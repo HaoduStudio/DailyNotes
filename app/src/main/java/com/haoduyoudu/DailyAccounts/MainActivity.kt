@@ -18,6 +18,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -118,6 +119,7 @@ class MainActivity : AppCompatActivity() {
         findda.addClickScale()
         pifu.addClickScale()
         about.addClickScale()
+        setsafety.addClickScale()
         menu.setOnClickListener {
             mDrawerLayout.openDrawer(GravityCompat.END)
         }
@@ -152,6 +154,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             mDrawerLayout.closeDrawer(GravityCompat.END)
         }
+
+        if(MyApplication.SHIELD_PASSWORD_ACTON){
+            setsafety.visibility=View.GONE
+            val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+            lp.setMargins(0,0,0,0)
+            setsafety.layoutParams = lp
+        }
+
         listView.setOnItemClickListener { _, view, position, _ ->
             
             if(!repeattouch){
@@ -427,7 +437,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         return if (!firstLoad) {
-            if (needtoinputpassword){
+            if (needtoinputpassword && !MyApplication.SHIELD_PASSWORD_ACTON){
                 startActivity(Intent(this,inputpassword::class.java).apply { putExtra("type",MyApplication.INPUT_PASSWORD) })
                 thread {
                     Thread.sleep(500)

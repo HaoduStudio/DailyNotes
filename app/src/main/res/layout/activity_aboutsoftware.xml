@@ -110,9 +110,16 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="\n图片版权声明：\n本软件部分图片插画来自阿里巴巴矢量图标，如有侵权，请联系作者删除\n\n\n     好用？支持一下？"
+                    android:text="\n图片版权声明：\n本软件部分图片插画来自阿里巴巴矢量图标，如有侵权，请联系作者删除\n"
+                    android:textColor="#C5C3C3"
+                    android:textSize="13sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="好用？支持一下？"
+                    android:gravity="center"
                     android:textColor="#C5C3C3"
                     android:textSize="13sp"
                     android:layout_marginBottom="5dp"/>

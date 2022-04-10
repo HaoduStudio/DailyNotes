@@ -25,6 +25,7 @@ import kotlin.Exception
 import kotlin.concurrent.thread
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import android.view.MotionEvent
 import java.io.*
@@ -43,6 +44,10 @@ class aboutsoftware : AppCompatActivity(), IResponseCallback{
 
         xtcCallback = XTCCallbackImpl()
         xtcCallback.handleIntent(intent, this)
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            share_to_friend.visibility=View.GONE
+        }
 
         versions.setOnClickListener {
             touchdata.add(System.currentTimeMillis())

@@ -27,6 +27,8 @@ class MyApplication:Application() {
         val Add_pictures = 2
         val Add_videos = 3
 
+        const val SHIELD_PASSWORD_ACTON = true
+
         const val SET_PASSWORD = 1
         const val RESET_PASSWORD = 2
         const val INPUT_PASSWORD = 3
