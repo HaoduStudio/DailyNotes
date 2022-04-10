@@ -164,7 +164,6 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
         editsometext.setText(FileUtils.readTxtFile(path+"text.txt"))
 
         uptextcolor()
-        ifrewrite(isrewrite)
         try {
             initimageorvideolist()
             if(imageorvideoList.size != 0){
@@ -193,6 +192,7 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
                 finish()
             }
         }
+        ifrewrite(isrewrite)
         imageorvideolist.setOnItemLongClickListener { _, _, position, _ ->
             val textviewobj = imageorvideoList[position]
             if(isrewrite){
@@ -381,7 +381,6 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
         }else{
             isrewrite = true
             if(moodtext.length() >5) moodtext.text = moodtext.text.toString().substring(0,5)+"..."
-            edit_addmedia1.visibility = View.VISIBLE
             edit_addmedia2.visibility = View.VISIBLE
             edittmood.visibility = View.VISIBLE
             edittemplate.visibility = View.VISIBLE
@@ -390,6 +389,11 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
             hide_more_ac()
             MyApplication.newwrite = true
             editsometext.setHint(edithint)
+            if((imagetimes-1) == 0 && (recordtimes-1) != 0){
+                edit_addmedia1.visibility=View.INVISIBLE
+            }else{
+                edit_addmedia1.visibility=View.VISIBLE
+            }
         }
     }
 
@@ -497,6 +501,11 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
         recordlist.setLayoutParams(lp3)
 
         adapterofrecord.notifyDataSetChanged()
+        if((imagetimes-1) == 0 && (recordtimes-1) != 0){
+            edit_addmedia1.visibility=View.INVISIBLE
+        }else{
+            edit_addmedia1.visibility=View.VISIBLE
+        }
     }
 
 
@@ -534,6 +543,11 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
                 }
                 Log.d("onActivityResult","imagetimes"+imagetimes.toString())
                 Log.d("onActivityResult","imagetimes"+videotimes.toString())
+                if((imagetimes-1) == 0 && (recordtimes-1) != 0){
+                    edit_addmedia1.visibility=View.INVISIBLE
+                }else{
+                    edit_addmedia1.visibility=View.VISIBLE
+                }
             }
             2 -> if(resultCode == RESULT_OK){
                 val type = data?.getStringExtra("type").toString() ?: null
@@ -556,6 +570,11 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
                     initimageorvideolist()
                 }else if(type == "record" && del){
                     initrecordlist()
+                }
+                if((imagetimes-1) == 0 && (recordtimes-1) != 0){
+                    edit_addmedia1.visibility=View.INVISIBLE
+                }else{
+                    edit_addmedia1.visibility=View.VISIBLE
                 }
             }
 

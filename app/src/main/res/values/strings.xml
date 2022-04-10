@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">每日手帐</string>
     <string name="version">版本V2.0.1</string>
-    <string name="aboutnewvewsion">新版特性:\n更新贴纸\n添加天气和标语\n接入小天才shareapi\n更新应用图标\n更新模板\n可以修改字体颜色\n可以分享手帐\n添加自定义心情\n修复已知bug\n添加了心情日历\n添加了页面索引\n添加 \\彩蛋/\n</string>
+    <string name="aboutnewvewsion">新版特性:\n更新贴纸\n添加天气和标语\n接入小天才shareapi\n更新应用图标\n更新模板\n可以修改字体颜色\n可以分享手帐\n可以设置密码\n添加自定义心情\n修复已知bug\n添加了心情日历\n添加了页面索引\n添加 \\彩蛋/\n</string>
 </resources>

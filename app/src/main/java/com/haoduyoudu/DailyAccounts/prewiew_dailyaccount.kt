@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
@@ -232,7 +233,16 @@ class prewiew_dailyaccount : AppCompatActivity() {
     }
     fun onPopEdit(){
         Log.d("testpop","open")
-        sk_popview.visibility = View.VISIBLE
+        try{
+            val bitmap: Bitmap = rsBlur(this,viewConversionBitmap(mDrawerLayout)!!,8)
+            val bitmap1 = Bitmap.createBitmap(bitmap, 0, 360-DisplayUtil.dip2px(75f), 320, DisplayUtil.dip2px(75f))
+            sk_popview.background=BitmapDrawable(resources,BitmapFillet.fillet(bitmap1,DisplayUtil.dip2px(8f),BitmapFillet.CORNER_TOP))
+            bitmap.recycle()
+            bitmap1.recycle()
+            sk_popview.visibility = View.VISIBLE
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
         thread {
             Thread.sleep(50)
             try {

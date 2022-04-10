@@ -43,7 +43,7 @@
         <entry key="app/src/main/res/drawable/textcolor_selector.xml" value="0.709375" />
         <entry key="app/src/main/res/drawable/textcursor_color.xml" value="0.625" />
         <entry key="app/src/main/res/drawable/textview_style.xml" value="0.709375" />
-        <entry key="app/src/main/res/layout/activity_aboutsoftware.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/activity_aboutsoftware.xml" value="0.48125" />
         <entry key="app/src/main/res/layout/activity_add_pictures_or_videos.xml" value="0.4171511627906977" />
         <entry key="app/src/main/res/layout/activity_add_pictures_or_videos_first.xml" value="0.3444767441860465" />
         <entry key="app/src/main/res/layout/activity_caidan.xml" value="0.3578213377136799" />
@@ -69,7 +69,7 @@
         <entry key="app/src/main/res/layout/activity_select_template.xml" value="0.14065934065934066" />
         <entry key="app/src/main/res/layout/activity_settingpage.xml" value="0.7092198581560284" />
         <entry key="app/src/main/res/layout/activity_showaudio.xml" value="1.052962501979679" />
-        <entry key="app/src/main/res/layout/activity_showdailyaccount.xml" value="0.6687760713574288" />
+        <entry key="app/src/main/res/layout/activity_showdailyaccount.xml" value="0.5410316323165546" />
         <entry key="app/src/main/res/layout/activity_showfind.xml" value="0.633930285836126" />
         <entry key="app/src/main/res/layout/activity_showimage.xml" value="0.5830933029366357" />
         <entry key="app/src/main/res/layout/activity_showvideo.xml" value="1.119186046511628" />

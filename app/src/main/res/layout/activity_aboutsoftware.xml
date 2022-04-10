@@ -59,7 +59,7 @@
                     android:id="@+id/zhixiemeigong"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="*致谢美工\n感谢  颖琳、卡比、许祁颂、DonG、倪冰、Wick、Oroxi、老瑜、苏柒、二贼猫为软件添砖加瓦\n"
+                    android:text="*致谢美工\n感谢  颖琳、卡比、许祁颂、DonG、倪冰、Wick、Oroxi、老瑜、苏柒、二贼猫为软件添砖加瓦\n(点我看看！)\n"
                     android:textSize="13sp"
                     android:textColor="#FFFFFF" />
 
