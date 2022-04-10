@@ -1,0 +1,524 @@
+package com.haoduyoudu.DailyAccounts
+
+import android.Manifest
+import android.app.ActivityOptions
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.os.Build
+import android.os.Bundle
+import android.renderscript.Allocation
+import android.renderscript.Element
+import android.renderscript.RenderScript
+import android.renderscript.ScriptIntrinsicBlur
+import android.util.Log
+import android.view.Gravity
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.view.GravityCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.Mapofweather
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.needupdata
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.weather
+import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+import java.util.*
+import kotlin.concurrent.thread
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
+
+
+class MainActivity : AppCompatActivity() {
+    lateinit var adapter: TextviewButtonListAdapter
+    private val textviewbuttonList = ArrayList<TextviewButtonList>()
+    var repeattouch = false
+    var firstLoad = true
+    var firststart = false
+    var needtoinputpassword = false
+
+    lateinit var lastitem:TextviewButtonList
+    lateinit var lastitemview:View
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        getWindow().setGravity(Gravity.CENTER);
+        setContentView(R.layout.activity_main)
+
+        thread {
+            if(File("/data/data/com.haoduyoudu.DailyAccounts/"+"password.data").exists())
+                needtoinputpassword = true
+            if(needupdata?:true)
+                Thread.sleep(2000)
+            else
+                Thread.sleep(500)
+            ActivityCompat.requestPermissions(this, arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.RECORD_AUDIO),1)
+            //Manifest.permission.RECORD_AUDIO
+            while(!firststart){}
+            try{
+                initTextviewButtonList()
+                refreshTBL(adapter)
+                runOnUiThread {
+                    adapter.notifyDataSetChanged()
+                    if(needupdata == true)
+                        Toast.makeText(this,MyApplication.Mapoftime[MyApplication().gettime()],Toast.LENGTH_SHORT).show()
+                    needupdata=false
+                }
+
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+            Thread.sleep(300)
+            try {
+                val pathofdailyaccounts = "/sdcard/Android/data/com.haoduyoudu.DailyAccounts/"
+                var Filenamesofdailyaccounts = GFN(pathofdailyaccounts)
+                if(Filenamesofdailyaccounts.size != 0 && weather != null && needupdata == true){
+                    startActivityForResult(Intent(this,SayHello::class.java),3)
+                }else if(Filenamesofdailyaccounts.size != 0 && weather == null && needupdata == true){
+                    thread {
+                        var outtime = 0
+                        while (weather == null && outtime<=1000){
+                            Thread.sleep(100)
+                            outtime+=100
+                        }
+                        if (weather != null)
+                            startActivityForResult(Intent(this,SayHello::class.java),3)
+                        if(outtime>1000)
+                            LoadmainUI()
+                    }
+                }else{
+                    LoadmainUI()
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+
+        MyApplication.Activitys.put("MainActivity",this)
+        swipeRefresh.setColorSchemeResources(R.color.colorAccent)
+        swipeRefresh.setOnRefreshListener {
+            refreshfromsR(adapter)
+        }
+
+        menu.addClickScale()
+        write.addClickScale()
+        moodcalendar.addClickScale()
+        findda.addClickScale()
+        pifu.addClickScale()
+        about.addClickScale()
+        menu.setOnClickListener {
+            mDrawerLayout.openDrawer(GravityCompat.END)
+        }
+        write.setOnClickListener {
+            MyApplication.newwrite = true
+            val intent = Intent(this,DailyAccounts::class.java)
+            startActivity(intent)
+            mDrawerLayout.closeDrawer(GravityCompat.END)
+        }
+        moodcalendar.setOnClickListener {
+            val intent = Intent(this,Moodcalendar::class.java)
+            startActivity(intent)
+            mDrawerLayout.closeDrawer(GravityCompat.END)
+        }
+        findda.setOnClickListener {
+            val intent = Intent(this,find::class.java)
+            startActivity(intent)
+            mDrawerLayout.closeDrawer(GravityCompat.END)
+        }
+        pifu.setOnClickListener {
+            val intent = Intent(this,cel_background::class.java)
+            startActivity(intent)
+            mDrawerLayout.closeDrawer(GravityCompat.END)
+        }
+        setsafety.setOnClickListener {
+            val intent = Intent(this,Settingpage::class.java)
+            startActivity(intent)
+            mDrawerLayout.closeDrawer(GravityCompat.END)
+        }
+        about.setOnClickListener {
+            val intent = Intent(this,aboutsoftware::class.java)
+            startActivity(intent)
+            mDrawerLayout.closeDrawer(GravityCompat.END)
+        }
+        listView.setOnItemClickListener { _, view, position, _ ->
+            
+            if(!repeattouch){
+                repeattouch = true
+                val textviewobj = textviewbuttonList[position]
+
+                val image:ImageView = view.findViewById(R.id.ListImage)
+
+                val intent = Intent(this,showdailyaccount::class.java)
+                intent.putExtra("path",textviewobj.path)
+                intent.putExtra("date",textviewobj.name)
+                intent.putExtra("index",textviewobj.index)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    try{
+                        image.transitionName = "Image"
+                        val options = ActivityOptions.makeSceneTransitionAnimation(this, image,"Image")
+                        startActivity(intent,options.toBundle())
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        startActivity(intent)
+                    }
+                }else{
+                    startActivity(intent)
+                }
+                repeattouch = false
+            }
+        }
+        listView.setOnItemLongClickListener { _, view, position, _ ->
+            val textviewobj = textviewbuttonList[position]
+            DeleteFileUtil.delete(File(cacheDir.absolutePath,"shot.jpg").absolutePath)
+            FileUtils.savebitmap(rsBlur(this,viewConversionBitmap(main_background)!!,8),cacheDir.absolutePath,"shot.jpg",80)
+            lastitem = textviewobj
+            lastitemview = view
+            startActivityForResult(Intent(this,more_ac::class.java),4)
+            true
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        print("onRestart()")
+        MyApplication.Activitys["MainActivity"] = this
+        if(MyApplication.newwrite){
+            print("ref")
+            initTextviewButtonList()
+            refreshTBL(adapter)
+            adapter.notifyDataSetChanged()
+            MyApplication.newwrite = false
+
+        }
+    }
+    private fun refreshTBL(adapter: TextviewButtonListAdapter){
+        val pathofdailyaccounts = "/sdcard/Android/data/com.haoduyoudu.DailyAccounts/"
+        var Filenamesofdailyaccounts = GFN(pathofdailyaccounts)
+        if (Filenamesofdailyaccounts.size != 0) {
+            if(firstLoad){
+                runOnUiThread {
+                    Glide.with(this)
+                        .load(R.mipmap.black)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(weather_img)
+                    loadbackground()
+                    Log.d("MainActivity","刷新 天气图片")
+                }
+            }else{
+                loadbackground()
+            }
+            listView.setBackgroundResource(0)
+            for (i in 0..Filenamesofdailyaccounts.size-1) {
+                try {
+                    val moodtext = FileUtils.readTxtFile(pathofdailyaccounts+Filenamesofdailyaccounts[i]+"/"+"mood.txt")
+                    val moodsplit = moodtext.split("$[%|!|%]$")
+                    var imageId: Int
+                    if (moodsplit.size == 2)
+                        imageId = moodsplit[0].toInt()
+                    else
+                        imageId = MyApplication.NumberToMoodImage[moodtext.toInt()] ?: R.mipmap.isnoneface
+
+                    val name = (Filenamesofdailyaccounts[i].substring(0,4) + "-" +  //87
+                            Filenamesofdailyaccounts[i].substring(4,6) +
+                            "-" +Filenamesofdailyaccounts[i].substring(6,8))
+
+
+                    textviewbuttonList.add(
+                        TextviewButtonList(
+                            name,
+                            imageId,
+                            pathofdailyaccounts+Filenamesofdailyaccounts[i]+"/",
+                            "DailyAccounts",
+                            notes = FileUtils.readTxtFile(pathofdailyaccounts+
+                                    Filenamesofdailyaccounts[i]+
+                                    "/week.txt"),
+                            index = i))
+                    Log.d("xxx",FileUtils.readTxtFile(pathofdailyaccounts+ Filenamesofdailyaccounts[i]+ "/week.txt"))
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
+            if(Filenamesofdailyaccounts.size == 0)
+                runOnUiThread {
+                    listView.setBackgroundResource(R.mipmap.kong)
+                    Glide.with(this)
+                        .load(R.mipmap.black)
+                        .into(weather_img)
+                }
+
+        }else{
+            runOnUiThread {
+                listView.setBackgroundResource(R.mipmap.kong)
+                Glide.with(this)
+                    .load(R.mipmap.black)
+                    .into(weather_img)
+            }
+        }
+    }
+    private fun refreshfromsR(adapter: TextviewButtonListAdapter){
+        thread {
+            Thread.sleep(2000)
+            runOnUiThread{
+                initTextviewButtonList()
+                refreshTBL(adapter)
+                adapter.notifyDataSetChanged()
+                swipeRefresh.isRefreshing = false
+            }
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        try {
+            when(requestCode){
+                3 -> if(resultCode == RESULT_OK){
+                    LoadmainUI()
+                }
+                4 -> if(resultCode == RESULT_OK){
+                    if(data != null){
+                        when(data.getStringExtra("type")){
+                            "edit" -> {
+                                val image:ImageView = lastitemview.findViewById(R.id.ListImage)
+
+                                val intent = Intent(this,showdailyaccount::class.java)
+                                intent.putExtra("path",lastitem.path)
+                                intent.putExtra("date",lastitem.name)
+                                intent.putExtra("index",lastitem.index)
+                                intent.putExtra("rewrite",true)
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    try{
+                                        image.transitionName = "Image"
+                                        val options = ActivityOptions.makeSceneTransitionAnimation(this, image,"Image")
+                                        startActivity(intent,options.toBundle())
+                                    }catch (e:Exception){
+                                        e.printStackTrace()
+                                        startActivity(intent)
+                                    }
+                                }else{
+                                    startActivity(intent)
+                                }
+                            }
+                            "del" -> {
+                                DeleteFileUtil.delete(lastitem.path)
+                                initTextviewButtonList()
+                                refreshTBL(adapter)
+                                adapter.notifyDataSetChanged()
+                                Toast.makeText(this,"删除成功",Toast.LENGTH_SHORT).show()
+                            }
+                            "share" -> {
+                                val image:ImageView = lastitemview.findViewById(R.id.ListImage)
+
+                                val intent = Intent(this,showdailyaccount::class.java)
+                                intent.putExtra("path",lastitem.path)
+                                intent.putExtra("date",lastitem.name)
+                                intent.putExtra("index",lastitem.index)
+                                intent.putExtra("ac","shot")
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    try{
+                                        image.transitionName = "Image"
+                                        val options = ActivityOptions.makeSceneTransitionAnimation(this, image,"Image")
+                                        startActivity(intent,options.toBundle())
+                                    }catch (e:Exception){
+                                        e.printStackTrace()
+                                        startActivity(intent)
+                                    }
+                                }else{
+                                    startActivity(intent)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+
+    private fun initTextviewButtonList(){
+        textviewbuttonList.clear()
+        adapter = TextviewButtonListAdapter(this, R.layout.tewtviewbuttonlistwithnotes_item, textviewbuttonList)
+        runOnUiThread {
+            listView.adapter = adapter
+        }
+    }
+    fun GFN(dirpathx:String):MutableList<String>{
+        val fileNames: MutableList<String> = mutableListOf()
+        //在该目录下走一圈，得到文件目录树结构
+        val fileTree: FileTreeWalk = File(dirpathx).walk()
+        fileTree.maxDepth(1) //需遍历的目录层次为1，即无须检查子目录
+            .filter { it.isDirectory && it.name != "assest"} //只挑选文件，不处理文件夹
+            //.filter { it.extension in listOf("m4a","mp3") }
+            .forEach { fileNames.add(it.name) }//循环 处理符合条件的文件
+        if(fileNames.size!=0){
+            fileNames.removeAt(0)
+            fileNames.sort()
+            fileNames.reverse()
+        }
+        return fileNames
+    }
+
+    fun crossfadeToContentView(contentView: View) {
+
+        // 设置内容contentView为0%的不透明度，但是状态为“可见”，
+        // 因此在动画过程中是一直可见的（但是为全透明）。
+        contentView.setAlpha(0f);
+        contentView.setVisibility(View.VISIBLE);
+
+        // 开始动画内容contentView到100%的不透明度，然后清除所有设置在View上的动画监听器。
+        contentView.animate().alpha(1f).setDuration(1000)
+            .setListener(null);
+
+        // 加载progressView开始动画逐渐变为0%的不透明度，
+        // 动画结束后，设置可见性为GONE（消失）作为一个优化步骤
+        // （它将不再参与布局的传递等过程）
+    }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        MyApplication.Activitys.put("Hello",this)
+        when(requestCode){
+            1 -> {
+                for(i in permissions){
+                    Log.d("权限",i+"\n")
+                }
+                for(i in grantResults){
+                    Log.d("权限",i.toString()+"\n")
+                }
+                if(grantResults.size == 3){
+                    if(grantResults[0] == 0 && grantResults[1] == 0 && grantResults[2] == 0){    //Bug #51
+                        if(!firststart){
+                            firststart = true
+                            MyApplication.AllPermissionsOK = true
+                        }
+                    }else{
+                        runOnUiThread {
+                            setTheme(R.style.AppTheme)
+                            Toast.makeText(this,"需要同意所有权限才能正常使用哦～", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                    }
+                }else{
+                    setTheme(R.style.AppTheme)
+                    Toast.makeText(this,"系统出了点小问题，请稍后再试～", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        }
+    }
+
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        return if (!firstLoad) {
+            if (needtoinputpassword){
+                startActivity(Intent(this,inputpassword::class.java).apply { putExtra("type",MyApplication.INPUT_PASSWORD) })
+                thread {
+                    Thread.sleep(500)
+                    needtoinputpassword = false
+                }
+                false
+            }else{
+                super.dispatchTouchEvent(ev)
+            }
+        } else {
+            false
+        }
+    }
+
+    fun LoadmainUI(){
+        if(firstLoad){
+            runOnUiThread {   //worried
+                try{
+                    crossfadeToContentView(listView)
+                    crossfadeToContentView(Title)
+                    menu.visibility = View.VISIBLE
+                    menuyinying.visibility = View.VISIBLE
+                    main_background.setBackgroundColor(getResources().getColor(R.color.black))
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+                firstLoad = false
+            }
+        }
+    }
+    private fun rsBlur(context: Context, source: Bitmap, radius: Int): Bitmap {
+        val renderScript = RenderScript.create(context)
+        Log.i("blur", "scale size:" + source.width + "*" + source.height)
+        val input = Allocation.createFromBitmap(renderScript, source)
+        val output = Allocation.createTyped(renderScript, input.type)
+        val scriptIntrinsicBlur = ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript))
+        scriptIntrinsicBlur.setInput(input)
+        scriptIntrinsicBlur.setRadius(radius.toFloat())
+        scriptIntrinsicBlur.forEach(output)
+        output.copyTo(source)
+        renderScript.destroy()
+        return source
+    }
+    fun viewConversionBitmap(v: View,config:Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap? {
+        val w = v.width
+        val h = v.height
+        val bmp = Bitmap.createBitmap(w, h, config)
+        val c = Canvas(bmp)
+        /** 如果不设置canvas画布为白色，则生成透明  */
+        v.layout(0, 0, w, h)
+        v.draw(c)
+        return bmp
+    }
+    fun loadbackground(){
+        thread {
+            if(MyApplication.nowbackground == "weather"){
+                while(weather==null){Thread.sleep(100)}
+                val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
+                runOnUiThread {
+                    Glide.with(this)
+                        .load(Mapofweather[weather])
+                        .transition(withCrossFade(factory))
+                        .into(weather_img)
+                }
+            }else{
+                runOnUiThread {
+                    if(MyApplication.nowbackground != "wave")
+                        Glide.with(this)
+                            .load(MyApplication.Mapofbackground[MyApplication.nowbackground])
+                            .into(weather_img)
+                    else
+                        when(MyApplication().gettime()){
+                            1,2,3 -> {
+                                Glide.with(this)
+                                    .load(R.mipmap.wave2)
+                                    .into(weather_img)
+                            }
+                            4,5,6 -> {
+                                Glide.with(this)
+                                    .load(R.mipmap.wave)
+                                    .into(weather_img)
+                            }
+
+                        }
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+}

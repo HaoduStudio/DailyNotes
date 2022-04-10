@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppThemesharp" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--设置支持过渡动画-->
+        <item name="android:windowContentTransitions">true</item>
+        <!--设置进入动画      通过分解方式进入-->
+
+        <item name="android:windowSharedElementEnterTransition">@transition/share1</item>
+        <item name="android:windowSharedElementExitTransition">@null</item>
+
+        <item name="android:windowSharedElementReenterTransition">@null</item>
+        <item name="android:windowSharedElementReturnTransition">@null</item>
+
+        <item name="android:hardwareAccelerated">false</item>
+        <item name="android:largeHeap">true</item>
+    </style>
+</resources>

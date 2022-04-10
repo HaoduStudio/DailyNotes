@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:layout_weight="1"
+    tools:context=".DailyAccounts">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="与您今日心情最符合的是.."
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="6dp"
+        android:textColor="#FF9800"
+        android:textSize="13dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="137dp"
+        android:layout_height="137dp"
+        android:layout_gravity="center_horizontal"
+        tools:layout_editor_absoluteY="28dp">
+
+
+        <Button
+            android:id="@+id/radiobutton1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/ishappy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.060000002" />
+
+        <Button
+            android:id="@+id/radiobutton2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/isangry"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.29000002" />
+
+        <Button
+            android:id="@+id/radiobutton3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/isnothappy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.88"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.29000002" />
+
+        <Button
+            android:id="@+id/radiobutton4"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/ispingfan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.71000004" />
+
+        <Button
+            android:id="@+id/radiobutton5"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/iswoozyface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.88"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.71000004" />
+
+        <Button
+            android:id="@+id/radiobutton6"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/isfuck"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.94" />
+
+        <Button
+            android:id="@+id/radiobutton7"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/issweet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/moremood"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_gravity="center_horizontal"
+        android:text=" 更多表情"
+        android:textColor="#F3E8896B"
+        android:drawableLeft="@mipmap/pen" />
+
+</LinearLayout>

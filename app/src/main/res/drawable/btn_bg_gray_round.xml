@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--手指未触摸-->
+    <item android:state_pressed="false">
+        <layer-list>
+            <item>
+                <!--绘制 圆形-->
+                <shape
+                    android:shape="oval">
+                    <!--填充颜色-->
+                    <solid android:color="#ff333333"/>
+                </shape>
+            </item>
+            <!--导入图片 -->
+        </layer-list>
+    </item>
+
+    <!--手指触摸-->
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape
+                    android:shape="oval">
+                    <!--填充颜色-->
+                    <solid android:color="#A6333333"/>
+                    <!--描边 白色 宽度1px-->
+                    <!--内容与该圆形的间距-->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320px"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:background="@drawable/textview_style">
+
+    <LinearLayout
+        android:layout_width="110dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="5dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/Buttonname"
+            android:layout_width="110dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:text="2021-07-26"
+            android:textColor="@drawable/textcolor_selector"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/clockopia"/>
+
+        <TextView
+            android:id="@+id/notes"
+            android:layout_width="110dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="4dp"
+            android:text="Wed"
+            android:textColor="@drawable/textcolor_selector"
+            android:textSize="13sp"
+            android:fontFamily="@font/ttth"/>/>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/ListImage"
+        android:layout_gravity="center_vertical"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="5dp"
+        android:src="@mipmap/add"/>
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/backgroundforactivity"
+    tools:context=".find">
+
+    <Button
+        android:id="@+id/upformouth"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:background="@mipmap/up"
+        app:layout_constraintBottom_toTopOf="@+id/mouth"
+        app:layout_constraintEnd_toEndOf="@+id/mouth"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="@+id/mouth" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="查找手帐"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="6dp"
+        android:textColor="#FF9800"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="58dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="53dp"
+        android:gravity="center"
+        android:text="____年"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/mouth"
+        android:layout_width="58dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="53dp"
+        android:gravity="center"
+        android:text="__月"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <Button
+        android:id="@+id/upforyear"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:background="@mipmap/up"
+        app:layout_constraintBottom_toTopOf="@+id/year"
+        app:layout_constraintEnd_toEndOf="@+id/year"
+        app:layout_constraintStart_toStartOf="@+id/year" />
+
+    <Button
+        android:id="@+id/downforyear"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:background="@mipmap/down"
+        app:layout_constraintEnd_toEndOf="@+id/year"
+        app:layout_constraintStart_toStartOf="@+id/year"
+        app:layout_constraintTop_toBottomOf="@+id/year" />
+
+    <Button
+        android:id="@+id/downformouth"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:background="@mipmap/down"
+        app:layout_constraintEnd_toEndOf="@+id/mouth"
+        app:layout_constraintStart_toStartOf="@+id/mouth"
+        app:layout_constraintTop_toBottomOf="@+id/mouth" />
+
+    <LinearLayout
+        android:layout_width="320px"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/button_cancel"
+            android:layout_width="79dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="1dp"
+            android:background="@drawable/bottombuttonleft_style"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@drawable/textcolor_selector" />
+
+        <TextView
+            android:id="@+id/button_ok"
+            android:layout_width="79dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/bottombuttonright_style"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@drawable/textcolor_selector" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

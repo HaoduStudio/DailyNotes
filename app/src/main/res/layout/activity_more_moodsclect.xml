@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:id="@+id/scrollview"
+    android:scrollbars="none"
+    tools:context=".MoreMoodsclect">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:id="@+id/upview">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="5dp"
+                android:checked="true"
+                android:text="更多表情"
+                android:textColor="#FF9800"
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:id="@+id/downview"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="5dp"
+                android:checked="true"
+                android:text="自定义心情"
+                android:textColor="#FF9800"
+                android:textSize="16sp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/Mycelmood"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="13dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.321" />
+
+                <EditText
+                    android:id="@+id/moodinput"
+                    android:layout_width="100dp"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="5dp"
+                    android:maxLength="7"
+                    android:background="@drawable/shape_wihte_frame"
+                    android:hint="想说什么吗"
+                    android:textColorHint="#8AFFFFFF"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.31"
+                    app:layout_constraintStart_toEndOf="@+id/Mycelmood"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.32999998" />
+
+                <LinearLayout
+                    android:layout_width="320px"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/button_cancel"
+                        android:layout_width="79dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="1dp"
+                        android:background="@drawable/bottombuttonleft_style"
+                        android:gravity="center"
+                        android:text="取消"
+                        android:textColor="@drawable/textcolor_selector" />
+
+                    <TextView
+                        android:id="@+id/button_ok"
+                        android:layout_width="79dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="1dp"
+                        android:background="@drawable/bottombuttonright_style"
+                        android:gravity="center"
+                        android:text="确定"
+                        android:textColor="@drawable/textcolor_selector" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

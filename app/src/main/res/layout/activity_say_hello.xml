@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:id="@+id/background_weather"
+    tools:context=".SayHello">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="130dp"
+        android:layout_height="140dp"
+        app:cardBackgroundColor="#54FFFFFF"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/time_say"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="早上好"
+                android:textColor="#DAFFFFFF"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/weather_img"
+                android:layout_width="25dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_say"
+                app:srcCompat="@mipmap/lei" />
+
+            <TextView
+                android:id="@+id/weather_say"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:text="雨,记得带伞"
+                android:textColor="#E8FFFFFF"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@+id/weather_img"
+                app:layout_constraintTop_toBottomOf="@+id/time_say" />
+
+            <TextView
+                android:id="@+id/Say"
+                android:layout_width="71dp"
+                android:layout_height="59dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="中午好，干饭人，今天也要好好吃饭"
+                android:textColor="#9A000000"
+                android:textSize="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/Say_img"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@mipmap/bg_lmorning" />
+
+            <TextView
+                android:id="@+id/tem_say"
+                android:layout_width="39dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="6dp"
+                android:text="17度"
+                android:textSize="9dp"
+                android:drawableLeft="@mipmap/bg_lwendu"
+                app:layout_constraintStart_toEndOf="@+id/weather_img"
+                app:layout_constraintTop_toBottomOf="@+id/weather_say" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="42dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@mipmap/yun" />
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/quitfloat"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@mipmap/icon_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

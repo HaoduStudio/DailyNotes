@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/backgroundforactivity"
+    tools:context=".aboutsoftware">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/titlebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="5dp"
+            android:checked="true"
+            android:text="关于软件"
+            android:textColor="#FF9800"
+            android:textSize="16sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Tv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="手帐？我们这儿，专业的！\n"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="10dp">
+                    <ImageView
+                        android:id="@+id/im1"
+                        android:layout_width="160dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher" />
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:id="@+id/zhixiemeigong"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="*致谢美工\n感谢  颖琳、卡比、许祁颂、DonG、倪冰、Wick、Oroxi、老瑜、苏柒、二贼猫为软件添砖加瓦\n"
+                    android:textSize="13sp"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="加入我们的反馈群吧！\n群号:721731698"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="259dp"
+                    android:scaleType="fitEnd"
+                    android:src="@mipmap/qqimage" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/versions">
+                    <TextView
+                        android:id="@+id/Version"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/version"
+                        android:textColor="#C5C3C3"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="此版本为正式版\n"
+                        android:textColor="#C5C3C3"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="软件作者:好读游独\n邮箱：michaelzhtiger@outlook.com\n"
+                    android:textColor="#C5C3C3"
+                    android:textSize="13sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/aboutnewvewsion"
+                    android:textColor="#C5C3C3"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="\n图片版权声明：\n本软件部分图片插画来自阿里巴巴矢量图标，如有侵权，请联系作者删除\n\n\n     好用？支持一下？"
+                    android:textColor="#C5C3C3"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="5dp"/>
+                <Button
+                    android:id="@+id/share_to_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/shape_all"
+                    android:gravity="center"
+                    android:text="分享给好友"
+                    android:textColor="#FFF"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <View
+        android:id="@+id/tempview"
+        android:visibility="gone"
+        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <ImageView
+        android:id="@+id/startview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:src="@mipmap/about_pg"/>
+</FrameLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="160dp"
+    android:layout_height="30dp"
+    android:orientation="horizontal"
+    android:ellipsize="end">
+
+    <ImageView
+        android:id="@+id/ListImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left"
+        android:scaleType="fitXY"
+        android:layout_marginStart="10dp"
+        android:src="@mipmap/isrecord" />
+
+    <TextView
+        android:id="@+id/Buttonname"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:text="''10秒"
+        android:textColor="#949191"
+        android:layout_marginEnd="50dp"
+        android:textSize="13dp" />
+</FrameLayout>
