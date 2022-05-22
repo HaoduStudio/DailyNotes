@@ -16,5 +16,5 @@ emmmmm....
 
 ***接下来来看看我们“奇妙の宣传片”吧!***
 
-<iframe height=498 width=510 src="https://zjk.cdn.nextsay.cn/movies/trailer_dailynotes.flv">
+![预告片](https://zjk.cdn.nextsay.cn/movies/trailer_dailynotes.flv "好康的")
 
