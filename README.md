@@ -15,14 +15,5 @@ emmmmm....
 所以我们在 **Github** 上开源了，至于为什么不是Gitee......想必 **你们比我们更清楚**
 
 ***接下来来看看我们“奇妙の宣传片”吧!***
-<div id="player_fc0d33818d63d830"></div>
-<script type="text/javascript" src="https://player.dogecloud.com/js/loader"></script>
-<script type="text/javascript">
-var player = new DogePlayer({
-    container: document.getElementById('player_fc0d33818d63d830'),
-    userId: 2491,
-    vcode: 'fc0d33818d63d830',
-    autoPlay: false
-});
-</script>
 
+https://player.dogecloud.com/web/player.html?vcode=fc0d33818d63d830&userId=2491&autoPlay=false
