@@ -16,4 +16,4 @@ emmmmm....
 
 ***接下来来看看我们“奇妙の宣传片”吧!***
 
-https://player.dogecloud.com/web/player.html?vcode=fc0d33818d63d830&userId=2491&autoPlay=false
+https://zjk.cdn.nextsay.cn/movies/trailer_dailynotes.flv
