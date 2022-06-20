@@ -229,15 +229,19 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         print("onRestart()")
-        MyApplication.Activitys["MainActivity"] = this
-        if(MyApplication.newwrite){
-            print("ref")
-            initTextviewButtonList()
-            refreshTBL()
-            adapter.notifyDataSetChanged()
-            MyApplication.newwrite = false
-
+        try{
+            MyApplication.Activitys["MainActivity"] = this
+            if(MyApplication.newwrite){
+                print("ref")
+                initTextviewButtonList()
+                refreshTBL()
+                adapter.notifyDataSetChanged()
+                MyApplication.newwrite = false
+            }
+        }catch(e:Exception){
+            e.printStackTrace()
         }
+
     }
     private fun refreshTBL(){
         val pathofdailyaccounts = "/sdcard/Android/data/com.haoduyoudu.DailyAccounts/"
