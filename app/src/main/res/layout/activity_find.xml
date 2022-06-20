@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="true"
-        android:text="查找手帐"
+        android:text="@string/find_title"
         android:layout_marginStart="5dp"
         android:layout_marginTop="6dp"
         android:textColor="#FF9800"
@@ -36,7 +36,7 @@
         android:layout_height="22dp"
         android:layout_marginTop="53dp"
         android:gravity="center"
-        android:text="____年"
+        android:text="@string/find_year"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
         android:layout_height="22dp"
         android:layout_marginTop="53dp"
         android:gravity="center"
-        android:text="__月"
+        android:text="@string/find_month"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +99,7 @@
             android:layout_marginRight="1dp"
             android:background="@drawable/bottombuttonleft_style"
             android:gravity="center"
-            android:text="取消"
+            android:text="@string/cancel"
             android:textColor="@drawable/textcolor_selector" />
 
         <TextView
@@ -109,7 +109,7 @@
             android:layout_marginLeft="1dp"
             android:background="@drawable/bottombuttonright_style"
             android:gravity="center"
-            android:text="确定"
+            android:text="@string/ok"
             android:textColor="@drawable/textcolor_selector" />
     </LinearLayout>
 

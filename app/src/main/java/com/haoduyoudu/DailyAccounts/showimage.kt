@@ -31,7 +31,7 @@ class showimage : AppCompatActivity() {
                 })
 
         }catch (e:Exception){
-            Toast.makeText(this,"图片出错啦！",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
             finish()
         }
         imageView.setOnClickListener {

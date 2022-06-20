@@ -63,10 +63,10 @@ class needtodelete : AppCompatActivity() {
                 if(withtodel != null){
                     DeleteFileUtil.delete(withtodel)
                 }
-                Toast.makeText(this,"删除成功",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.del_ok),Toast.LENGTH_SHORT).show()
             }catch (e:Exception){
                 e.printStackTrace()
-                Toast.makeText(this,"删除失败",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.del_fail),Toast.LENGTH_SHORT).show()
                 yestodel = false
 
             }

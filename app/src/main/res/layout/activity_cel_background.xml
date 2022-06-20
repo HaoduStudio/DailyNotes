@@ -40,7 +40,7 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="根据天气变化"
+                    android:text="@string/change_by_weather"
                     android:textColor="#FC5A5656"
                     android:textSize="11sp"/>
             </LinearLayout>
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="城市"
+                    android:text="@string/city"
                     android:textColor="#FC5A5656"
                     android:textSize="11sp"/>
             </LinearLayout>
@@ -95,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="野营"
+                    android:text="@string/grassland"
                     android:textColor="#FC5A5656"
                     android:textSize="11sp"/>
             </LinearLayout>
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="大海"
+                    android:text="@string/wave"
                     android:textColor="#FC5A5656"
                     android:textSize="11sp"/>
             </LinearLayout>
@@ -149,7 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="吉祥物游屿"
+                    android:text="@string/mascotyouyu"
                     android:textColor="#FC5A5656"
                     android:textSize="11sp"/>
             </LinearLayout>

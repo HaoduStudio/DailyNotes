@@ -24,7 +24,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/edittext_style"
-            android:hint="点击编辑"
+            android:hint="@string/click_edit"
             android:typeface="monospace"
             android:gravity="start"
             android:textColor="@color/TC_1"
@@ -113,7 +113,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="取消"
+                android:text="@string/cancel"
                 android:textColor="@color/TC_1"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="@+id/quit"
@@ -123,7 +123,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="换行"
+                android:text="@string/returnline"
                 android:textColor="@color/TC_1"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="@+id/enter"
@@ -133,7 +133,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="调色"
+                android:text="@string/tintcolor"
                 android:textColor="@color/TC_1"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="@+id/celcolor"
@@ -143,7 +143,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="完成"
+                android:text="@string/ok"
                 android:textColor="@color/TC_1"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="@+id/ok"

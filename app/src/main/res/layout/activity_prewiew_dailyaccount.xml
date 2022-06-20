@@ -23,13 +23,13 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/keepscrimg"
+                    <LinearLayout
+                        android:id="@+id/images"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/testpic_ofaccount"/>
+                        android:orientation="vertical">
 
+                    </LinearLayout>
                     <com.haoduyoudu.DailyAccounts.StickerLayout
                         android:id="@+id/mStickerLayout"
                         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="大小"
+                            android:text="@string/sk_size"
                             android:drawableStart="@mipmap/ic_daxiao"
                             android:textSize="13sp"
                             android:textColor="#9E000000"
@@ -84,7 +84,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="角度"
+                            android:text="@string/sk_angle"
                             android:drawableStart="@mipmap/ic_xuanzhuan"
                             android:textSize="13sp"
                             android:textColor="#9E000000"
@@ -107,7 +107,7 @@
                                     android:id="@+id/sk_angle_left"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:text="左"
+                                    android:text="@string/sk_left"
                                     android:drawableStart="@mipmap/ic_lrzuo"
                                     android:textSize="15sp"
                                     android:textColor="#9E000000"
@@ -118,7 +118,7 @@
                                     android:id="@+id/sk_angle_right"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:text="右"
+                                    android:text="@string/sk_right"
                                     android:drawableEnd="@mipmap/ic_lryou"
                                     android:textSize="15sp"
                                     android:textColor="#9E000000"
@@ -140,7 +140,7 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text=" 删除"
+                            android:text="@string/sk_del"
                             android:textColor="#FFF"
                             android:gravity="center"
                             android:drawableStart="@mipmap/ic_ldel" />

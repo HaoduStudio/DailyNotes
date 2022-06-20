@@ -22,7 +22,7 @@ class forget_password : AppCompatActivity() {
             val file = File(rootdata,"FORGETPASS.dt")
             DeleteFileUtil.delete(file.absolutePath)
             FileUtils.writeTxtToFile((System.currentTimeMillis()+FORGET_PASSWORD_TIME).toString(),rootdata,"FORGETPASS.dt")
-            Toast.makeText(this,"设置成功",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.setpassword_done),Toast.LENGTH_SHORT).show()
             val intent = Intent()
             setResult(RESULT_OK,intent)
             finish()

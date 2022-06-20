@@ -18,6 +18,8 @@ import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.core.view.GravityCompat
@@ -122,19 +124,41 @@ class prewiew_dailyaccount : AppCompatActivity() {
             }
         })
         if (File(cacheDir.absolutePath,"shot.png").exists()){
-            val imgpath = File(cacheDir,"shot.png").absolutePath
-            val lp = keepscrimg.layoutParams
-            val options = BitmapFactory.Options()
-            BitmapFactory.decodeFile(imgpath,options)
-            lp.height=options.outHeight
-            keepscrimg.layoutParams = lp
-
-            Glide.with(this).load(imgpath)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(keepscrimg)
+            try {
+                val imgpath = File(cacheDir,"shot.png").absolutePath
+                val lp = images.layoutParams
+                val options = BitmapFactory.Options()
+                BitmapFactory.decodeFile(imgpath,options)
+                lp.height=options.outHeight
+                images.layoutParams = lp
+                val onceimgheight = 4000
+                val `is` = FileInputStream(imgpath)
+                val bmp = BitmapFactory.decodeStream(`is`)
+                for (i in 0..(Math.ceil(options.outHeight/onceimgheight.toDouble())-1).toInt()){
+                    val img:ImageView = ImageView(this)
+                    img.scaleType = ImageView.ScaleType.FIT_XY
+                    val startheight = if(i==0) 0 else i*onceimgheight+1;
+                    val height = if((startheight+onceimgheight)>options.outHeight) {
+                        if (options.outHeight % onceimgheight == 1) {
+                            options.outHeight-startheight+1
+                        }else{
+                            options.outHeight-startheight
+                        }
+                    }else{
+                        onceimgheight
+                    }
+                    Log.d("imgdata","0,$startheight,${options.outWidth},$height")
+                    val lp2 = LinearLayout.LayoutParams(options.outWidth,height)
+                    img.layoutParams = lp2
+                    img.setImageBitmap(Bitmap.createBitmap(bmp,0,startheight,options.outWidth,height))
+                    images.addView(img)
+                    Log.d("prewiew","add one img view")
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
         }else{
-            Toast.makeText(this,"彩蛋x1",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
         }
         delsk.addClickScale()
         delsk.setOnClickListener {
@@ -378,13 +402,13 @@ class prewiew_dailyaccount : AppCompatActivity() {
                         val sticker = Sticker(bitmap)
                         mStickerLayout.addSticker(sticker)
                     }catch (e:Exception){
-                        Toast.makeText(this,"添加失败",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,getString(R.string.add_fail),Toast.LENGTH_SHORT).show()
                         e.printStackTrace()
                     }
                 }else if(mStickerLayout.returnAllSticker().size == 0){
                     ifeditingsk(false)
                 }else if(resultCode == RESULT_OK){
-                    Toast.makeText(this,"添加失败",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,getString(R.string.add_fail),Toast.LENGTH_SHORT).show()
                 }
             }
         }

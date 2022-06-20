@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="true"
-        android:text="与您今日心情最符合的是.."
+        android:text="@string/sel_mood_title"
         android:layout_marginStart="5dp"
         android:layout_marginTop="6dp"
         android:textColor="#FF9800"
@@ -114,7 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="18dp"
         android:layout_gravity="center_horizontal"
-        android:text=" 更多表情"
+        android:text="@string/more_mood"
         android:textColor="#F3E8896B"
         android:drawableLeft="@mipmap/pen" />
 

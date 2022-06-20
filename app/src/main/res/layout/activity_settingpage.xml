@@ -26,7 +26,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="6dp"
-                    android:text="安全设置"
+                    android:text="@string/safesetting"
                     android:textColor="#4dd865"
                     android:textSize="16sp" />
                 <ImageView
@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
                         android:textSize="16sp"
-                        android:text="密码"
+                        android:text="@string/password"
                         android:textColor="@drawable/textcolor_selector"/>
                     <TextView
                         android:id="@+id/textofisopen"
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
                         android:textColor="@drawable/textcolor_selector"
-                        android:text="已关闭"/>
+                        android:text="@string/closed"/>
                 </LinearLayout>
             </LinearLayout>
             <com.zcw.togglebutton.ToggleButton
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="更改密码"
+                android:text="@string/reset_password"
                 android:layout_marginStart="2dp"
                 android:textColor="@drawable/textcolor_selector"/>
             <ImageView
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="忘记密码"
+                android:text="@string/forgetpassword2"
                 android:layout_marginStart="2dp"
                 android:textColor="@drawable/textcolor_selector"/>
             <ImageView
@@ -131,6 +131,6 @@
             android:layout_marginBottom="10dp"
             android:textColor="#999999"
             android:textSize="13sp"
-            android:text="开启密码可以保护你的手帐内容和隐私，防止被他人偷看，会在应用打开时要求输入"/>
+            android:text="@string/setpassowrdtips"/>
     </LinearLayout>
 </ScrollView>

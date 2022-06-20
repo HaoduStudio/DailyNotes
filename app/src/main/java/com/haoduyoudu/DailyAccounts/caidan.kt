@@ -2,9 +2,11 @@ package com.haoduyoudu.DailyAccounts
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Build
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 
 import kotlinx.android.synthetic.main.activity_caidan.*
@@ -34,7 +36,7 @@ class caidan : AppCompatActivity(),IResponseCallback {
                 val images = arrayListOf<Int>(R.mipmap.q_aiyu,R.mipmap.q_aiyu2,R.mipmap.q_aiyu3,R.mipmap.q_aiyujieshao,R.mipmap.q_youyujieshao)
                 val randomimageindex = (0..4).random()
                 when(randomimageindex){
-                    0,1,2 -> {Toast.makeText(this,"来看看我们的吉祥物吧!",Toast.LENGTH_SHORT).show()}
+                    0,1,2 -> {Toast.makeText(this,getString(R.string.about_caidan_tips2),Toast.LENGTH_SHORT).show()}
                 }
                 Glide.with(this)
                     .asBitmap()
@@ -53,17 +55,22 @@ class caidan : AppCompatActivity(),IResponseCallback {
                 page2.visibility=View.VISIBLE
                 page1.visibility=View.GONE
                 share_to_friend.setOnClickListener {
-                    val xtcAppExtendObject = XTCAppExtendObject()
-                    xtcAppExtendObject.startActivity = MainActivity::class.java.name
-                    xtcAppExtendObject.extInfo = ""
-                    val xtcShareMessage = XTCShareMessage()
-                    xtcShareMessage.shareObject = xtcAppExtendObject
-                    xtcShareMessage.setThumbImage(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
-                    xtcShareMessage.description = "发现一个小彩蛋～"
-                    val request = SendMessageToXTC.Request()
-                    request.message = xtcShareMessage
-                    request.setFlag(1)
-                    ShareMessageManager(this).sendRequestToXTC(request, "a81252c4145a48a9a52f0d3015a891d9")
+                    if(!(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O || MyApplication.SHIELD_SHARE_ACTON)){
+                        val xtcAppExtendObject = XTCAppExtendObject()
+                        xtcAppExtendObject.startActivity = MainActivity::class.java.name
+                        xtcAppExtendObject.extInfo = ""
+                        val xtcShareMessage = XTCShareMessage()
+                        xtcShareMessage.shareObject = xtcAppExtendObject
+                        xtcShareMessage.setThumbImage(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
+                        xtcShareMessage.description = getString(R.string.share_caidan)
+                        val request = SendMessageToXTC.Request()
+                        request.message = xtcShareMessage
+                        request.setFlag(1)
+                        ShareMessageManager(this).sendRequestToXTC(request, "a81252c4145a48a9a52f0d3015a891d9")
+                        Log.d("caidan","shareOK")
+                    }else{
+                        Toast.makeText(this,getString(R.string.model_not_support),Toast.LENGTH_SHORT).show()
+                    }
                 }
                 share_to_friend.addClickScale()
             }
@@ -76,10 +83,10 @@ class caidan : AppCompatActivity(),IResponseCallback {
 
     override fun onResp(isSuccess: Boolean, response: BaseResponse?) {
         if(isSuccess){
-            Toast.makeText(this,"分享成功", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.share_done), Toast.LENGTH_SHORT).show()
         }else{
             if(response?.getCode()!=2)
-                Toast.makeText(this,"分享失败,错误码${response?.getCode() ?: "None"}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.share_fail)+","+getString(R.string.error_code,response?.getCode() ?: 0), Toast.LENGTH_SHORT).show()
         }
     }
 }

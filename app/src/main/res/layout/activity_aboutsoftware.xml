@@ -18,7 +18,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="5dp"
             android:checked="true"
-            android:text="关于软件"
+            android:text="@string/about_title"
             android:textColor="#FF9800"
             android:textSize="16sp" />
 
@@ -37,7 +37,7 @@
                     android:id="@+id/Tv1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="手帐？我们这儿，专业的！\n"
+                    android:text="@string/softwear_inf"
                     android:textColor="#FFFFFF"
                     android:textSize="13sp" />
 
@@ -59,14 +59,15 @@
                     android:id="@+id/zhixiemeigong"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="*致谢美工\n感谢  颖琳、卡比、许祁颂、DonG、倪冰、Wick、Oroxi、老瑜、苏柒、二贼猫为软件添砖加瓦\n(点我看看！)\n"
+                    android:text="@string/thank_for"
                     android:textSize="13sp"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:layout_marginBottom="5dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="加入我们的反馈群吧！\n群号:721731698"
+                    android:text="@string/qq_group"
                     android:textColor="#FFFFFF"
                     android:textSize="13sp" />
 
@@ -92,14 +93,15 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="此版本为正式版\n"
+                        android:text="@string/version_with"
+                        android:layout_marginBottom="5dp"
                         android:textColor="#C5C3C3"
                         android:textSize="13sp" />
                 </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="软件作者:好读游独\n邮箱：michaelzhtiger@outlook.com\n"
+                    android:text="@string/authorinfo"
                     android:textColor="#C5C3C3"
                     android:textSize="13sp" />
                 <TextView
@@ -112,27 +114,33 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="\n图片版权声明：\n本软件部分图片插画来自阿里巴巴矢量图标，如有侵权，请联系作者删除\n"
+                    android:text="@string/img_copyright"
                     android:textColor="#C5C3C3"
                     android:textSize="13sp" />
-                <TextView
+                <LinearLayout
+                    android:id="@+id/sharefriendf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="好用？支持一下？"
-                    android:gravity="center"
-                    android:textColor="#C5C3C3"
-                    android:textSize="13sp"
-                    android:layout_marginBottom="5dp"/>
-                <Button
-                    android:id="@+id/share_to_friend"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/shape_all"
-                    android:gravity="center"
-                    android:text="分享给好友"
-                    android:textColor="#FFF"/>
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/share_softwear_tips"
+                        android:gravity="center"
+                        android:textColor="#C5C3C3"
+                        android:textSize="13sp"
+                        android:layout_marginBottom="5dp"/>
+                    <Button
+                        android:id="@+id/share_to_friend"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/shape_all"
+                        android:gravity="center"
+                        android:text="@string/share_softwear_button"
+                        android:textColor="#FFF"/>
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

@@ -34,6 +34,11 @@ import android.renderscript.Element
 
 import android.renderscript.RenderScript
 import androidx.core.view.size
+import com.xtc.shareapi.share.sharescene.Chat
+import android.widget.ScrollView
+
+
+
 
 
 class showdailyaccount : AppCompatActivity(), IResponseCallback {
@@ -65,9 +70,15 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val path = intent.getStringExtra("path")
-        val name = intent.getStringExtra("date")
+        var path:String=""
+        var name:String=""
+        try{
+            path = intent.getStringExtra("path")!!
+            name = intent.getStringExtra("date")!!
+        }catch (e:Exception){
+            Toast.makeText(this,getString(R.string.error_code,404),Toast.LENGTH_SHORT).show()
+            finish()
+        }
         val index = intent.getIntExtra("index",-2)
 
 
@@ -75,8 +86,11 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
         pathx = path.toString()
         namex = name.toString()
         indexx = index.toInt()
-
-        if(isrewrite) setTheme(R.style.DialogActivityTheme)
+        try {
+            if(isrewrite) setTheme(R.style.DialogActivityTheme)
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
 
         setContentView(R.layout.activity_showdailyaccount)
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -89,33 +103,55 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
         preview.setOnClickListener {
             try {
                 thread {
+                    var inerror = false
                     DeleteFileUtil.delete(File(cacheDir.absolutePath,"shot.png").absolutePath)
                     runOnUiThread {
-                        ifrewrite(false)
-                        preview.visibility = View.GONE
-                        mStickerLayout.visibility=View.GONE
+                        try{
+                            ifrewrite(false)
+                            preview.visibility = View.GONE
+                            mStickerLayout.visibility=View.GONE
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                        }
                     }
                     Thread.sleep(250)
                     runOnUiThread {
-                        FileUtils.savebitmap(viewConversionBitmap(f_background),cacheDir.absolutePath,"shot.png",100,Bitmap.CompressFormat.PNG)
+                        try{
+                            val thepreviewimg = viewConversionBitmap(f_background)
+                            FileUtils.savebitmap(thepreviewimg,cacheDir.absolutePath,"shot.png",100,Bitmap.CompressFormat.PNG)
+                        }catch (e:Exception){
+                            inerror = true
+                            e.printStackTrace()
+                        }
+                        try{
+                            preview.visibility = View.VISIBLE
+                            ifrewrite(true)
+                        }catch (e:Exception){
+                            inerror = true
+                            e.printStackTrace()
+                        }
                     }
-                    runOnUiThread {
-                        preview.visibility = View.VISIBLE
-                        ifrewrite(true)
+                    if (!inerror){
+                        startActivityForResult(Intent(this,prewiew_dailyaccount::class.java).putExtra("path",pathx),5)
+                    }else{
+                        runOnUiThread {
+                            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
+                        }
+                        finish()
                     }
-                    startActivityForResult(Intent(this,prewiew_dailyaccount::class.java).putExtra("path",pathx),5)
                 }
             }catch (e:Exception){
                 e.printStackTrace()
             }
         }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            moodimage.transitionName = "Image"
+        try{
+            if(!MyApplication.SHIELD_SHARE_NOTES_ACTON){
+                xtcCallback = XTCCallbackImpl()
+                xtcCallback.handleIntent(intent, this)
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
         }
-
-        xtcCallback = XTCCallbackImpl()
-        xtcCallback.handleIntent(intent, this)
         /**
          * 贴纸类点击事件
          *
@@ -140,26 +176,37 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
                 })
             }
         }
-
-        edithint = editsometext.hint.toString()
-        Glide.get(this).clearMemory();
-        thread {
-            Glide.get(this).clearDiskCache();
+        try {
+            edithint = editsometext.hint.toString()
+            mStickerLayout.removeAllSticker()
+        }catch (e:Exception){
+            Toast.makeText(this,getString(R.string.error_code,5),Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
         }
-        mStickerLayout.removeAllSticker()
-        if(!isrewrite)
-            load_sks()
-
+        if(!isrewrite) {
+            try {
+                load_sks()
+            } catch (e: Exception) {
+                Toast.makeText(this,getString(R.string.error_code,4041),Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
+        }
         uploadbackground()
-
-        val week = FileUtils.readTxtFile(path+"week.txt")
-
-
+        var week:String="无"
+        try {
+            week = FileUtils.readTxtFile(path+"week.txt")
+        }catch (e:Exception){
+            Toast.makeText(this,getString(R.string.error_code,6),Toast.LENGTH_SHORT).show()
+        }
 
         date.text = name.toString()
         whatweek.text = week.toString()
 
         uploadmood()
+
+        if(isrewrite && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            moodimage.transitionName = null
+
 
         editsometext.setText(FileUtils.readTxtFile(path+"text.txt"))
 
@@ -178,21 +225,26 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
                     if(recordList[i].type == "record") recordtimes +=1
                 }
             }
-        }catch (e:Exception){
+        }catch (e:Exception) {
             e.printStackTrace()
-            Toast.makeText(this,"手帐出错啦！",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.system_error), Toast.LENGTH_LONG).show()
             try {
                 mStickerLayout.visibility = View.GONE
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     finishAfterTransition()
-                }else{
+                } else {
                     finish()
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 finish()
             }
         }
-        ifrewrite(isrewrite)
+        try {
+            ifrewrite(isrewrite)
+        }catch (e:Exception){
+            Toast.makeText(this, getString(R.string.error_code,4042), Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
         imageorvideolist.setOnItemLongClickListener { _, _, position, _ ->
             val textviewobj = imageorvideoList[position]
             if(isrewrite){
@@ -337,10 +389,19 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
             thread {
                 Thread.sleep(500)
                 runOnUiThread {
-                    shot_to_img()
+                    try {
+                        shot_to_img()
+                    }catch (e:Exception){
+                        Toast.makeText(this,getString(R.string.cannotsave),Toast.LENGTH_SHORT).show()
+                        e.printStackTrace()
+                    }
                 }
             }
         }
+        //设置默认滚动到底部
+        //mScrollView.post(Runnable {
+        //    mScrollView.fullScroll(ScrollView.FOCUS_DOWN)
+        //})
     }
 
 
@@ -414,7 +475,7 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
             for (i in 0..Filenamesofimage.size - 1) {
                 imageorvideoList.add(
                     TextviewButtonList(
-                        "图片" + (i+1).toString(),
+                        getString(R.string.image) + (i+1).toString(),
                         0,
                         pathofimage + Filenamesofimage[i],
                         "image",
@@ -438,7 +499,7 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
                 var topsize = Filenamesofimage.size + i
                 imageorvideoList.add(
                     TextviewButtonList(
-                        "视频"+Filenamesofvideo[i].substring(0,1),
+                        getString(R.string.video)+Filenamesofvideo[i].substring(0,1),
                         0,
                         pathofvideo + Filenamesofvideo[i],
                         "video",
@@ -482,7 +543,7 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
         lp3.height = 0
         if(Filenamesofrecord.size != 0){
             for(i in 0..Filenamesofrecord.size-1){
-                recordList.add(TextviewButtonList("录音"+(i+1).toString(),
+                recordList.add(TextviewButtonList(getString(R.string.record)+(i+1).toString(),
                     R.mipmap.isrecord,
                     pathofrecord + Filenamesofrecord[i],
                     "record")
@@ -623,9 +684,9 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         setIntent(intent)
-
+        if(!MyApplication.SHIELD_SHARE_NOTES_ACTON)
+            xtcCallback.handleIntent(intent, this)
         //处理回调
-        xtcCallback.handleIntent(intent, this)
     }
 
     fun uploadmood(){
@@ -649,7 +710,7 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
             Glide.with(this)
                 .load(R.mipmap.isnoneface)
                 .into(moodimage)
-            moodtext.setText("心情失踪啦！")
+            moodtext.setText(getString(R.string.nonemood))
         }
     }
 
@@ -674,9 +735,6 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
                     try{
                         val share_image = viewConversionBitmap(f_background)!!
                         close_ac.visibility = View.VISIBLE
-                        FileUtils.savebitmap(share_image,"/sdcard/DCIM/Camera/",System.currentTimeMillis().toString()+".png",100,Bitmap.CompressFormat.PNG)
-
-                        Toast.makeText(this,"已保存到相册",Toast.LENGTH_SHORT).show()
                         //第一步：创建XTCImageObject 对象，并设置bitmap属性为要分享的图片
                         val xtcImageObject = XTCImageObject();
                         xtcImageObject.setBitmap(share_image);
@@ -685,12 +743,10 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
                         //第二步：创建XTCShareMessage对象，并将shareObject属性设置为xtcTextObject对象
                         val xtcShareMessage = XTCShareMessage();
                         xtcShareMessage.setShareObject(xtcImageObject);
-
                         //第三步：创建SendMessageToXTC.Request对象，并设置message属性为xtcShareMessage
                         val request = SendMessageToXTC.Request();
                         request.setMessage(xtcShareMessage);
                         request.setFlag(1)
-
                         //第四步：创建ShareMessageManagr对象，调用sendRequestToXTC方法，传入SendMessageToXTC.Request对象和AppKey
                         ShareMessageManager(this).sendRequestToXTC(request, "a81252c4145a48a9a52f0d3015a891d9");
                     }catch (e:Exception){
@@ -699,7 +755,7 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
                 }
             }
         }catch (e:Exception){
-            Toast.makeText(this,"分享失败",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.share_fail),Toast.LENGTH_SHORT).show()
             e.printStackTrace()
         }
     }
@@ -773,10 +829,10 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
     }
     override fun onResp(isSuccess: Boolean, response: BaseResponse?) {
         if(isSuccess){
-            Toast.makeText(this,"分享成功",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.share_done),Toast.LENGTH_SHORT).show()
         }else{
-            if(response?.getCode()!=2)
-                Toast.makeText(this,"分享失败,错误码${response?.getCode() ?: "None"}",Toast.LENGTH_SHORT).show()
+            if(response?.getCode()!=2 && response != null)
+                Toast.makeText(this,getString(R.string.share_fail)+","+getString(R.string.error_code,response.getCode()),Toast.LENGTH_SHORT).show()
         }
     }
 

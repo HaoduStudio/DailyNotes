@@ -56,7 +56,7 @@ class MoodAdapter(val moodList: List<MyMood>,val context:Context):
                     }catch (e:Exception){
                         e.printStackTrace()
                         (context as Activity).finish()
-                        Toast.makeText(context,"系统有些小错误哦～",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,MyApplication.context.getString(R.string.system_error),Toast.LENGTH_SHORT).show()
                     }
                 }else{
                     val intent = Intent(context, showdailyaccount::class.java)

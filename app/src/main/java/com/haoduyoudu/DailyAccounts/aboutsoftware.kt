@@ -25,15 +25,18 @@ import kotlin.Exception
 import kotlin.concurrent.thread
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.content.res.Resources
 import android.os.Build
 import android.util.Log
 import android.view.MotionEvent
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.SHIELD_SHARE_ACTON
 import java.io.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import com.xtc.shareapi.share.sharescene.Chat
 
+class aboutsoftware : AppCompatActivity(){
 
-class aboutsoftware : AppCompatActivity(), IResponseCallback{
-
-    lateinit var xtcCallback: XTCCallbackImpl
     var cantouch = true
     val touchdata = ArrayList<Long>()
     val pathofdailyaccounts = "/sdcard/Android/data/com.haoduyoudu.DailyAccounts/"
@@ -42,11 +45,8 @@ class aboutsoftware : AppCompatActivity(), IResponseCallback{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aboutsoftware)
 
-        xtcCallback = XTCCallbackImpl()
-        xtcCallback.handleIntent(intent, this)
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            share_to_friend.visibility=View.GONE
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O || SHIELD_SHARE_ACTON){
+            sharefriendf.visibility=View.GONE
         }
 
         versions.setOnClickListener {
@@ -66,7 +66,7 @@ class aboutsoftware : AppCompatActivity(), IResponseCallback{
                     try{
                         if(GFN(pathofdailyaccounts).size >= 21){
                             if(!File("/data/data/com.haoduyoudu.DailyAccounts/assest/moresticker/").exists()){
-                                Toast.makeText(this,"恭喜达成目标！",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this,getString(R.string.about_mubiaodacheng),Toast.LENGTH_SHORT).show()
                                 val rpath = "/data/data/com.haoduyoudu.DailyAccounts/"
                                 FileUtils.makeRootDirectory(rpath + "assest/" + "moresticker/")
                                 for (i in assets.list("moresticker")!!) {
@@ -77,7 +77,7 @@ class aboutsoftware : AppCompatActivity(), IResponseCallback{
                                 startActivity(newintent)
                             }
                         }else{
-                            Toast.makeText(this,"彩蛋：写完21篇手帐再来找我,我们不见不散!",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,getString(R.string.caidan_tips),Toast.LENGTH_SHORT).show()
                         }
                         touchdata.clear()
                     }catch (e:Exception){
@@ -92,19 +92,19 @@ class aboutsoftware : AppCompatActivity(), IResponseCallback{
                 startActivity(newintent)
                 true
             }
-        if(MyApplication.needupdata!=null)
-            if(MyApplication.needupdata!!){
-                tempview.visibility=View.VISIBLE
-                cantouch=false
-                thread {
-                    runOnUiThread { fadein(startview) }
-                    Thread.sleep(3500)
-                    runOnUiThread { fadeout(startview,2300) }
-                    Thread.sleep(2300)
-                    runOnUiThread { tempview.visibility=View.GONE }
-                    cantouch=true
-                }
+        if(MyApplication.firstLoadaboutBg){
+            tempview.visibility=View.VISIBLE
+            cantouch=false
+            thread {
+                runOnUiThread { fadein(startview) }
+                Thread.sleep(3500)
+                runOnUiThread { fadeout(startview, 2300) }
+                Thread.sleep(2300)
+                runOnUiThread { tempview.visibility = View.GONE }
+                cantouch = true
             }
+            MyApplication.firstLoadaboutBg = false
+        }
         share_to_friend.addClickScale(0.8f)
         im1.setScale(0.0f)
         val lp: ViewGroup.LayoutParams = im1.getLayoutParams()
@@ -114,7 +114,7 @@ class aboutsoftware : AppCompatActivity(), IResponseCallback{
         Tv1.setOnLongClickListener {
             try {
                 if (!istouch) {
-                    Toast.makeText(this,"Tips：您使用的彩蛋已过时,为什么不去版本号中多点几下呢AWA",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,getString(R.string.about_caidan_tips2),Toast.LENGTH_LONG).show()
                     im1.addScale(0.0f, 1.0f, 500)
                     lp.height = 320
                     im1.setLayoutParams(lp)
@@ -147,39 +147,23 @@ class aboutsoftware : AppCompatActivity(), IResponseCallback{
                 xtcShareMessage.shareObject = xtcAppExtendObject
                 xtcShareMessage.setThumbImage(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
 
-                xtcShareMessage.description = "好用的宝贝，分享给你～"
+                xtcShareMessage.description = getString(R.string.share_software_text)
 
                 val request = SendMessageToXTC.Request()
                 request.message = xtcShareMessage
                 request.setFlag(1)
-                ShareMessageManager(this).sendRequestToXTC(request, "a81252c4145a48a9a52f0d3015a891d9")
-                Toast.makeText(this,"《每日手帐》感谢您的支持与鼓励！",Toast.LENGTH_SHORT).show()
+                val shareMessageManager = ShareMessageManager(this)
+                shareMessageManager.sendRequestToXTC(request, "a81252c4145a48a9a52f0d3015a891d9")
+                Toast.makeText(this,getString(R.string.share_software_tips),Toast.LENGTH_SHORT).show()
+
             }catch (e:Exception){
-                Toast.makeText(this,"分享失败",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.share_fail),Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        setIntent(intent)
-        //处理回调
-        xtcCallback.handleIntent(intent, this)
-    }
 
-    override fun onResp(isSuccess: Boolean, response: BaseResponse?) {
-        if(isSuccess){
-            Toast.makeText(this,"分享成功",Toast.LENGTH_SHORT).show()
-        }else{
-            if(response?.getCode()!=2)
-                Toast.makeText(this,"分享失败,错误码${response?.getCode() ?: "None"}",Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun onReq(request: ShowMessageFromXTC.Request?) {
-        //to-do
-    }
     private fun fadein(v: View,duration:Long = 1500L){
         v.setAlpha(0f);
         v.setVisibility(View.VISIBLE);
@@ -255,6 +239,22 @@ class aboutsoftware : AppCompatActivity(), IResponseCallback{
             }
         }
         return file.getPath();
+    }
+    private fun getBitmap(context: Context, vectorDrawableId: Int): Bitmap? {
+        var bitmap: Bitmap? = null
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            val vectorDrawable = context.getDrawable(vectorDrawableId)
+            bitmap = Bitmap.createBitmap(
+                vectorDrawable!!.intrinsicWidth,
+                vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+            )
+            val canvas = Canvas(bitmap)
+            vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
+            vectorDrawable.draw(canvas)
+        } else {
+            bitmap = BitmapFactory.decodeResource(context.resources, vectorDrawableId)
+        }
+        return bitmap
     }
 
 }

@@ -60,7 +60,7 @@ class find : AppCompatActivity() {
         }
         button_ok.setOnClickListener {
             if(yt == 0){
-                Toast.makeText(this, "您还未选择年份！", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.find_tips), Toast.LENGTH_SHORT).show()
             }else{
                 val intent = Intent(this,showfind::class.java)
                 val ms = if(mt.toString().length < 2){

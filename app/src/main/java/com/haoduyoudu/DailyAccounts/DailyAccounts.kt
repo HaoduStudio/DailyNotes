@@ -58,7 +58,7 @@ class DailyAccounts : AppCompatActivity(), View.OnClickListener {
                 radiobutton7.addScale(0.1f,1.0f,800)
             }
         }catch (e:Exception){
-            Toast.makeText(this,"系统出了点小问题哦，请稍后再试～",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
             finish()
         }
 
@@ -67,7 +67,7 @@ class DailyAccounts : AppCompatActivity(), View.OnClickListener {
             if(intent.getStringExtra("path") != null){
                 path = intent.getStringExtra("path").toString()
             }else{
-                Toast.makeText(this,"系统出了点小问题哦，请稍后再试～",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
             }
         }
         moremood.setOnClickListener {
@@ -171,7 +171,7 @@ class DailyAccounts : AppCompatActivity(), View.OnClickListener {
             }
 
         } else {
-            Toast.makeText(this, "您今天已经写过手帐了\n若想修改和删除,请到\"管理手帐\"界面操作哦", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.sel_mood_tips), Toast.LENGTH_SHORT).show()
         }
     }
 }

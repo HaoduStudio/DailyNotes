@@ -1,24 +1,29 @@
 package com.haoduyoudu.DailyAccounts
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.media.MediaMetadataRetriever
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.MAX_IMAGE_OR_VIDEO_COUNT
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.MAX_RECORD_COUNT
 import kotlinx.android.synthetic.main.activity_select_media_access.*
 import java.io.File
-import java.lang.StringBuilder
 import kotlin.concurrent.thread
 
 
@@ -61,7 +66,7 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                 Thread.sleep(1000)
                 try {
                     SB.clear()
-                    SB.append("苦逼加载中")
+                    SB.append(getString(R.string.selmedia_loading))
                     i++
                     repeat(i%3+1){
                         SB.append(".")
@@ -154,14 +159,14 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                                             { progress ->  Log.d("压缩视频","进度${progress}")})
                                         if(!result)
                                             runOnUiThread {
-                                                Toast.makeText(this,"出了点小问题哦～请稍后再试",Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
                                             }
                                     }
                                 }catch (e:Exception){
                                     Log.e("copy","复制图片失败")
                                     e.printStackTrace()
                                     runOnUiThread {
-                                        Toast.makeText(this,"出了点小问题哦～请稍后再试",Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
                                     }
                                 }
                                 try {
@@ -179,9 +184,26 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                                     Thread.sleep(1000)
                                 }catch (e:Exception){
                                     try{
-                                        val options: BitmapFactory.Options = BitmapFactory.Options();
-                                        options.inJustDecodeBounds =true;
-                                        val bitmapofvideobuffe = BitmapFactory.decodeResource(getResources(), R.mipmap.novideo, options)
+                                        var bitmapofvideobuffe:Bitmap? = null
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            val vectorDrawable: Drawable = this.getDrawable(R.mipmap.novideo)!!
+                                            bitmapofvideobuffe = Bitmap.createBitmap(
+                                                vectorDrawable.intrinsicWidth,
+                                                vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+                                            )
+                                            val canvas = Canvas(bitmapofvideobuffe)
+                                            vectorDrawable.setBounds(
+                                                0,
+                                                0,
+                                                canvas.getWidth(),
+                                                canvas.getHeight()
+                                            )
+                                            vectorDrawable.draw(canvas)
+                                        }else{
+                                            val options: BitmapFactory.Options = BitmapFactory.Options();
+                                            options.inJustDecodeBounds =true;
+                                            bitmapofvideobuffe = BitmapFactory.decodeResource(getResources(), R.mipmap.novideo, options)
+                                        }
                                         FileUtils.savebitmap(
                                             bitmapofvideobuffe,
                                             videobuffe,
@@ -191,7 +213,7 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                                         Thread.sleep(200)
                                     }catch (e:Exception){
                                         runOnUiThread {
-                                            Toast.makeText(this,"出了点小问题哦～请稍后再试",Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
                                         }
                                     }
                                     e.printStackTrace()
@@ -260,13 +282,13 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                                         { progress ->  Log.d("压缩视频","进度${progress}")})
                                     if(!result)
                                         runOnUiThread {
-                                            Toast.makeText(this,"出了点小问题哦～请稍后再试",Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
                                         }
                                 }catch (e:Exception){
                                     Log.e("copy","复制图片失败")
                                     e.printStackTrace()
                                     runOnUiThread {
-                                        Toast.makeText(this,"出了点小问题哦～请稍后再试",Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
                                     }
                                 }
                                 try {
@@ -281,9 +303,26 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                                     mmr.release()
                                     Thread.sleep(1000)
                                 }catch (e:Exception){
-                                    val options: BitmapFactory.Options = BitmapFactory.Options();
-                                    options.inJustDecodeBounds =true;
-                                    val bitmapofvideobuffe = BitmapFactory.decodeResource(getResources(), R.mipmap.novideo, options)
+                                    var bitmapofvideobuffe:Bitmap? = null
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                        val vectorDrawable: Drawable = this.getDrawable(R.mipmap.novideo)!!
+                                        bitmapofvideobuffe = Bitmap.createBitmap(
+                                            vectorDrawable.intrinsicWidth,
+                                            vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+                                        )
+                                        val canvas = Canvas(bitmapofvideobuffe!!)
+                                        vectorDrawable.setBounds(
+                                            0,
+                                            0,
+                                            canvas.getWidth(),
+                                            canvas.getHeight()
+                                        )
+                                        vectorDrawable.draw(canvas)
+                                    }else{
+                                        val options: BitmapFactory.Options = BitmapFactory.Options();
+                                        options.inJustDecodeBounds =true;
+                                        bitmapofvideobuffe = BitmapFactory.decodeResource(getResources(), R.mipmap.novideo, options)
+                                    }
                                     FileUtils.savebitmap(
                                         bitmapofvideobuffe,
                                         videobuffe,
@@ -295,10 +334,7 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                                 }finally {
                                     finish()
                                 }
-
                             }
-
-
                             val intent = Intent()
                             intent.putExtra("type", "video")
                             setResult(RESULT_OK, intent)
@@ -307,7 +343,7 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                 }
             }
         }catch (e:Exception){
-            Toast.makeText(this,"添加失败！",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.add_fail),Toast.LENGTH_SHORT).show()
             val pathofimage = pathx+ "/image/"
             val pathofvideo = pathx+ "/video/"
             //如果有的话
@@ -338,8 +374,8 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
             if (listofview.indexOf(v.id) != -1){
                 Log.e("imagetimes","$imagetimes")
                 Log.e("videotimes","$videotimes")
-                if((imagetimes-1) + (videotimes-1) >= 3){
-                    Toast.makeText(this, "只能添加三个视频或图片哦", Toast.LENGTH_SHORT).show()
+                if((imagetimes-1) + (videotimes-1) >= MAX_IMAGE_OR_VIDEO_COUNT){
+                    Toast.makeText(this, getString(R.string.selmedia_max_imgorvid_count,MAX_IMAGE_OR_VIDEO_COUNT), Toast.LENGTH_SHORT).show()
                 }else{
                     when(v.id){
                         fromalbum.id->{
@@ -347,14 +383,14 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                                 val intent= Intent()
                                 intent.setAction(Intent.ACTION_GET_CONTENT)
                                 intent.setType("file/*")
-                                intent.putExtra("com.xtc.camera.LEFT_BUTTON_TEXT","取消")
-                                intent.putExtra("com.xtc.camera.RIGHT_BUTTON_TEXT","确定")
+                                intent.putExtra("com.xtc.camera.LEFT_BUTTON_TEXT",getString(R.string.cancel))
+                                intent.putExtra("com.xtc.camera.RIGHT_BUTTON_TEXT",getString(R.string.ok))
                                 startActivityForResult(intent,fromAlbum)
                             }catch (e:Exception){
                                 val intent = Intent()
                                 setResult(RESULT_CANCELED, intent)
                                 e.printStackTrace()
-                                Toast.makeText(this,"出错啦！",Toast.LENGTH_LONG).show()
+                                Toast.makeText(this,getString(R.string.model_not_support),Toast.LENGTH_LONG).show()
                                 finish()
                             }
                         }
@@ -362,14 +398,14 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                             try {
                                 val intent: Intent = Intent()
                                 intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE)
-                                intent.putExtra("com.xtc.camera.LEFT_BUTTON_TEXT", "取消")
-                                intent.putExtra("com.xtc.camera.RIGHT_BUTTON_TEXT", "确定")
+                                intent.putExtra("com.xtc.camera.LEFT_BUTTON_TEXT", getString(R.string.cancel))
+                                intent.putExtra("com.xtc.camera.RIGHT_BUTTON_TEXT", getString(R.string.ok))
                                 startActivityForResult(intent, takePhoto)
                             }catch (e:Exception){
                                 val intent = Intent()
                                 setResult(RESULT_CANCELED, intent)
                                 e.printStackTrace()
-                                Toast.makeText(this,"出错啦！",Toast.LENGTH_LONG).show()
+                                Toast.makeText(this,getString(R.string.model_not_support),Toast.LENGTH_LONG).show()
                                 finish()
                             }
                         }
@@ -377,22 +413,22 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                             try {
                                 val intent: Intent = Intent()
                                 intent.setAction(MediaStore.ACTION_VIDEO_CAPTURE)
-                                intent.putExtra("com.xtc.camera.LEFT_BUTTON_TEXT","取消")
-                                intent.putExtra("com.xtc.camera.RIGHT_BUTTON_TEXT","确定")
+                                intent.putExtra("com.xtc.camera.LEFT_BUTTON_TEXT",getString(R.string.cancel))
+                                intent.putExtra("com.xtc.camera.RIGHT_BUTTON_TEXT",getString(R.string.ok))
                                 startActivityForResult(intent,takeVideo)
                             }catch (e:Exception){
                                 val intent = Intent()
                                 setResult(RESULT_CANCELED, intent)
                                 e.printStackTrace()
-                                Toast.makeText(this,"出错啦！",Toast.LENGTH_LONG).show()
+                                Toast.makeText(this,getString(R.string.model_not_support),Toast.LENGTH_LONG).show()
                                 finish()
                             }
                         }
                     }
                 }
             }else{
-                if((recordtimes-1) >= 6){
-                    Toast.makeText(this, "只能添加六个音频哦", Toast.LENGTH_SHORT).show()
+                if((recordtimes-1) >= MAX_RECORD_COUNT){
+                    Toast.makeText(this, getString(R.string.selmedia_max_record_count,MAX_RECORD_COUNT), Toast.LENGTH_SHORT).show()
                 }else{
                     val intent = Intent()
                     intent.putExtra("type","backrecord")
@@ -402,5 +438,4 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
             }
         }
     }
-
 }

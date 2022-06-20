@@ -20,22 +20,22 @@ class Moodcalendar : AppCompatActivity() {
         Month = Calendar.getInstance().get(Calendar.MONTH) + 1
         onleft.addClickScale()
         onright.addClickScale()
-        mouth.setText(Month.toString()+"月")
+        mouth.setText(getlanguagemonth(Month))
         refreshcalendar(Month)
         onleft.setOnClickListener {
-            mouth.setText("加载中")
+            mouth.setText(getString(R.string.loading))
             Month-=1
             if(Month==0) Month = 12
             refreshcalendar(Month)
-            mouth.setText(Month.toString()+"月")
+            mouth.setText(getlanguagemonth(Month))
 
         }
         onright.setOnClickListener {
-            mouth.setText("加载中")
+            mouth.setText(getString(R.string.loading))
             Month+=1
             if(Month==13) Month = 1
             refreshcalendar(Month)
-            mouth.setText(Month.toString()+"月")
+            mouth.setText(getlanguagemonth(Month))
         }
     }
 
@@ -127,9 +127,35 @@ class Moodcalendar : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if(MyApplication.newwrite){
-            mouth.setText("加载中")
+            mouth.setText(getString(R.string.loading))
             refreshcalendar(Month)
-            mouth.setText(Month.toString()+"月")
+            mouth.setText(getlanguagemonth(Month))
+        }
+    }
+    private fun getlanguagemonth(mon: Int):String{
+        when(getString(R.string.language_tag)){
+            "en" -> {
+                val engmonth = mapOf<Int,String>(
+                    0 to "None",
+                    1 to "Jan.",
+                    2 to "Feb.",
+                    3 to "Mar.",
+                    4 to "Apr.",
+                    5 to "May.",
+                    6 to "Jun.",
+                    7 to "Jul.",
+                    8 to "Aug.",
+                    9 to "Sept.",
+                    10 to "Oct.",
+                    11 to "Nov.",
+                    12 to "Dec.",
+                    13 to "None"
+                )
+                return engmonth[mon]!!
+            }
+            else -> {
+                return mon.toString()+"月"
+            }
         }
     }
 }

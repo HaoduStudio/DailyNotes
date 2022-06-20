@@ -27,7 +27,7 @@ class showaudio : AppCompatActivity() {
         try{
             playmedia.play(path.toString())
         }catch (e:Exception){
-            Toast.makeText(this,"系统有点忙,或者音频出错了哦～",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
             finish()
         }
 
@@ -47,7 +47,7 @@ class showaudio : AppCompatActivity() {
                 }
             }finally {
                 runOnUiThread{
-                    zhuangtai.text = "播放完成"
+                    zhuangtai.text = getString(R.string.playback_complete)
                 }
                 playmedia.stop()
                 Thread.sleep(1000)

@@ -57,20 +57,20 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
             RESET_PASSWORD -> {
                 originalpassword = getbeforepassword()
                 if(originalpassword == null || originalpassword?.size!= DIGIT_OF_PASSWORD){
-                    Toast.makeText(this,"系统错误",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
                     val file = File(rootdata+"password.data")
                     DeleteFileUtil.delete(file.absolutePath)
                     val intent = Intent()
                     setResult(RESULT_CANCELED,intent)
                     finish()
                 }else{
-                    showtips("输入原密码")
+                    showtips(getString(R.string.enter_original_password))
                 }
             }
             INPUT_PASSWORD,CLOSE_PASSWORD -> {
                 originalpassword = getbeforepassword()
                 if(originalpassword == null || originalpassword?.size != DIGIT_OF_PASSWORD){
-                    Toast.makeText(this,"系统错误",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
                     val file = File(rootdata+"password.data")
                     DeleteFileUtil.delete(file.absolutePath)
                     android.os.Process.killProcess(android.os.Process.myPid())
@@ -80,7 +80,7 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                             thread {
                                 val endtime = FileUtils.readTxtFile(File(rootdata,"FORGETPASS.dt").absolutePath).toLong()
                                 runOnUiThread {
-                                    showtips("输入密码")
+                                    showtips(getString(R.string.enter_password))
                                 }
                                 Thread.sleep(1000)
                                 while (!isover){
@@ -90,7 +90,7 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                                         DeleteFileUtil.delete(File(rootdata,"FORGETPASS.dt").absolutePath)
                                         DeleteFileUtil.delete(File(rootdata,"password.data").absolutePath)
                                         runOnUiThread {
-                                            Toast.makeText(this,"你设置的\"忘记密码\"功能时间已到，已关闭密码",Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(this,getString(R.string.forgetpassword_OK_tips),Toast.LENGTH_SHORT).show()
                                         }
                                         val intent = Intent()
                                         setResult(RESULT_OK,intent)
@@ -101,23 +101,23 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                                     if(nowstatus != IS_INPUT_PASSWORD && nowstatus != IS_LOCKING_UI){
                                         runOnUiThread {
                                             if(howend / (1000*60*60) != 0L){
-                                                "${(howend/(1000*60*60)).toInt()}小时后自动解锁".also { text_tips.text=it }
+                                                getString(R.string.lastend_unlook_h,(howend/(1000*60*60)).toInt()).also { text_tips.text=it }
                                             }else if(howend/(1000*60) != 0L){
-                                                "${(howend/(1000*60)).toInt()}分钟后自动解锁".also { text_tips.text=it }
+                                                getString(R.string.lastend_unlook_m,(howend/(1000*60)).toInt()).also { text_tips.text=it }
                                             }else if(howend/(1000) != 0L){
-                                                "还有${(howend/(1000)).toInt()}秒后自动解锁".also { text_tips.text=it }
+                                                getString(R.string.lastend_unlook_s,(howend/(1000)).toInt()).also { text_tips.text=it }
                                             }else{
-                                                "已解锁".also { text_tips.text=it }
+                                                getString(R.string.password_unlocked).also { text_tips.text=it }
                                             }
                                         }
                                     }
                                 }
                             }
                         }else{
-                            showtips("输入密码")
+                            showtips(getString(R.string.enter_password))
                         }
                     }else{
-                        showtips("输入密码")
+                        showtips(getString(R.string.enter_password))
                     }
                 }
             }
@@ -147,7 +147,7 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                             if(originalpassword!!.equals(nowpasword)){
                                 if(type == CLOSE_PASSWORD){
                                     DeleteFileUtil.delete(File(rootdata,"password.data").absolutePath)
-                                    Toast.makeText(this,"已关闭密码",Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this,getString(R.string.password_turned_off),Toast.LENGTH_SHORT).show()
                                 }
                                 DeleteFileUtil.delete(File(rootdata,"FORGETPASS.dt").absolutePath)
                                 val intent = Intent()
@@ -160,10 +160,10 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                                     if(errortimes >= MAX_PASSWORD_ERROR_TIMES){
                                         onlockpassword()
                                     }else{
-                                        Toast.makeText(this,"密码错误\n还可尝试${MAX_PASSWORD_ERROR_TIMES-errortimes}次",Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this,getString(R.string.password_remaining_opportunities,MAX_PASSWORD_ERROR_TIMES-errortimes),Toast.LENGTH_SHORT).show()
                                     }
                                 }else{
-                                    Toast.makeText(this,"密码错误",Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this,getString(R.string.password_error),Toast.LENGTH_SHORT).show()
                                 }
                             }
                         }
@@ -172,7 +172,7 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                         if(beforepassword!!.size < DIGIT_OF_PASSWORD){
                             forwardapassword(clicknum,beforepassword!!)
                             if(beforepassword!!.size == DIGIT_OF_PASSWORD){
-                                showtips("再次输入密码")
+                                showtips(getString(R.string.enter_password_again))
                                 oncleanpassword()
                             }
                         }else if(nowpasword.size < DIGIT_OF_PASSWORD){
@@ -182,11 +182,11 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                                     createpassword(nowpasword)
                                     val intent = Intent()
                                     setResult(RESULT_OK,intent)
-                                    Toast.makeText(this,"设置成功",Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this,getString(R.string.setpassword_done),Toast.LENGTH_SHORT).show()
                                     finish()
                                 }else{
                                     onpassworderror(false)
-                                    Toast.makeText(this,"两次密码不相同",Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this,getString(R.string.two_password_notsame),Toast.LENGTH_SHORT).show()
                                     beforepassword!!.clear()
                                     nowpasword.clear()
                                 }
@@ -199,7 +199,7 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
 
                                 forwardapassword(clicknum, beforepassword!!)
                                 if (beforepassword!!.size == DIGIT_OF_PASSWORD) {
-                                    showtips("再次输入新密码")
+                                    showtips(getString(R.string.enter_newpassword_again))
                                     oncleanpassword()
                                 }
                             } else if (nowpasword.size < DIGIT_OF_PASSWORD) {
@@ -209,11 +209,11 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                                         val intent = Intent()
                                         setResult(RESULT_OK, intent)
                                         createpassword(nowpasword)
-                                        Toast.makeText(this, "修改成功", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this, getString(R.string.modified_successfully), Toast.LENGTH_SHORT).show()
                                         finish()
                                     }else {
                                         onpassworderror(false)
-                                        Toast.makeText(this, "两次密码不相同", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this, getString(R.string.two_password_notsame), Toast.LENGTH_SHORT).show()
                                         beforepassword!!.clear()
                                         nowpasword.clear()
                                     }
@@ -225,9 +225,9 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                                 if(!originalpassword!!.equals(originalpassword_input)){
                                     originalpassword_input!!.clear()
                                     onpassworderror(false)
-                                    Toast.makeText(this, "原密码不正确", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, getString(R.string.original_password_error), Toast.LENGTH_SHORT).show()
                                 }else{
-                                    showtips("输入新密码")
+                                    showtips(getString(R.string.enter_new_password))
                                     oncleanpassword()
                                 }
                             }
@@ -320,7 +320,7 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
                 CountDownTimer(cloktime, 1*1000) {
                 override fun onTick(millisUntilFinished:Long) {
                     nowstatus = IS_LOCKING_UI
-                    "${(millisUntilFinished/1000).toInt()}秒后再试".also { text_tips.text = it }
+                    getString(R.string.try_again_password_s,(millisUntilFinished/1000).toInt()).also { text_tips.text = it }
                 }
                 override fun onFinish() {
                     showpassword()
@@ -349,12 +349,12 @@ class inputpassword : AppCompatActivity(), View.OnClickListener{
             val sb = StringBuilder()
             for (i in marray) sb.append(i.toString()+" ")
             if(!FileUtils.writeTxtToFile(sb.toString(),rootdata,"password.data")){
-                Toast.makeText(this,"创建失败",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.creation_failed),Toast.LENGTH_SHORT).show()
                 finish()
             }
         }catch (e:Exception){
             e.printStackTrace()
-            Toast.makeText(this,"创建失败",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.creation_failed),Toast.LENGTH_SHORT).show()
             finish()
         }
     }

@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.JsonWriter
 import android.util.Log
 import com.tencent.bugly.crashreport.CrashReport
+import com.xtc.shareapi.share.sharescene.Chat
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -27,7 +28,11 @@ class MyApplication:Application() {
         val Add_pictures = 2
         val Add_videos = 3
 
+        var firstLoadaboutBg = true
+
+        const val SHIELD_SHARE_NOTES_ACTON = true
         const val SHIELD_PASSWORD_ACTON = true
+        const val SHIELD_SHARE_ACTON = false
 
         const val SET_PASSWORD = 1
         const val RESET_PASSWORD = 2
@@ -37,6 +42,9 @@ class MyApplication:Application() {
         const val DIGIT_OF_PASSWORD = 3
         const val FORGET_PASSWORD_TIME = 2*24*60*60*1000L
         const val LOCK_TIME = 1000*60*2L // ten s
+        const val MAX_RECORD_COUNT = 6
+        const val MAX_IMAGE_OR_VIDEO_COUNT = 3
+        const val MAX_STICKER_COUNT = 9
 
         var nowbackground = "weather"
 
@@ -208,7 +216,214 @@ class MyApplication:Application() {
             23 to R.mipmap.happybirthday,
             24 to R.mipmap.banana
         )
+        fun InitLoad(){
+            thread {
+                var LoadassestOK = false
+                try{
+                    if(!File(filePath).exists())
+                        DeleteFileUtil.delete("/data/data/com.haoduyoudu.DailyAccounts/assest/")
+                    LoadassestOK = Loadassest()  //预加载assests
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
 
+
+                try {
+                    if(!File(filePath).exists()){
+                        needupdata = true
+                        setjson(sound = true,first = true,firstloadOK = LoadassestOK)
+                    }else{
+
+                        var date:Int? = null
+                        var uptime:Int? = null
+                        val jsontext = FileUtils.readTxtFile(filePath)
+                        val jsonObject = JSONObject(jsontext)
+
+
+                        date = jsonObject.getString("date").toInt()
+                        uptime = jsonObject.getString("uptime").toInt()
+                        Appsetting["sound"] = jsonObject.getString("sound") == "on"
+                        weather = jsonObject.getString("weather")
+                        tem = jsonObject.getString("tem").toInt()
+                        if (jsonObject.getString("ver")!=getVer(context)){
+                            DeleteFileUtil.delete("/data/data/com.haoduyoudu.DailyAccounts/assest/")
+                            setjson(sound = Appsetting["sound"]!!?:true,first = true, firstloadOK = Loadassest())
+                        }
+                        if(!jsonObject.getBoolean("firstloadOK")){
+                            DeleteFileUtil.delete("/data/data/com.haoduyoudu.DailyAccounts/assest/")
+                            setjson(first = false,firstloadOK = Loadassest())
+                        }
+                        try{
+                            val back:String? = jsonObject.getString("background")
+                            if(back != null){
+                                nowbackground = back
+                            }
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                        }
+
+
+                        if((date != getday()) or (gettime() != uptime)){   //updata
+                            setjson(sound = Appsetting["sound"]!!?:true,first = true)
+                            needupdata = true
+                        }else{
+                            needupdata = false
+                        }
+                    }
+                }catch (e:Exception){
+                    e.printStackTrace()
+                    try{
+                        setjson(sound = Appsetting["sound"]!!?:true,first = true)
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
+                }
+            }
+        }
+        private fun parseJSONWithJSONObject(jsonData:String){
+            try {
+                val jsonObject = JSONObject(jsonData)
+                val weathers = jsonObject.getString("wea_img")
+                weather = weathers
+                val tems = jsonObject.getString("tem").toInt()
+                tem = tems
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
+
+        fun gettime():Int{
+            val calendars = Calendar.getInstance()
+            calendars.setTimeZone(TimeZone.getTimeZone("GMT+8:00"))
+            val hours:Int = calendars.get(Calendar.HOUR_OF_DAY)
+            var times:Int
+            if (0<=hours && hours<=10) times = 1
+            else if (11<=hours && 12>=hours) times = 2
+            else if (13<=hours && 18>=hours) times = 3
+            else if (19<=hours && 21>=hours) times = 4
+            else if (22<=hours && 23>=hours) times = 5
+            else times = 6
+            return times
+        }
+        private fun getday():Int{
+            val calendars = Calendar.getInstance()
+            calendars.setTimeZone(TimeZone.getTimeZone("GMT+8:00"))
+            val day:Int = calendars.get(Calendar.DATE)
+            return day
+        }
+        fun setjson(sound:Boolean = true,first:Boolean = false,firstloadOK:Boolean = true){
+            thread {
+                if (first) {getweather()}
+                Thread.sleep(2800)
+                try {
+                    val fileOutputStream = FileOutputStream(filePath);
+                    //开始写JSON数据
+                    val jsonWriter = JsonWriter(
+                        OutputStreamWriter(
+                            fileOutputStream, "UTF-8")
+                    );
+                    jsonWriter.beginObject();
+                    jsonWriter.name("date").value(getday().toString())
+                    jsonWriter.name("uptime").value(gettime().toString());
+                    jsonWriter.name("sound").value(if(sound) "on" else "off");
+                    jsonWriter.name("weather").value(weather?:"null");
+                    jsonWriter.name("tem").value(tem.toString())
+                    jsonWriter.name("ver").value(getVer(context))
+                    jsonWriter.name("firstloadOK").value(firstloadOK)
+                    jsonWriter.name("background").value(nowbackground)
+                    jsonWriter.endObject();
+                    Log.d("json","JSON数据写入完毕！");
+                    jsonWriter.close();
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
+        }
+
+        private fun getweather(){
+            thread{
+                try{
+                    val client = OkHttpClient()
+                    val request = Request.Builder()
+                        .url("https://www.tianqiapi.com/api/?version=v51"+"&appid=1001&appsecret=1046")
+                        .build()
+                    val response = client.newCall(request).execute()
+                    val responseData = response.body?.string()
+                    Log.e("weather",responseData.toString())
+                    if(responseData != null) {
+                        //    show weather
+                        parseJSONWithJSONObject(responseData)
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                }
+            }
+        }
+
+        fun copyAssets(context:Context,FileName:String,dir:String,assestpath:String):String{
+
+
+            val dir = File(dir);
+            if (!dir.exists() || !dir.isDirectory()) {
+                dir.mkdir();
+            }
+
+            val file = File(dir, FileName);
+            var inputStream:InputStream? = null
+            var outputStream:OutputStream? = null
+
+            //通过IO流的方式，将assets目录下的数据库文件，写入到SD卡中。
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                    inputStream = context.getClassLoader().getResourceAsStream(assestpath + FileName);
+                    outputStream = FileOutputStream(file);
+                    val buffer = ByteArray(1024)
+                    var len:Int;
+                    while ((inputStream.read(buffer).also { len = it }) != -1) {
+                        outputStream.write(buffer, 0, len);
+                    }
+                    Log.d("copyAssests",file.absolutePath)
+                } catch (e:IOException) {
+                    e.printStackTrace();
+                } finally {
+                    outputStream?.flush();
+                    outputStream?.close();
+                    inputStream?.close();
+                }
+            }
+            return file.getPath();
+        }
+
+        fun Loadassest():Boolean{
+            var OK = false
+            try{
+                while(!AllPermissionsOK){}
+                val rpath = "/data/data/com.haoduyoudu.DailyAccounts/"
+                if(!File(rpath+"assest/").exists()) {
+                    FileUtils.makeRootDirectory(rpath + "assest/")
+                }
+                if (!File(rpath+"assest/mood/").exists()){
+                    FileUtils.makeRootDirectory(rpath + "assest/" + "mood/")
+                    for (i in 1..59) {
+                        copyAssets(context, i.toString() + ".png","/data/data/com.haoduyoudu.DailyAccounts/assest/mood/","assets/mood/")
+                    }
+                }
+                if (!File(rpath+"assest/sticker/").exists()){
+                    FileUtils.makeRootDirectory(rpath + "assest/" + "sticker/")
+                    for (i in context.assets.list("sticker")!!) {
+                        copyAssets(context, i.toString(),"/data/data/com.haoduyoudu.DailyAccounts/assest/sticker/","assets/sticker/")
+                    }
+                }
+
+                OK = true
+            }catch (e:Exception){
+                e.printStackTrace()
+
+            }
+            return OK
+        }
+        fun getVer(ct:Context):String = context.getPackageManager().getPackageInfo(ct.getPackageName(), 0).versionName
     }
 
     override fun onCreate() {
@@ -219,216 +434,6 @@ class MyApplication:Application() {
         context = applicationContext
 
         CrashReport.initCrashReport(getApplicationContext(), "3d71114e10", false);
-        thread {
-            var LoadassestOK = false
-            try{
-                while(!AllPermissionsOK){}
-                if(!File(filePath).exists())
-                    DeleteFileUtil.delete("/data/data/com.haoduyoudu.DailyAccounts/assest/")
-                LoadassestOK = Loadassest()  //预加载assests
-            }catch (e:Exception){
-                e.printStackTrace()
-            }
-
-
-            try {
-                if(!File(filePath).exists()){
-                    needupdata = true
-                    setjson(sound = true,first = true,firstloadOK = LoadassestOK)
-                }else{
-
-                    var date:Int? = null
-                    var uptime:Int? = null
-                    val jsontext = FileUtils.readTxtFile(filePath)
-                    val jsonObject = JSONObject(jsontext)
-
-
-                    date = jsonObject.getString("date").toInt()
-                    uptime = jsonObject.getString("uptime").toInt()
-                    Appsetting["sound"] = jsonObject.getString("sound") == "on"
-                    weather = jsonObject.getString("weather")
-                    tem = jsonObject.getString("tem").toInt()
-                    if (jsonObject.getString("ver")!=getVer(applicationContext)){
-                        DeleteFileUtil.delete("/data/data/com.haoduyoudu.DailyAccounts/assest/")
-                        setjson(sound = Appsetting["sound"]!!?:true,first = true, firstloadOK = Loadassest())
-                    }
-                    if(!jsonObject.getBoolean("firstloadOK")){
-                        DeleteFileUtil.delete("/data/data/com.haoduyoudu.DailyAccounts/assest/")
-                        setjson(first = false,firstloadOK = Loadassest())
-                    }
-                    try{
-                        val back:String? = jsonObject.getString("background")
-                        if(back != null){
-                            nowbackground = back
-                        }
-                    }catch (e:Exception){
-                        e.printStackTrace()
-                    }
-
-
-                    if((date != getday()) or (gettime() != uptime)){   //updata
-                        setjson(sound = Appsetting["sound"]!!?:true,first = true)
-                        needupdata = true
-                    }else{
-                        needupdata = false
-                    }
-                }
-            }catch (e:Exception){
-                e.printStackTrace()
-                try{
-                    setjson(sound = Appsetting["sound"]!!?:true,first = true)
-                }catch (e:Exception){
-                    e.printStackTrace()
-                }
-            }
-        }
-
-
-
     }
-    private fun parseJSONWithJSONObject(jsonData:String){
-        try {
-            val jsonObject = JSONObject(jsonData)
-            val weathers = jsonObject.getString("wea_img")
-            weather = weathers
-            val tems = jsonObject.getString("tem").toInt()
-            tem = tems
-        }catch (e: Exception){
-            e.printStackTrace()
-        }
-    }
-
-    fun gettime():Int{
-        val calendars = Calendar.getInstance()
-        calendars.setTimeZone(TimeZone.getTimeZone("GMT+8:00"))
-        val hours:Int = calendars.get(Calendar.HOUR_OF_DAY)
-        var times:Int
-        if (1<=hours && hours<=10) times = 1
-        else if (11<=hours && 12>=hours) times = 2
-        else if (13<=hours && 18>=hours) times = 3
-        else if (19<=hours && 21>=hours) times = 4
-        else if (22<=hours && 24>=hours) times = 5
-        else times = 6
-        return times
-    }
-    private fun getday():Int{
-        val calendars = Calendar.getInstance()
-        calendars.setTimeZone(TimeZone.getTimeZone("GMT+8:00"))
-        val day:Int = calendars.get(Calendar.DATE)
-        return day
-    }
-    fun setjson(sound:Boolean = true,first:Boolean = false,firstloadOK:Boolean = true){
-        thread {
-            if (first) {getweather()}
-            Thread.sleep(2800)
-            try {
-                val fileOutputStream = FileOutputStream(filePath);
-                //开始写JSON数据
-                val jsonWriter = JsonWriter(
-                    OutputStreamWriter(
-                        fileOutputStream, "UTF-8")
-                );
-                jsonWriter.beginObject();
-                jsonWriter.name("date").value(getday().toString())
-                jsonWriter.name("uptime").value(gettime().toString());
-                jsonWriter.name("sound").value(if(sound) "on" else "off");
-                jsonWriter.name("weather").value(weather?:"null");
-                jsonWriter.name("tem").value(tem.toString())
-                jsonWriter.name("ver").value(getVer(applicationContext))
-                jsonWriter.name("firstloadOK").value(firstloadOK)
-                jsonWriter.name("background").value(nowbackground)
-                jsonWriter.endObject();
-                Log.d("json","JSON数据写入完毕！");
-                jsonWriter.close();
-            }catch (e:Exception){
-                e.printStackTrace()
-            }
-        }
-    }
-
-    private fun getweather(){
-        thread{
-            try{
-                val client = OkHttpClient()
-                val request = Request.Builder()
-                    .url("https://www.tianqiapi.com/api/?version=v51"+"&appid=1001&appsecret=1046")
-                    .build()
-                val response = client.newCall(request).execute()
-                val responseData = response.body?.string()
-                Log.e("weather",responseData.toString())
-                if(responseData != null) {
-                    //    show weather
-                    parseJSONWithJSONObject(responseData)
-                }
-            }catch (e: Exception){
-                e.printStackTrace()
-            }
-        }
-    }
-
-    fun copyAssets(context:Context,FileName:String,dir:String,assestpath:String):String{
-
-
-        val dir = File(dir);
-        if (!dir.exists() || !dir.isDirectory()) {
-            dir.mkdir();
-        }
-
-        val file = File(dir, FileName);
-        var inputStream:InputStream? = null
-        var outputStream:OutputStream? = null
-
-        //通过IO流的方式，将assets目录下的数据库文件，写入到SD卡中。
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-                inputStream = context.getClassLoader().getResourceAsStream(assestpath + FileName);
-                outputStream = FileOutputStream(file);
-                val buffer = ByteArray(1024)
-                var len:Int;
-                while ((inputStream.read(buffer).also { len = it }) != -1) {
-                    outputStream.write(buffer, 0, len);
-                }
-                Log.d("copyAssests",file.absolutePath)
-            } catch (e:IOException) {
-                e.printStackTrace();
-            } finally {
-                outputStream?.flush();
-                outputStream?.close();
-                inputStream?.close();
-            }
-        }
-        return file.getPath();
-    }
-
-    fun Loadassest():Boolean{
-        var OK = false
-        try{
-            while(!AllPermissionsOK){}
-            val rpath = "/data/data/com.haoduyoudu.DailyAccounts/"
-            if(!File(rpath+"assest/").exists()) {
-                FileUtils.makeRootDirectory(rpath + "assest/")
-            }
-            if (!File(rpath+"assest/mood/").exists()){
-                FileUtils.makeRootDirectory(rpath + "assest/" + "mood/")
-                for (i in 1..59) {
-                    copyAssets(context, i.toString() + ".png","/data/data/com.haoduyoudu.DailyAccounts/assest/mood/","assets/mood/")
-                }
-            }
-            if (!File(rpath+"assest/sticker/").exists()){
-                FileUtils.makeRootDirectory(rpath + "assest/" + "sticker/")
-                for (i in assets.list("sticker")!!) {
-                    copyAssets(context, i.toString(),"/data/data/com.haoduyoudu.DailyAccounts/assest/sticker/","assets/sticker/")
-                }
-            }
-
-            OK = true
-        }catch (e:Exception){
-            e.printStackTrace()
-
-        }
-        return OK
-    }
-    fun getVer(ct:Context):String = context.getPackageManager().getPackageInfo(ct.getPackageName(), 0).versionName
 
 }

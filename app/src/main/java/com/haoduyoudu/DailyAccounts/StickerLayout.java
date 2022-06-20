@@ -1,5 +1,7 @@
 package com.haoduyoudu.DailyAccounts;
 
+import static com.haoduyoudu.DailyAccounts.MyApplication.MAX_STICKER_COUNT;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -90,13 +92,13 @@ public class StickerLayout extends View implements View.OnTouchListener {
      */
     public void addSticker(Sticker sticker) {
         int size = StickerManager.getInstance().getStickerList().size();
-        if (size < 9) {
+        if (size < MAX_STICKER_COUNT) {
             StickerManager.getInstance().addSticker(sticker);
             if(canEdit)
                 StickerManager.getInstance().setFocusSticker(sticker);
             invalidate();
         } else {
-            Toast.makeText(mContext, "贴纸最大数量不能超过9个", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, MyApplication.context.getString(R.string.stickercount_exceed,MAX_STICKER_COUNT), Toast.LENGTH_SHORT).show();
         }
     }
 

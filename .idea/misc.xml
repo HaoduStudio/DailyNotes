@@ -24,9 +24,12 @@
         <entry key="app/src/main/res/drawable/gradient_right.xml" value="0.7111111111111111" />
         <entry key="app/src/main/res/drawable/littlebuttonblue.xml" value="1.1527777777777777" />
         <entry key="app/src/main/res/drawable/mood_bg_selector.xml" value="0.6861111111111111" />
+        <entry key="app/src/main/res/drawable/more_ac_cancel.xml" value="0.5453566447570093" />
+        <entry key="app/src/main/res/drawable/more_ac_left.xml" value="0.294367196676629" />
+        <entry key="app/src/main/res/drawable/more_ac_right.xml" value="0.38901768804097325" />
         <entry key="app/src/main/res/drawable/ok_little_button_left.xml" value="0.8944444444444445" />
         <entry key="app/src/main/res/drawable/ok_little_button_right.xml" value="0.8944444444444445" />
-        <entry key="app/src/main/res/drawable/password_item.xml" value="1.3666666666666667" />
+        <entry key="app/src/main/res/drawable/password_item.xml" value="0.9355636303302965" />
         <entry key="app/src/main/res/drawable/pop_right.xml" value="0.9472222222222222" />
         <entry key="app/src/main/res/drawable/round_style_c.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/round_style_d.xml" value="0.628125" />
@@ -43,44 +46,46 @@
         <entry key="app/src/main/res/drawable/textcolor_selector.xml" value="0.709375" />
         <entry key="app/src/main/res/drawable/textcursor_color.xml" value="0.625" />
         <entry key="app/src/main/res/drawable/textview_style.xml" value="0.709375" />
-        <entry key="app/src/main/res/layout/activity_aboutsoftware.xml" value="0.6397236072158174" />
+        <entry key="app/src/main/res/layout/activity_aboutsoftware.xml" value="0.5265815225243181" />
         <entry key="app/src/main/res/layout/activity_add_pictures_or_videos.xml" value="0.4171511627906977" />
         <entry key="app/src/main/res/layout/activity_add_pictures_or_videos_first.xml" value="0.3444767441860465" />
-        <entry key="app/src/main/res/layout/activity_caidan.xml" value="0.3578213377136799" />
-        <entry key="app/src/main/res/layout/activity_cel_background.xml" value="0.6987951807228916" />
+        <entry key="app/src/main/res/layout/activity_caidan.xml" value="0.5566502463054187" />
+        <entry key="app/src/main/res/layout/activity_cel_background.xml" value="0.575571231096982" />
         <entry key="app/src/main/res/layout/activity_cel_sticker.xml" value="0.5317931945003955" />
-        <entry key="app/src/main/res/layout/activity_daily_accounts.xml" value="0.8073351081274968" />
-        <entry key="app/src/main/res/layout/activity_edit_daily_text.xml" value="0.5839570148220157" />
+        <entry key="app/src/main/res/layout/activity_daily_accounts.xml" value="0.47640188856491983" />
+        <entry key="app/src/main/res/layout/activity_edit_daily_text.xml" value="0.8827088454824887" />
         <entry key="app/src/main/res/layout/activity_find.xml" value="0.5959302325581395" />
-        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.4171779141104294" />
+        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.5025126554590035" />
         <entry key="app/src/main/res/layout/activity_hello.xml" value="0.311046511627907" />
         <entry key="app/src/main/res/layout/activity_inputpassword.xml" value="0.6696341026732299" />
         <entry key="app/src/main/res/layout/activity_loading.xml" value="0.4171511627906977" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.6562791178448004" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.5623342175066313" />
-        <entry key="app/src/main/res/layout/activity_moodcalendar.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_more_ac.xml" value="0.5652390689789492" />
-        <entry key="app/src/main/res/layout/activity_more_moodsclect.xml" value="0.4279773693503632" />
+        <entry key="app/src/main/res/layout/activity_moodcalendar.xml" value="0.5870385515916094" />
+        <entry key="app/src/main/res/layout/activity_more_ac.xml" value="0.694420799964499" />
+        <entry key="app/src/main/res/layout/activity_more_ac2.xml" value="0.5212448268260771" />
+        <entry key="app/src/main/res/layout/activity_more_moodsclect.xml" value="0.36957768203425745" />
         <entry key="app/src/main/res/layout/activity_more_operation.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_needtodelete.xml" value="0.5166666666666667" />
+        <entry key="app/src/main/res/layout/activity_needtodelete.xml" value="0.4691218241716974" />
         <entry key="app/src/main/res/layout/activity_prewiew_dailyaccount.xml" value="0.42118214349809047" />
         <entry key="app/src/main/res/layout/activity_say_hello.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_select_media_access.xml" value="0.4994141273818399" />
-        <entry key="app/src/main/res/layout/activity_select_template.xml" value="0.14065934065934066" />
-        <entry key="app/src/main/res/layout/activity_settingpage.xml" value="0.7092198581560284" />
+        <entry key="app/src/main/res/layout/activity_select_template.xml" value="0.40731233700971364" />
+        <entry key="app/src/main/res/layout/activity_settingpage.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_showaudio.xml" value="1.052962501979679" />
-        <entry key="app/src/main/res/layout/activity_showdailyaccount.xml" value="0.5410316323165546" />
-        <entry key="app/src/main/res/layout/activity_showfind.xml" value="0.633930285836126" />
+        <entry key="app/src/main/res/layout/activity_showdailyaccount.xml" value="0.5311496020712996" />
+        <entry key="app/src/main/res/layout/activity_showfind.xml" value="0.6277241841882586" />
         <entry key="app/src/main/res/layout/activity_showimage.xml" value="0.5830933029366357" />
         <entry key="app/src/main/res/layout/activity_showvideo.xml" value="1.119186046511628" />
         <entry key="app/src/main/res/layout/activity_sound_recording.xml" value="0.4258720930232558" />
-        <entry key="app/src/main/res/layout/activity_sound_recording_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_sound_recording_dialog.xml" value="0.4332472537520664" />
         <entry key="app/src/main/res/layout/activity_sound_recording_first.xml" value="0.4258720930232558" />
         <entry key="app/src/main/res/layout/activity_weather.xml" value="0.4998613665678341" />
         <entry key="app/src/main/res/layout/imageorvideolist_item.xml" value="0.4708333333333333" />
         <entry key="app/src/main/res/layout/mood_bg_selector.xml" value="0.2318840579710145" />
         <entry key="app/src/main/res/layout/moodlist_item.xml" value="0.3444767441860465" />
         <entry key="app/src/main/res/layout/moremoodlist_item.xml" value="0.680365296803653" />
+        <entry key="app/src/main/res/layout/recordlist_item.xml" value="0.9263218063341491" />
         <entry key="app/src/main/res/layout/stickerlist_item.xml" value="0.15516492930654419" />
         <entry key="app/src/main/res/layout/templateimagelistitem.xml" value="0.4811046511627907" />
         <entry key="app/src/main/res/layout/test.xml" value="0.5354979932654789" />

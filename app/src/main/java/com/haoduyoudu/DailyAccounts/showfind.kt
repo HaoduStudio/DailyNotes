@@ -38,8 +38,14 @@ class showfind : AppCompatActivity() {
 
         y = intent.getStringExtra("y").toString()
         m = intent.getStringExtra("m").toString()
-        initTextviewButtonList()
-        refreshTBL(adapter)
+        try{
+            adapter = TextviewButtonListAdapter(this, R.layout.tewtviewbuttonlistwithnotes_item, textviewbuttonList)
+            initTextviewButtonList()
+            refreshTBL(adapter)
+            listView.adapter = adapter
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
         listView.setOnItemClickListener { _, view, position, _ ->
             val textviewobj = textviewbuttonList[position]
             val image: ImageView = view.findViewById(R.id.ListImage)
@@ -66,7 +72,8 @@ class showfind : AppCompatActivity() {
             FileUtils.savebitmap(rsBlur(this,viewConversionBitmap(f_background)!!,8),cacheDir.absolutePath,"shot.jpg",80)
             lastitem = textviewbuttonList[position]
             lastitemview = view
-            startActivityForResult(Intent(this,more_ac::class.java),4)
+            if(MyApplication.SHIELD_SHARE_NOTES_ACTON) startActivityForResult(Intent(this,more_ac2::class.java),4)
+            else startActivityForResult(Intent(this,more_ac::class.java),4)
             true
         }
     }
@@ -84,25 +91,13 @@ class showfind : AppCompatActivity() {
                             intent.putExtra("date",lastitem.name)
                             intent.putExtra("index",lastitem.index)
                             intent.putExtra("rewrite",true)
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                try{
-                                    image.transitionName = "Image"
-                                    val options = ActivityOptions.makeSceneTransitionAnimation(this, image,"Image")
-                                    startActivity(intent,options.toBundle())
-                                }catch (e:Exception){
-                                    e.printStackTrace()
-                                    startActivity(intent)
-                                }
-                            }else{
-                                startActivity(intent)
-                            }
+                            startActivity(intent)
                         }
                         "del" -> {
                             DeleteFileUtil.delete(lastitem.path)
                             initTextviewButtonList()
                             refreshTBL(adapter)
-                            adapter.notifyDataSetChanged()
-                            Toast.makeText(this,"删除成功", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,getString(R.string.del_ok), Toast.LENGTH_SHORT).show()
                         }
                         "share" -> {
                             val image:ImageView = lastitemview.findViewById(R.id.ListImage)
@@ -204,8 +199,6 @@ class showfind : AppCompatActivity() {
     }
     private fun initTextviewButtonList(){
         textviewbuttonList.clear()
-        adapter = TextviewButtonListAdapter(this, R.layout.tewtviewbuttonlistwithnotes_item, textviewbuttonList)
-        listView.adapter = adapter
     }
     fun GFN(dirpathx:String):MutableList<String>{
         val fileNames: MutableList<String> = mutableListOf()

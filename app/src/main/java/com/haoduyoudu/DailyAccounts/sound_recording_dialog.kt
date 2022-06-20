@@ -43,9 +43,9 @@ class sound_recording_dialog : AppCompatActivity() {
         startorstop.setOnClickListener {
             if(isRecording){
                 try {
-                    startorstop.text = "点击录音"
-                    textView.text = "录音完成"
-                    Toast.makeText(this, "录音完成", Toast.LENGTH_SHORT).show()
+                    startorstop.text = getString(R.string.click_recording)
+                    textView.text = getString(R.string.recording_done)
+                    Toast.makeText(this, getString(R.string.recording_done), Toast.LENGTH_SHORT).show()
                     arm!!.stopRecord()
                     AudioRecordManager.convertPcmToWav(
                         dirname + soundfilename,
@@ -67,8 +67,8 @@ class sound_recording_dialog : AppCompatActivity() {
             }else{
                 arm!!.startRecord(dirname, soundfilename)
                 isRecording = true
-                startorstop.text = "点击停止"
-                textView.text = "正在录音"
+                startorstop.text = getString(R.string.click_stop_recording)
+                textView.text = getString(R.string.is_recording)
                 thread {
                     try{
                         for (i in 60 downTo 1){
@@ -76,9 +76,9 @@ class sound_recording_dialog : AppCompatActivity() {
                                 Thread.sleep(1000)
                                 runOnUiThread {
                                     if (i > 3) {
-                                        elsetime.setText("还剩${i}秒")
+                                        elsetime.setText(getString(R.string.recordlast_s,i))
                                     } else {
-                                        elsetime.setText("${i}秒后自动暂停")
+                                        elsetime.setText(getString(R.string.recordlast_auto_s,i))
                                     }
                                 }
                                 if (i == 1) {
@@ -103,7 +103,7 @@ class sound_recording_dialog : AppCompatActivity() {
                         }
                     }catch (e:Exception){
                         runOnUiThread {
-                            Toast.makeText(this,"当前设备忙哦",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
                         }
                         isRecording = false
                         finish()

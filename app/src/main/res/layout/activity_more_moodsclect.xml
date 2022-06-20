@@ -24,7 +24,7 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="5dp"
                 android:checked="true"
-                android:text="更多表情"
+                android:text="@string/more_moodtitle"
                 android:textColor="#FF9800"
                 android:textSize="16sp" />
 
@@ -35,11 +35,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/downview"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:orientation="vertical"
-            android:id="@+id/downview"
             android:visibility="gone">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,9 +48,10 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="5dp"
                 android:checked="true"
-                android:text="自定义心情"
+                android:text="@string/custommood_title"
                 android:textColor="#FF9800"
                 android:textSize="16sp" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -69,9 +71,9 @@
                     android:layout_width="100dp"
                     android:layout_height="29dp"
                     android:layout_marginStart="5dp"
-                    android:maxLength="7"
                     android:background="@drawable/shape_wihte_frame"
-                    android:hint="想说什么吗"
+                    android:hint="@string/moremoodhint"
+                    android:maxLength="7"
                     android:textColorHint="#8AFFFFFF"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -96,7 +98,7 @@
                         android:layout_marginRight="1dp"
                         android:background="@drawable/bottombuttonleft_style"
                         android:gravity="center"
-                        android:text="取消"
+                        android:text="@string/cancel"
                         android:textColor="@drawable/textcolor_selector" />
 
                     <TextView
@@ -106,7 +108,7 @@
                         android:layout_marginLeft="1dp"
                         android:background="@drawable/bottombuttonright_style"
                         android:gravity="center"
-                        android:text="确定"
+                        android:text="@string/ok"
                         android:textColor="@drawable/textcolor_selector" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

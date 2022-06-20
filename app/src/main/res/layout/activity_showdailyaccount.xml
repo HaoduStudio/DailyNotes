@@ -76,6 +76,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginStart="22dp"
+                                android:transitionName="Image"
                                 android:src="@mipmap/ishappy" />
 
                             <TextView
@@ -120,7 +121,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:background="@null"
-                            android:hint="    点击编辑文字"
+                            android:hint="@string/shownotestip1"
                             android:textColor="#868181"
                             android:textColorHint="@color/hinttext_color"
                             android:textSize="14sp" />
@@ -152,7 +153,7 @@
                                 android:textSize="14sp"
                                 android:layout_marginStart="22dp"
                                 android:layout_marginEnd="22dp"
-                                android:text="  点击添加多媒体"/>
+                                android:text="@string/shownotestip2"/>
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

@@ -34,6 +34,7 @@ import java.io.File
 import java.util.*
 import kotlin.concurrent.thread
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
+import android.content.pm.PackageManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -62,20 +63,38 @@ class MainActivity : AppCompatActivity() {
                 Thread.sleep(2000)
             else
                 Thread.sleep(500)
-            ActivityCompat.requestPermissions(this, arrayOf(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.RECORD_AUDIO),1)
-            //Manifest.permission.RECORD_AUDIO
-            while(!firststart){}
+            if(!(hasPermission(this,"android.permission.WRITE_EXTERNAL_STORAGE")
+                && hasPermission(this,"android.permission.READ_EXTERNAL_STORAGE")
+                && hasPermission(this,"android.permission.RECORD_AUDIO"))){
+                ActivityCompat.requestPermissions(this, arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.RECORD_AUDIO),1)
+                //Manifest.permission.RECORD_AUDIO
+                try {
+                    while(!firststart){Thread.sleep(50)}
+                }catch (e:Exception){
+                    Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
+                    e.printStackTrace()
+                    finish()
+                }
+            }else{
+                firststart = true
+                MyApplication.AllPermissionsOK = true
+                Log.d("Main1","else master,all oermissions OK")
+            }
+            Log.d("Main1","AllPermissionsOK ${MyApplication.AllPermissionsOK}")
+            Log.d("Main1","firststart ${firststart}")
+            if(MyApplication.AllPermissionsOK){
+                MyApplication.InitLoad()
+            }
             try{
+                adapter = TextviewButtonListAdapter(this, R.layout.tewtviewbuttonlistwithnotes_item, textviewbuttonList)
                 initTextviewButtonList()
-                refreshTBL(adapter)
+                refreshTBL()
                 runOnUiThread {
                     adapter.notifyDataSetChanged()
-                    if(needupdata == true)
-                        Toast.makeText(this,MyApplication.Mapoftime[MyApplication().gettime()],Toast.LENGTH_SHORT).show()
-                    needupdata=false
+                    listView.adapter = adapter
                 }
 
             }catch (e:Exception){
@@ -94,8 +113,15 @@ class MainActivity : AppCompatActivity() {
                             Thread.sleep(100)
                             outtime+=100
                         }
-                        if (weather != null)
-                            startActivityForResult(Intent(this,SayHello::class.java),3)
+                        if (weather != null) {
+                            startActivityForResult(Intent(this, SayHello::class.java), 3)
+                            needupdata = false
+                        }else{
+                            runOnUiThread {
+                                if(needupdata == true)
+                                    Toast.makeText(this,MyApplication.Mapoftime[MyApplication.gettime()],Toast.LENGTH_SHORT).show()
+                            }
+                        }
                         if(outtime>1000)
                             LoadmainUI()
                     }
@@ -195,7 +221,8 @@ class MainActivity : AppCompatActivity() {
             FileUtils.savebitmap(rsBlur(this,viewConversionBitmap(main_background)!!,8),cacheDir.absolutePath,"shot.jpg",80)
             lastitem = textviewobj
             lastitemview = view
-            startActivityForResult(Intent(this,more_ac::class.java),4)
+            if(MyApplication.SHIELD_SHARE_NOTES_ACTON) startActivityForResult(Intent(this,more_ac2::class.java),4)
+            else startActivityForResult(Intent(this,more_ac::class.java),4)
             true
         }
     }
@@ -206,25 +233,29 @@ class MainActivity : AppCompatActivity() {
         if(MyApplication.newwrite){
             print("ref")
             initTextviewButtonList()
-            refreshTBL(adapter)
+            refreshTBL()
             adapter.notifyDataSetChanged()
             MyApplication.newwrite = false
 
         }
     }
-    private fun refreshTBL(adapter: TextviewButtonListAdapter){
+    private fun refreshTBL(){
         val pathofdailyaccounts = "/sdcard/Android/data/com.haoduyoudu.DailyAccounts/"
         var Filenamesofdailyaccounts = GFN(pathofdailyaccounts)
         if (Filenamesofdailyaccounts.size != 0) {
             if(firstLoad){
                 runOnUiThread {
-                    Glide.with(this)
-                        .load(R.mipmap.black)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .into(weather_img)
-                    loadbackground()
-                    Log.d("MainActivity","刷新 天气图片")
+                    try{
+                        Glide.with(this)
+                            .load(R.mipmap.black)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(weather_img)
+                        loadbackground()
+                        Log.d("MainActivity","刷新 天气图片")
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
                 }
             }else{
                 loadbackground()
@@ -262,18 +293,26 @@ class MainActivity : AppCompatActivity() {
             }
             if(Filenamesofdailyaccounts.size == 0)
                 runOnUiThread {
-                    listView.setBackgroundResource(R.mipmap.kong)
-                    Glide.with(this)
-                        .load(R.mipmap.black)
-                        .into(weather_img)
+                    try{
+                        listView.setBackgroundResource(R.mipmap.kong)
+                        Glide.with(this)
+                            .load(R.mipmap.black)
+                            .into(weather_img)
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
                 }
 
         }else{
             runOnUiThread {
-                listView.setBackgroundResource(R.mipmap.kong)
-                Glide.with(this)
-                    .load(R.mipmap.black)
-                    .into(weather_img)
+                try{
+                    listView.setBackgroundResource(R.mipmap.kong)
+                    Glide.with(this)
+                        .load(R.mipmap.black)
+                        .into(weather_img)
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
             }
         }
     }
@@ -281,10 +320,14 @@ class MainActivity : AppCompatActivity() {
         thread {
             Thread.sleep(2000)
             runOnUiThread{
-                initTextviewButtonList()
-                refreshTBL(adapter)
-                adapter.notifyDataSetChanged()
-                swipeRefresh.isRefreshing = false
+                try{
+                    initTextviewButtonList()
+                    refreshTBL()
+                    adapter.notifyDataSetChanged()
+                    swipeRefresh.isRefreshing = false
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
             }
         }
     }
@@ -293,6 +336,7 @@ class MainActivity : AppCompatActivity() {
         try {
             when(requestCode){
                 3 -> if(resultCode == RESULT_OK){
+                    needupdata = false
                     LoadmainUI()
                 }
                 4 -> if(resultCode == RESULT_OK){
@@ -306,25 +350,14 @@ class MainActivity : AppCompatActivity() {
                                 intent.putExtra("date",lastitem.name)
                                 intent.putExtra("index",lastitem.index)
                                 intent.putExtra("rewrite",true)
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                    try{
-                                        image.transitionName = "Image"
-                                        val options = ActivityOptions.makeSceneTransitionAnimation(this, image,"Image")
-                                        startActivity(intent,options.toBundle())
-                                    }catch (e:Exception){
-                                        e.printStackTrace()
-                                        startActivity(intent)
-                                    }
-                                }else{
-                                    startActivity(intent)
-                                }
+                                startActivity(intent)
                             }
                             "del" -> {
                                 DeleteFileUtil.delete(lastitem.path)
                                 initTextviewButtonList()
-                                refreshTBL(adapter)
+                                refreshTBL()
                                 adapter.notifyDataSetChanged()
-                                Toast.makeText(this,"删除成功",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this,getString(R.string.del_ok),Toast.LENGTH_SHORT).show()
                             }
                             "share" -> {
                                 val image:ImageView = lastitemview.findViewById(R.id.ListImage)
@@ -359,10 +392,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initTextviewButtonList(){
         textviewbuttonList.clear()
-        adapter = TextviewButtonListAdapter(this, R.layout.tewtviewbuttonlistwithnotes_item, textviewbuttonList)
-        runOnUiThread {
-            listView.adapter = adapter
-        }
     }
     fun GFN(dirpathx:String):MutableList<String>{
         val fileNames: MutableList<String> = mutableListOf()
@@ -421,13 +450,14 @@ class MainActivity : AppCompatActivity() {
                     }else{
                         runOnUiThread {
                             setTheme(R.style.AppTheme)
-                            Toast.makeText(this,"需要同意所有权限才能正常使用哦～", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,getString(R.string.main_premissions_tips), Toast.LENGTH_SHORT).show()
                             finish()
                         }
                     }
                 }else{
                     setTheme(R.style.AppTheme)
-                    Toast.makeText(this,"系统出了点小问题，请稍后再试～", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,getString(R.string.system_error), Toast.LENGTH_SHORT).show()
+                    finish()
                 }
 
             }
@@ -497,38 +527,54 @@ class MainActivity : AppCompatActivity() {
                 while(weather==null){Thread.sleep(100)}
                 val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
                 runOnUiThread {
-                    Glide.with(this)
-                        .load(Mapofweather[weather])
-                        .transition(withCrossFade(factory))
-                        .into(weather_img)
+                    try{
+                        Glide.with(this)
+                            .load(Mapofweather[weather])
+                            .transition(withCrossFade(factory))
+                            .into(weather_img)
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
                 }
             }else{
                 runOnUiThread {
-                    if(MyApplication.nowbackground != "wave")
-                        Glide.with(this)
-                            .load(MyApplication.Mapofbackground[MyApplication.nowbackground])
-                            .into(weather_img)
-                    else
-                        when(MyApplication().gettime()){
-                            1,2,3 -> {
-                                Glide.with(this)
-                                    .load(R.mipmap.wave2)
-                                    .into(weather_img)
+                    if(MyApplication.nowbackground != "wave") {
+                        try {
+                            Glide.with(this)
+                                .load(MyApplication.Mapofbackground[MyApplication.nowbackground])
+                                .into(weather_img)
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                        }
+                    }else {
+                        when (MyApplication.gettime()) {
+                            1, 2, 3 -> {
+                                try{
+                                    Glide.with(this)
+                                        .load(R.mipmap.wave)
+                                        .into(weather_img)
+                                }catch (e:Exception){
+                                    e.printStackTrace()
+                                }
                             }
-                            4,5,6 -> {
-                                Glide.with(this)
-                                    .load(R.mipmap.wave)
-                                    .into(weather_img)
+                            4, 5, 6 -> {
+                                try {
+                                    Glide.with(this)
+                                        .load(R.mipmap.wave2)
+                                        .into(weather_img)
+                                }catch (e:Exception){
+                                    e.printStackTrace()
+                                }
                             }
 
                         }
+                    }
                 }
             }
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
+    fun hasPermission(context: Context, permission: String?): Boolean {
+        return context.checkCallingOrSelfPermission(permission!!) == PackageManager.PERMISSION_GRANTED
     }
+    
 }

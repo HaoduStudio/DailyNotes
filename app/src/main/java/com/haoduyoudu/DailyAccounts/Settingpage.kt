@@ -58,14 +58,14 @@ class Settingpage : AppCompatActivity() {
     fun onopenorclosepassword(yes:Boolean){
         if(yes){
             isopenpassword.setToggleOn()
-            textofisopen.text="已开启"
+            textofisopen.text=getString(R.string.opened)
             changepassword.visibility=View.VISIBLE;
             changepassword.addScale(0f,1f)
             dontremenberpass.visibility=View.VISIBLE;
             dontremenberpass.addScale(0f,1f)
         }else{
             isopenpassword.setToggleOff()
-            textofisopen.text="已关闭"
+            textofisopen.text=getString(R.string.closed)
             changepassword.visibility=View.GONE;
             changepassword.addScale(1f,0f)
             dontremenberpass.visibility=View.GONE;

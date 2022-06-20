@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.activity_more_ac.*
@@ -48,9 +49,13 @@ class more_ac : AppCompatActivity() {
             close()
         }
         sharethis.setOnClickListener {
-            val intent = Intent()
-            intent.putExtra("type","share")
-            setResult(RESULT_OK,intent)
+            if(!MyApplication.SHIELD_SHARE_NOTES_ACTON){
+                val intent = Intent()
+                intent.putExtra("type","share")
+                setResult(RESULT_OK,intent)
+            }else{
+                Toast.makeText(this,getString(R.string.not_support),Toast.LENGTH_SHORT).show()
+            }
             close()
         }
         editthis.setOnClickListener {

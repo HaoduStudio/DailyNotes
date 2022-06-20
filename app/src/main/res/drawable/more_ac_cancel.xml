@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--手指未触摸-->
+    <item android:state_pressed="false">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="#C63A3939"/>
+                    <corners
+                        android:bottomLeftRadius="14dp"
+                        android:bottomRightRadius="14dp"
+                        android:topLeftRadius="14dp"
+                        android:topRightRadius="14dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!--手指触摸-->
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="#E87E7979"/>
+                    <corners
+                        android:bottomLeftRadius="14dp"
+                        android:bottomRightRadius="14dp"
+                        android:topLeftRadius="14dp"
+                        android:topRightRadius="14dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>
