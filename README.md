@@ -2,6 +2,7 @@
 A diary software that can record your mood and thoughts at any time every day.
 It runs on the Xtc watch.
 
+
 🌏English(This) | [中文简体](https://github.com/HaoduyouduStudio/DailyNotes/blob/master/ZH-CN%20README.md)
 
 # Screenshot
