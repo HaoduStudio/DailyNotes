@@ -2,6 +2,8 @@
 
 一个手账软件，可以在每天的任何时间记录你的心情和想法。它在 小天才 手表上运行。
 
+🌏[English](https://github.com/HaoduyouduStudio/DailyNotes) | 中文简体 (当前访问)
+
 # 截图
 
 您可以在 `/images` 中查看截图
