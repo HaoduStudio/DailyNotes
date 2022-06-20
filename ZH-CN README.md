@@ -22,7 +22,7 @@
 
 ***您需要修改变量进行开关、修改，可能对某些人难以理解***
 
-**一切配置文件均在 `app/src/main/java/com/haoduyoudu/DailyAccounts/MyApplication.kt`
+**一切配置文件均在 `app/src/main/java/com/haoduyoudu/DailyAccounts/MyApplication.kt`**
 
 - SHIELD_PASSWORD_ACTON 是否屏蔽密码功能
 - SHIELD_SHARE_NOTES_ACTON 是否屏蔽分享手帐功能
