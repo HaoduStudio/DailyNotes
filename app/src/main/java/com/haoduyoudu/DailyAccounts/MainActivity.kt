@@ -35,6 +35,7 @@ import java.util.*
 import kotlin.concurrent.thread
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import android.content.pm.PackageManager
+import kotlin.collections.HashMap
 
 
 class MainActivity : AppCompatActivity() {
@@ -279,6 +280,29 @@ class MainActivity : AppCompatActivity() {
                             Filenamesofdailyaccounts[i].substring(4,6) +
                             "-" +Filenamesofdailyaccounts[i].substring(6,8))
 
+                    val mdate = FileUtils.readTxtFile(pathofdailyaccounts + Filenamesofdailyaccounts[i]+ "/week.txt")
+                    val weekDays = mapOf<String,Int>(
+                        "Sun" to 0,
+                        "Mon" to 1,
+                        "Tue" to 2,
+                        "Wed" to 3,
+                        "Thu" to 4,
+                        "Fri" to 5,
+                        "Sat" to 6
+                    )
+                    val weekDays2: Array<String> =
+                        arrayOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+
+                    val mdate2 = getDate(Filenamesofdailyaccounts[i].substring(0,4).toInt(),
+                        Filenamesofdailyaccounts[i].substring(4,6).toInt(),
+                        Filenamesofdailyaccounts[i].substring(6,8).toInt())
+
+                    if(mdate2 != weekDays[mdate.toString()]){
+                        Log.d("MainAvtivity","${mdate2}  ${weekDays[mdate.toString()]}")
+                        DeleteFileUtil.delete(pathofdailyaccounts + Filenamesofdailyaccounts[i]+ "/week.txt")
+                        FileUtils.writeTxtToFile(weekDays2[mdate2],pathofdailyaccounts + Filenamesofdailyaccounts[i] + "/", "week.txt")
+                        Log.e("MainActivity","重新更正日期")
+                    }
 
                     textviewbuttonList.add(
                         TextviewButtonList(
@@ -286,9 +310,7 @@ class MainActivity : AppCompatActivity() {
                             imageId,
                             pathofdailyaccounts+Filenamesofdailyaccounts[i]+"/",
                             "DailyAccounts",
-                            notes = FileUtils.readTxtFile(pathofdailyaccounts+
-                                    Filenamesofdailyaccounts[i]+
-                                    "/week.txt"),
+                            notes = weekDays2[mdate2],
                             index = i))
                     Log.d("xxx",FileUtils.readTxtFile(pathofdailyaccounts+ Filenamesofdailyaccounts[i]+ "/week.txt"))
                 }catch (e:Exception){
@@ -459,9 +481,11 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }else{
-                    setTheme(R.style.AppTheme)
-                    Toast.makeText(this,getString(R.string.system_error), Toast.LENGTH_SHORT).show()
-                    finish()
+                    runOnUiThread {
+                        setTheme(R.style.AppTheme)
+                        Toast.makeText(this,getString(R.string.system_error), Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
                 }
 
             }
@@ -580,5 +604,12 @@ class MainActivity : AppCompatActivity() {
     fun hasPermission(context: Context, permission: String?): Boolean {
         return context.checkCallingOrSelfPermission(permission!!) == PackageManager.PERMISSION_GRANTED
     }
-    
+    private fun getDate(ly: Int, lm: Int, ld: Int):Int{ //栓Q XC I Love You ～～
+        val ly2 = if(lm < 3) ly-1 else ly
+        val c = ly2.toString().subSequence(0,2).toString().toInt()
+        val y = ly2.toString().subSequence(2,4).toString().toInt()
+        val m = if(lm < 3) 12+lm else lm
+        val d = ld
+        return (y+(y/4)+(c/4)-2*c+(26*(m+1)/10)+d-1)%7
+    }
 }

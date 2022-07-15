@@ -1,13 +1,13 @@
 <resources>
     <string name="language_tag">zh_cn</string>
     <string name="app_name">每日手帐</string>
-    <string name="version">版本V2.0.3</string>
+    <string name="version">版本V2.0.4</string>
     <string name="version_with">此版本为正式版</string>
     <string name="authorinfo">软件作者:好读游独\n邮箱：michaelzhtiger@outlook.com\n</string>
-    <string name="aboutnewvewsion">新版特性:\n更新贴纸\n添加天气和标语\n接入小天才shareapi\n更新应用图标\n更新模板\n可以修改字体颜色\n添加自定义心情\n修复已知bug\n添加了心情日历\n添加了页面索引\n添加 \\彩蛋/</string>
+    <string name="aboutnewvewsion">新版特性:\n更新贴纸\n添加天气和标语\n接入小天才shareapi\n更新模板\n可以修改字体颜色\n添加自定义心情\n修复已知bug\n更新 \\彩蛋/</string>
     <string name="about_title">关于软件</string>
     <string name="about_mubiaodacheng">恭喜达成目标！</string>
-    <string name="about_caidan_tips">彩蛋：写完21篇手帐再来找我,我们不见不散!</string>
+    <string name="about_caidan_tips">彩蛋：写完%d篇手帐再来找我,我们不见不散!</string>
     <string name="about_caidan_tips2">Tips：您使用的彩蛋已过时,为什么不去版本号中多点几下呢AWA</string>
     <string name="share_software_text">好用的宝贝，分享给你～</string>
     <string name="share_software_tips">《每日手帐》感谢您的支持与鼓励！</string>

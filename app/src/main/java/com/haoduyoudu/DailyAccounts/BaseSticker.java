@@ -40,8 +40,28 @@ public abstract class BaseSticker implements ISupportOperation {
 
     private static final int PADDING = 30;//避免图像与边框太近，这里设置一个边距
 
-
     public BaseSticker(Bitmap bitmap) {
+        //将贴纸默认移动到屏幕中间
+        initSticker(bitmap);
+        WindowManager windowManager = (WindowManager) MyApplication.context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+
+        float dx = displayMetrics.widthPixels / 2 - mStickerBitmap.getWidth() / 2;
+        float dy = displayMetrics.heightPixels / 2 - mStickerBitmap.getHeight() / 2;
+        translate(dx, dy);
+        //将贴纸默认缩小1/2
+        scale(0.5f, 0.5f);
+    }
+
+    public BaseSticker(Bitmap bitmap, float dx, float dy) {
+        initSticker(bitmap);
+        translate(dx, dy);
+        //将贴纸默认缩小1/2
+        scale(0.5f, 0.5f);
+    }
+
+    private void initSticker(Bitmap bitmap){
         this.mStickerBitmap = bitmap;
         mMatrix = new Matrix();
         mMidPointF = new PointF();
@@ -59,15 +79,6 @@ public abstract class BaseSticker implements ISupportOperation {
         mDelBitmap = BitmapFactory.decodeResource(MyApplication.context.getResources(), R.mipmap.icon_delete);
         mDelBound = new RectF(0 - mDelBitmap.getWidth() / 2 - PADDING, 0 - mDelBitmap.getHeight() / 2 - PADDING, mDelBitmap.getWidth() / 2 + PADDING, mDelBitmap.getHeight() / 2 + PADDING);
 
-        //将贴纸默认移动到屏幕中间
-        WindowManager windowManager = (WindowManager) MyApplication.context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        float dx = displayMetrics.widthPixels / 2 - mStickerBitmap.getWidth() / 2;
-        float dy = displayMetrics.heightPixels / 2 - mStickerBitmap.getHeight() / 2;
-        translate(dx, dy);
-        //将贴纸默认缩小1/2
-        scale(0.5f, 0.5f);
     }
 
     public Bitmap getBitmap() {
@@ -94,7 +105,8 @@ public abstract class BaseSticker implements ISupportOperation {
         isFocus = focus;
     }
 
-    public PointF getmMidxy(){return mMidPointF;}
+    public PointF getMidXy(){return mMidPointF;}
+    public void setMidXy(PointF mMidXy){mMidPointF = mMidXy;}
 
     /**
      * 平移操作

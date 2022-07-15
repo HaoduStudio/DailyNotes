@@ -45,6 +45,7 @@ class MyApplication:Application() {
         const val MAX_RECORD_COUNT = 6
         const val MAX_IMAGE_OR_VIDEO_COUNT = 3
         const val MAX_STICKER_COUNT = 9
+        const val COUNT_OF_DAYS_OF_COLOREGG_TO_APPEAR = 21
 
         var nowbackground = "weather"
 

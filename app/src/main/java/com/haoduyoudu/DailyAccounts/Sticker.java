@@ -30,6 +30,10 @@ public class Sticker extends BaseSticker{
         super(bitmap);
     }
 
+    public Sticker(Bitmap bitmap,PointF pos) {
+        super(bitmap,pos.x,pos.y);
+    }
+
     /**
      * 重置状态
      */

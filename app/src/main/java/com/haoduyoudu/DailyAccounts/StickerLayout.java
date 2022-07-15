@@ -153,8 +153,8 @@ public class StickerLayout extends View implements View.OnTouchListener {
         int minnum = 100000;
         Sticker topsk = null;
         for(Sticker sk:sg){
-            if(sk.getmMidxy().y < minnum){
-                minnum = (int) sk.getmMidxy().y;
+            if(sk.getMidXy().y < minnum){
+                minnum = (int) sk.getMidXy().y;
                 topsk = sk;
             };
         }
@@ -262,7 +262,7 @@ public class StickerLayout extends View implements View.OnTouchListener {
                 break;
 
         }
-        if(isSkOnMove && canEdit && mStick != null) mMovesk.move(mStick.getmMidxy().x,mStick.getmMidxy().y);
+        if(isSkOnMove && canEdit && mStick != null) mMovesk.move(mStick.getMidXy().x,mStick.getMidXy().y);
         if (mStick != null && isEditing) {
             mStick.onTouch(event);
         } else {

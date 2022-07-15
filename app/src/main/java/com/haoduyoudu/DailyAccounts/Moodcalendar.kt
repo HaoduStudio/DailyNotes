@@ -1,6 +1,7 @@
 package com.haoduyoudu.DailyAccounts
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_moodcalendar.*
@@ -21,12 +22,22 @@ class Moodcalendar : AppCompatActivity() {
         onleft.addClickScale()
         onright.addClickScale()
         mouth.setText(getlanguagemonth(Month))
-        refreshcalendar(Month)
+        try{
+            refreshcalendar(Month)
+        }catch (e:Exception){
+            e.printStackTrace()
+            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
+        }
         onleft.setOnClickListener {
             mouth.setText(getString(R.string.loading))
             Month-=1
             if(Month==0) Month = 12
-            refreshcalendar(Month)
+            try{
+                refreshcalendar(Month)
+            }catch (e:Exception){
+                e.printStackTrace()
+                Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
+            }
             mouth.setText(getlanguagemonth(Month))
 
         }
@@ -34,7 +45,12 @@ class Moodcalendar : AppCompatActivity() {
             mouth.setText(getString(R.string.loading))
             Month+=1
             if(Month==13) Month = 1
-            refreshcalendar(Month)
+            try{
+                refreshcalendar(Month)
+            }catch (e:Exception){
+                e.printStackTrace()
+                Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
+            }
             mouth.setText(getlanguagemonth(Month))
         }
     }
