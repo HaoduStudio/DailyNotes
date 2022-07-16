@@ -36,7 +36,7 @@ class caidan : AppCompatActivity(),IResponseCallback {
                 val images = arrayListOf<Int>(R.mipmap.q_aiyu,R.mipmap.q_aiyu2,R.mipmap.q_aiyu3,R.mipmap.q_aiyujieshao,R.mipmap.q_youyujieshao)
                 val randomimageindex = (0..4).random()
                 when(randomimageindex){
-                    0,1,2 -> {Toast.makeText(this,getString(R.string.about_caidan_tips2),Toast.LENGTH_SHORT).show()}
+                    0,1,2 -> {Toast.makeText(this,getString(R.string.caidan_tips_2),Toast.LENGTH_SHORT).show()}
                 }
                 Glide.with(this)
                     .asBitmap()

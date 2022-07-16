@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.PointF
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -64,42 +65,61 @@ class prewiew_dailyaccount : AppCompatActivity() {
         }
         backtoedit.addClickScale()
         backtoedit.setOnClickListener {
-            mDrawerLayout.closeDrawer(GravityCompat.END)
-            Log.d("backtoedit","info of back")
-            if(iseditingsk){
-                val fileOut = FileOutputStream(File(cacheDir,"rewrite.data").absolutePath)
-                val out = ObjectOutputStream(fileOut)
-                out.writeInt(mScrollView.scrollY)
-                out.close()
-                fileOut.close()
+            try {
+                mDrawerLayout.closeDrawer(GravityCompat.END)
+                Log.d("backtoedit","info of back")
+                if(iseditingsk){
+                    val fileOut = FileOutputStream(File(cacheDir,"rewrite.data").absolutePath)
+                    val out = ObjectOutputStream(fileOut)
+                    out.writeInt(mScrollView.scrollY)
+                    out.close()
+                    fileOut.close()
+                }
+                ifeditingsk(false)
+                setResult(RESULT_CANCELED,Intent())
+                finish()
+            }catch (e:Exception){
+                e.printStackTrace()
+                Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
             }
-            ifeditingsk(false)
-            setResult(RESULT_CANCELED,Intent())
-            finish()
         }
         showright.setOnClickListener {
-            onpopwindowsshow()
-            showright.visibility=View.GONE
-
+            try {
+                onpopwindowsshow()
+                showright.visibility=View.GONE
+            }catch (e:Exception){
+                e.printStackTrace()
+                Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
+            }
         }
         editsk.setOnClickListener {
-            mDrawerLayout.closeDrawer(GravityCompat.END)
-            if(!iseditingsk){
-                ifeditingsk(true)
-                if(mStickerLayout.returnAllSticker().size == 0)
+            try {
+                mDrawerLayout.closeDrawer(GravityCompat.END)
+                if(!iseditingsk){
+                    ifeditingsk(true)
+                    if(mStickerLayout.returnAllSticker().size == 0)
+                        startActivityForResult(Intent(this,CelSticker::class.java),1)
+                    val topsk = mStickerLayout.topSticker
+                    if(topsk != null)
+                        mStickerLayout.focusSticker = topsk
+                }else{
                     startActivityForResult(Intent(this,CelSticker::class.java),1)
-                val topsk = mStickerLayout.topSticker
-                if(topsk != null)
-                    mStickerLayout.focusSticker = topsk
-            }else{
-                startActivityForResult(Intent(this,CelSticker::class.java),1)
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+                Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
             }
         }
         ok.setOnClickListener {
-            mDrawerLayout.closeDrawer(GravityCompat.END)
-            ifeditingsk(false)
-            setResult(RESULT_OK,Intent())
-            finish()
+            try {
+                mDrawerLayout.closeDrawer(GravityCompat.END)
+                ifeditingsk(false)
+                setResult(RESULT_OK,Intent())
+                finish()
+            }catch (e:Exception){
+                e.printStackTrace()
+                Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
+            }
         }
         mStickerLayout.removeAllSticker()
         load_sks()
@@ -114,13 +134,21 @@ class prewiew_dailyaccount : AppCompatActivity() {
 
             override fun onDrawerOpened(arg0: View) {
                 Log.e("mDrawerLayout", "open")
-                val vibrator = MyApplication.context.getSystemService(VIBRATOR_SERVICE) as Vibrator
-                vibrator.vibrate(34)
+                try {
+                    val vibrator = MyApplication.context.getSystemService(VIBRATOR_SERVICE) as Vibrator
+                    vibrator.vibrate(34)
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
             }
 
             override fun onDrawerClosed(arg0: View) {
                 Log.e("mDrawerLayout", "colse")
-                showright.visibility=View.VISIBLE
+                try {
+                    showright.visibility=View.VISIBLE
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
             }
         })
         if (File(cacheDir.absolutePath,"shot.png").exists()){
@@ -193,14 +221,22 @@ class prewiew_dailyaccount : AppCompatActivity() {
                 Log.d("Sticker","MoveUp")
                 mScrollView.post(object:Runnable {
                     override fun run() {
-                        mScrollView.smoothScrollTo(0,mScrollView.scrollY-10)
+                        try {
+                            mScrollView.smoothScrollTo(0,mScrollView.scrollY-10)
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                        }
                     }
                 })
             }else if(y>mScrollView.scrollY+360-50){
                 Log.d("Sticker","MoveDown")
                 mScrollView.post(object:Runnable {
                     override fun run() {
-                        mScrollView.smoothScrollTo(0,mScrollView.scrollY+10)
+                        try {
+                            mScrollView.smoothScrollTo(0,mScrollView.scrollY+10)
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                        }
                     }
                 })
             }
@@ -289,8 +325,12 @@ class prewiew_dailyaccount : AppCompatActivity() {
         }
     }
     fun onClosePopEdit(){
-        Log.d("testpop","close")
-        sk_popview.visibility = View.GONE
+        try {
+            Log.d("testpop","close")
+            sk_popview.visibility = View.GONE
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
     fun load_sks(){
         Log.i("info","loadsk")
@@ -399,7 +439,8 @@ class prewiew_dailyaccount : AppCompatActivity() {
                 if(resultCode == RESULT_OK && data != null){
                     try{
                         val bitmap = BitmapFactory.decodeFile(data.getStringExtra("stickerpath"))
-                        val sticker = Sticker(bitmap)
+                        val sticker = Sticker(bitmap,)
+                        sticker.midXy = PointF().apply { x = mScrollView.x/2 ; y = mScrollView.y/2 }
                         mStickerLayout.addSticker(sticker)
                     }catch (e:Exception){
                         Toast.makeText(this,getString(R.string.add_fail),Toast.LENGTH_SHORT).show()

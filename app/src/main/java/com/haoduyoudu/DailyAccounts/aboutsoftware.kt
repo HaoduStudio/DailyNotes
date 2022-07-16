@@ -33,6 +33,7 @@ import com.haoduyoudu.DailyAccounts.MyApplication.Companion.SHIELD_SHARE_ACTON
 import java.io.*
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.COUNT_OF_DAYS_OF_COLOREGG_TO_APPEAR
 import com.xtc.shareapi.share.sharescene.Chat
 
 class aboutsoftware : AppCompatActivity(){
@@ -64,7 +65,7 @@ class aboutsoftware : AppCompatActivity(){
                 }
                 if(touchdata.size>=7){
                     try{
-                        if(GFN(pathofdailyaccounts).size >= 21){
+                        if(GFN(pathofdailyaccounts).size >= COUNT_OF_DAYS_OF_COLOREGG_TO_APPEAR){
                             if(!File("/data/data/com.haoduyoudu.DailyAccounts/assest/moresticker/").exists()){
                                 Toast.makeText(this,getString(R.string.about_mubiaodacheng),Toast.LENGTH_SHORT).show()
                                 val rpath = "/data/data/com.haoduyoudu.DailyAccounts/"
@@ -77,7 +78,7 @@ class aboutsoftware : AppCompatActivity(){
                                 startActivity(newintent)
                             }
                         }else{
-                            Toast.makeText(this,getString(R.string.caidan_tips),Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,getString(R.string.about_caidan_tips, COUNT_OF_DAYS_OF_COLOREGG_TO_APPEAR),Toast.LENGTH_SHORT).show()
                         }
                         touchdata.clear()
                     }catch (e:Exception){
@@ -97,9 +98,9 @@ class aboutsoftware : AppCompatActivity(){
             cantouch=false
             thread {
                 runOnUiThread { fadein(startview) }
-                Thread.sleep(3500)
-                runOnUiThread { fadeout(startview, 2300) }
-                Thread.sleep(2300)
+                Thread.sleep(2500)
+                runOnUiThread { fadeout(startview, 1000) }
+                Thread.sleep(1000)
                 runOnUiThread { tempview.visibility = View.GONE }
                 cantouch = true
             }

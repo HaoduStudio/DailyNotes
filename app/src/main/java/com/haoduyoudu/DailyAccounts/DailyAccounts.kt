@@ -9,10 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_daily_accounts.*
 import java.io.File
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
+import kotlin.Exception
 
 
 class DailyAccounts : AppCompatActivity(), View.OnClickListener {
@@ -75,9 +73,14 @@ class DailyAccounts : AppCompatActivity(), View.OnClickListener {
         }
     }
     override fun onClick(v: View?) {
-        val MyMoodNumber = MyApplication.idToMoodNumber[v?.id!!.toInt()] as Int
-        savemood(MyMoodNumber.toString())
-        finish()
+        try {
+            val MyMoodNumber = MyApplication.idToMoodNumber[v?.id!!.toInt()] as Int
+            savemood(MyMoodNumber.toString())
+            finish()
+        }catch (e:Exception){
+            e.printStackTrace()
+            Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroy() {
@@ -96,14 +99,19 @@ class DailyAccounts : AppCompatActivity(), View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             1 -> if (resultCode == RESULT_OK) {
-                val moodnum = data?.getStringExtra("moodnum")
-                val moodtext = data?.getStringExtra("text")
+                try {
+                    val moodnum = data?.getStringExtra("moodnum")
+                    val moodtext = data?.getStringExtra("text")
 
-                Log.d("DAonActivityResult",moodnum+" "+moodtext+"return !")
+                    Log.d("DAonActivityResult",moodnum+" "+moodtext+"return !")
 
-                savemood(moodnum+"$[%|!|%]$"+moodtext)
+                    savemood(moodnum+"$[%|!|%]$"+moodtext)
 
-                finish()
+                    finish()
+                }catch (e:Exception){
+                    e.printStackTrace()
+                    Toast.makeText(this,getString(R.string.system_error),Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -133,18 +141,18 @@ class DailyAccounts : AppCompatActivity(), View.OnClickListener {
         val dirnamefile = File(dirname)
         val weekDays: Array<String> =
             arrayOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
-        val calendar: Calendar = Calendar.getInstance();
-        if(intent.getStringExtra("name") != null){
-            Log.d("editdate","true")
+        val mwek = if(intent.getStringExtra("name") != null){
             val namedate = intent.getStringExtra("name")!!.split("-")
-            calendar.set(namedate[0].toInt(),namedate[1].toInt(),namedate[2].toInt(),0,0,0)
+            getDate(namedate[0].toInt(),namedate[1].toInt(),namedate[2].toInt())
+        }else{
+            getDate(y.toInt(), m.toInt(), d.toInt())
         }
 
         if ((!dirnamefile.exists()) || (dirnamefile.exists() && rewrite)) {
             print("true")
             DeleteFileUtil.delete(dirname + "mood.txt")
             FileUtils.writeTxtToFile(
-                weekDays[calendar!!.get(Calendar.DAY_OF_WEEK) - 1],
+                weekDays[mwek],
                 dirname,
                 "week.txt"
             )
@@ -173,6 +181,15 @@ class DailyAccounts : AppCompatActivity(), View.OnClickListener {
         } else {
             Toast.makeText(this, getString(R.string.sel_mood_tips), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun getDate(ly: Int, lm: Int, ld: Int):Int{ //栓Q XC I Love You ～～
+        val ly2 = if(lm < 3) ly-1 else ly
+        val c = ly2.toString().subSequence(0,2).toString().toInt()
+        val y = ly2.toString().subSequence(2,4).toString().toInt()
+        val m = if(lm < 3) 12+lm else lm
+        val d = ld
+        return (y+(y/4)+(c/4)-2*c+(26*(m+1)/10)+d-1)%7
     }
 }
 
