@@ -115,4 +115,5 @@
     <string name="recordtitle">Tap record or stop</string>
     <string name="moremoodhint">Your mood</string>
     <string name="custommood_title">Custom mood</string>
+    <string name="isee">I see</string>
 </resources>

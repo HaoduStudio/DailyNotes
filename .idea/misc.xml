@@ -40,12 +40,13 @@
         <entry key="app/src/main/res/drawable/shape_all.xml" value="0.628125" />
         <entry key="app/src/main/res/drawable/shape_corner_up.xml" value="0.8305555555555556" />
         <entry key="app/src/main/res/drawable/shape_under.xml" value="0.49722222222222223" />
-        <entry key="app/src/main/res/drawable/shape_voume_up.xml" value="0.8305555555555556" />
+        <entry key="app/src/main/res/drawable/shape_voume_up.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/shape_wihte_frame.xml" value="0.6861111111111111" />
         <entry key="app/src/main/res/drawable/sharp_10dp.xml" value="0.8274506579862555" />
         <entry key="app/src/main/res/drawable/textcolor_selector.xml" value="0.709375" />
         <entry key="app/src/main/res/drawable/textcursor_color.xml" value="0.625" />
         <entry key="app/src/main/res/drawable/textview_style.xml" value="0.709375" />
+        <entry key="app/src/main/res/drawable/yindao_button.xml" value="0.21712341308593752" />
         <entry key="app/src/main/res/layout/activity_aboutsoftware.xml" value="0.6995978799461932" />
         <entry key="app/src/main/res/layout/activity_add_pictures_or_videos.xml" value="0.4171511627906977" />
         <entry key="app/src/main/res/layout/activity_add_pictures_or_videos_first.xml" value="0.3444767441860465" />
@@ -56,10 +57,11 @@
         <entry key="app/src/main/res/layout/activity_edit_daily_text.xml" value="0.8827088454824887" />
         <entry key="app/src/main/res/layout/activity_find.xml" value="0.5959302325581395" />
         <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.5025126554590035" />
+        <entry key="app/src/main/res/layout/activity_guide_interface.xml" value="0.5229927382088432" />
         <entry key="app/src/main/res/layout/activity_hello.xml" value="0.311046511627907" />
         <entry key="app/src/main/res/layout/activity_inputpassword.xml" value="0.6696341026732299" />
         <entry key="app/src/main/res/layout/activity_loading.xml" value="0.4171511627906977" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.6562791178448004" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.5623342175066313" />
         <entry key="app/src/main/res/layout/activity_moodcalendar.xml" value="0.5870385515916094" />
         <entry key="app/src/main/res/layout/activity_more_ac.xml" value="0.694420799964499" />
@@ -68,7 +70,7 @@
         <entry key="app/src/main/res/layout/activity_more_operation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_needtodelete.xml" value="0.4691218241716974" />
         <entry key="app/src/main/res/layout/activity_prewiew_dailyaccount.xml" value="0.42118214349809047" />
-        <entry key="app/src/main/res/layout/activity_say_hello.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_say_hello.xml" value="0.7686340332031252" />
         <entry key="app/src/main/res/layout/activity_select_media_access.xml" value="0.4994141273818399" />
         <entry key="app/src/main/res/layout/activity_select_template.xml" value="0.40731233700971364" />
         <entry key="app/src/main/res/layout/activity_settingpage.xml" value="0.1" />

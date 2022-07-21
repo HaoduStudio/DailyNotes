@@ -45,6 +45,7 @@
             android:layout_height="match_parent"
             android:divider="#00FFFFFF"
             android:dividerHeight="5dp"
+            android:overScrollMode="never"
             tools:listitem="@layout/tewtviewbuttonlistwithnotes_item"
             android:layout_gravity="bottom"/>
     </LinearLayout>

@@ -37,7 +37,6 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import android.content.pm.PackageManager
 import kotlin.collections.HashMap
 
-
 class MainActivity : AppCompatActivity() {
     lateinit var adapter: TextviewButtonListAdapter
     private val textviewbuttonList = ArrayList<TextviewButtonList>()
@@ -121,6 +120,7 @@ class MainActivity : AppCompatActivity() {
                             runOnUiThread {
                                 if(needupdata == true)
                                     Toast.makeText(this,MyApplication.Mapoftime[MyApplication.gettime()],Toast.LENGTH_SHORT).show()
+                                showUseTip()
                             }
                         }
                         if(outtime>1000)
@@ -128,6 +128,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }else{
                     LoadmainUI()
+                    showUseTip()
                 }
             }catch (e:Exception){
                 e.printStackTrace()
@@ -341,6 +342,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        try{
+            if (!firstLoad)
+                showUseTip()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
     private fun refreshfromsR(adapter: TextviewButtonListAdapter){
         thread {
@@ -364,6 +371,7 @@ class MainActivity : AppCompatActivity() {
                 3 -> if(resultCode == RESULT_OK){
                     needupdata = false
                     LoadmainUI()
+                    showUseTip()
                 }
                 4 -> if(resultCode == RESULT_OK){
                     if(data != null){
@@ -611,5 +619,15 @@ class MainActivity : AppCompatActivity() {
         val m = if(lm < 3) 12+lm else lm
         val d = ld
         return (y+(y/4)+(c/4)-2*c+(26*(m+1)/10)+d-1)%7
+    }
+    private fun showUseTip(){
+        if(GFN("/sdcard/Android/data/com.haoduyoudu.DailyAccounts/").size != 0
+            && (!File(filesDir.path,"NOTNEW.dt").exists())){
+            thread {
+                Thread.sleep(800)
+                startActivity(Intent(this,guideInterface::class.java))
+            }
+            Log.d("MainActivity","showUseTip")
+        }
     }
 }

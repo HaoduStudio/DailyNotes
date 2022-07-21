@@ -5,15 +5,16 @@ import android.app.Application
 import android.content.Context
 import android.util.JsonWriter
 import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.tencent.bugly.crashreport.CrashReport
-import com.xtc.shareapi.share.sharescene.Chat
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
+import java.io.*
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.concurrent.thread
-import java.io.*
 
 
 class MyApplication:Application() {
@@ -72,17 +73,51 @@ class MyApplication:Application() {
             "youyu" to R.mipmap.q_youyu
         )
 
+        val weatherCodeToString = mapOf<Int,String>(
+            1 to "qing",
+            2 to "yun",
+            3 to "yu",
+            4 to "yu",
+            5 to "bingbao",
+            6 to "xue",
+            7 to "yu",
+            8 to "yu",
+            9 to "yu",
+            10 to "yu",
+            11 to "yu",
+            12 to "yu",
+            13 to "xue",
+            14 to "xue",
+            15 to "xue",
+            16 to "wu",
+            17 to "xue",
+            18 to "wu",
+            19 to "yu",
+            20 to "shachen",
+            21 to "yu",
+            22 to "yu",
+            23 to "yu",
+            24 to "yu",
+            25 to "yu",
+            26 to "xue",
+            27 to "xue",
+            28 to "xue",
+            29 to "yin",
+            30 to "shachen",
+            31 to "shachen",
+            32 to "wu"
+        )
 
         val Mapofweather = mapOf<String,Int>(
-            "xue" to R.mipmap.bg_snow,
-            "lei" to R.mipmap.bg_rain,
-            "wu" to R.mipmap.bg_fog,
-            "bingbao" to R.mipmap.bg_snow,
-            "yun" to R.mipmap.bg_cloudy,
-            "yu" to R.mipmap.bg_rain,
-            "yin" to R.mipmap.bg_yin,
-            "qing" to R.mipmap.bg_clear_day,
-            "shachen" to R.mipmap.bg_dusd_storm
+            "xue" to R.mipmap.bg_snow, //雪
+            "lei" to R.mipmap.bg_rain, //雷
+            "wu" to R.mipmap.bg_fog,   //雾
+            "bingbao" to R.mipmap.bg_snow, //冰雹
+            "yun" to R.mipmap.bg_cloudy,  //多云
+            "yu" to R.mipmap.bg_rain, //雨
+            "yin" to R.mipmap.bg_yin, //阴
+            "qing" to R.mipmap.bg_clear_day, //晴
+            "shachen" to R.mipmap.bg_dusd_storm //沙尘
         )
 
         val Maooflittleweatherimg = mapOf<String,Int>(
@@ -282,6 +317,7 @@ class MyApplication:Application() {
             }
         }
         private fun parseJSONWithJSONObject(jsonData:String){
+            /*
             try {
                 val jsonObject = JSONObject(jsonData)
                 val weathers = jsonObject.getString("wea_img")
@@ -291,6 +327,14 @@ class MyApplication:Application() {
             }catch (e: Exception){
                 e.printStackTrace()
             }
+            */
+            val gson = Gson()
+            val typeOf = object : TypeToken<WeatherData>() {}.type
+            val mWeather = gson.fromJson<WeatherData>(jsonData, typeOf)
+            val weathercode = stringToInt(mWeather.data[0].weather.weathercode)
+            weather = weatherCodeToString[weathercode]
+            tem = stringToInt(mWeather.data[0].weather.temp)
+
         }
 
         fun gettime():Int{
@@ -342,11 +386,15 @@ class MyApplication:Application() {
         }
 
         private fun getweather(){
+            //https://help.bj.cn/Weathera/20200303/06AC9B964A094C6BBE66BDC3A32E6E9A.html
+            //https://www.tianqiapi.com/api/?version=v51&appid=1001&appsecret=1046
             thread{
                 try{
                     val client = OkHttpClient()
                     val request = Request.Builder()
-                        .url("https://www.tianqiapi.com/api/?version=v51"+"&appid=1001&appsecret=1046")
+                        .url("https://ip.help.bj.cn/")
+                        .removeHeader("User-Agent")
+                        .addHeader("User-Agent",getUserAgent())
                         .build()
                     val response = client.newCall(request).execute()
                     val responseData = response.body?.string()
@@ -425,6 +473,39 @@ class MyApplication:Application() {
             return OK
         }
         fun getVer(ct:Context):String = context.getPackageManager().getPackageInfo(ct.getPackageName(), 0).versionName
+
+        private fun getUserAgent(): String {
+            var userAgent = ""
+            val sb = StringBuffer()
+            userAgent = System.getProperty("http.agent") as String
+            var i = 0
+            val length = userAgent.length
+            while (i < length) {
+                val c = userAgent[i]
+                if (c <= '\u001f' || c >= '\u007f') {
+                    sb.append(String.format("\\u%04x", c.code))
+                } else {
+                    sb.append(c)
+                }
+                i++
+            }
+            Log.v("User-Agent", "User-Agent: $sb")
+            return sb.toString()
+        }
+
+        private fun stringToInt(uri:String):Int{
+            var result = 0
+            var intStart = -1
+            for(i in uri.indices){
+                if(uri[i] in '0'..'9'){
+                    result += uri[i]-'0'
+                    result *= 10
+                    if(intStart == -1) intStart = i
+                }
+            }
+            if(intStart!=0) if(uri[intStart-1]=='-') return -(result/10)
+            return result/10
+        }
     }
 
     override fun onCreate() {

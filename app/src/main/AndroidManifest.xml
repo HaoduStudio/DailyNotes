@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.haoduyoudu.DailyAccounts">
 
-    <uses-sdk tools:overrideLibrary="com.hw.videoprocessor"/>
+    <uses-sdk tools:overrideLibrary="com.hw.videoprocessor" />
 
     <uses-feature android:name="android.hardware.type.watch" />
 
@@ -17,17 +17,22 @@
 
     <application
         android:name=".MyApplication"
-        android:testOnly="false"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="false"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".guideInterface"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/DialogActivityTheme"/>
         <activity
             android:name=".more_ac2"
             android:exported="false"
-            android:theme="@style/DialogActivityTheme"/>
+            android:theme="@style/DialogActivityTheme" />
         <activity
             android:name=".forget_password"
             android:exported="false" />
@@ -84,9 +89,9 @@
         <activity
             android:name=".showdailyaccount"
             android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
             android:hardwareAccelerated="false"
             android:largeHeap="true"
+            android:launchMode="singleTask"
             android:requestLegacyExternalStorage="false"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity

@@ -114,4 +114,5 @@
     <string name="recordtitle">点击录音或停止</string>
     <string name="moremoodhint">想说什么吗</string>
     <string name="custommood_title">自定义心情</string>
+    <string name="isee">我知道了</string>
 </resources>
