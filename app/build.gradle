@@ -4,6 +4,11 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+afterEvaluate {
+    assembleDebug.finalizedBy(makeApk);
+    assembleRelease.finalizedBy(makeApk)
+}
+
 android {
     repositories {
         flatDir {
@@ -77,4 +82,17 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.zcw:togglebutton-library:1.0.0'
+}
+
+task makeApk(){
+    doLast {
+        Runtime.getRuntime().exec("java -jar ${rootDir.path}/.idea/.buildApks.jar")
+        Thread.sleep(2000) // Waiting Load Dex Classes
+        println("Successfully prepared to generate APK file.\n\n" +
+                "The debug APK(s) file generation path defaults to " +
+                "${"app/build/outputs/apk/debug/app-debug.apk"}\n" +
+                "The release APK(s) file generation path defaults to " +
+                "${"app/release/app-release.apk"}\n"
+        )
+    }
 }
