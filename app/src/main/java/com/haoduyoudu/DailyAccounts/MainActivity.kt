@@ -564,10 +564,17 @@ class MainActivity : AppCompatActivity() {
                 val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
                 runOnUiThread {
                     try{
-                        Glide.with(this)
-                            .load(Mapofweather[weather])
-                            .transition(withCrossFade(factory))
-                            .into(weather_img)
+                        if(Mapofweather[weather] != null){
+                            Glide.with(this)
+                                .load(Mapofweather[weather])
+                                .transition(withCrossFade(factory))
+                                .into(weather_img)
+                        }else{
+                            listView.setBackgroundResource(R.mipmap.black)
+                            Glide.with(this)
+                                .load(R.mipmap.black)
+                                .into(weather_img)
+                        }
                     }catch (e:Exception){
                         e.printStackTrace()
                     }

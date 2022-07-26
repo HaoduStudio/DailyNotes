@@ -74,6 +74,7 @@ class MyApplication:Application() {
         )
 
         val weatherCodeToString = mapOf<Int,String>(
+            0 to "qing",
             1 to "qing",
             2 to "yun",
             3 to "yu",
