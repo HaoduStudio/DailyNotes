@@ -13,3 +13,7 @@ fun getCornerRadiusTop(context: Context):Int {
     }
     return 16
 }
+
+
+//标注：这一版完全未由Rechrd & Rex修改过
+//完全由原作者修改

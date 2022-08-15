@@ -2,10 +2,13 @@
 <resources>
     <string name="language_tag">en</string>
     <string name="app_name">DailyNotes</string>
-    <string name="version">Version 2.0.4</string>
-    <string name="version_with">This version is official</string>
+    <string name="version">Version 2.0.5</string>
+    <string name="isee">I see</string>
+    <string name="authorinfo_rex">Now the maintenance team is ReX DailyNotes</string>
+    <string name="version_with">This version is a public alpha</string>
+    <string name= "github_info" > this software is now open source on GitHub. Welcome to star~ \n warehouse website: \n https://github.com/HaoduyouduStudio/DailyNotes \n</string>
     <string name="authorinfo">Software author:\nHaoduyoudu_Dev\nE-mail:michaelzhtiger@outlook.com\n</string>
-    <string name="aboutnewvewsion">New features: \nupdate stickers\nadd weather and slogans\naccess to xtc shareapi\nupdate templates\nmodify font color\nadd custom mood\nfix known bugs\nupdate painted eggshell</string>
+    <string name="aboutnewvewsion">New features: \nOptimize the animation experience\nSupport "traditional Chinese"\nupdate stickers\nadd weather and slogans\naccess to xtc shareapi\nupdate templates\nmodify font color\nadd custom mood\nfix known bugs\nupdate painted eggshell</string>
     <string name="about_title">About</string>
     <string name="about_mubiaodacheng">Congratulations on achieving your goal!</string>
     <string name="about_caidan_tips">Come back to me after writing %d hand accounts. We\'ll see each other!</string>
@@ -13,7 +16,7 @@
     <string name="share_software_text">Easy to use baby,share with you~</string>
     <string name="share_software_tips">Thank you for your support!</string>
     <string name="thank_for">*Thanks to the artist\nthank Yinglin, Kabi,Xu Qisong,DonG,Ni Bing,wick,Xianjingziran,Oroxi,Lao Yu,Su Qi and erthief cat for their contribution to the software  (click to see!)</string>
-    <string name="qq_group">Join our feedback group!\nGroup No.: 721731698</string>
+    <string name="qq_group">Join our feedback group!\nGroup No.: 721731698\nOr telegramGroup:t.me/+lJx7PjmqQS05Mjc1</string>
     <string name="softwear_inf">Daily notes? Here we are, professional! \n</string>
     <string name="img_copyright">\nPicture copyright notice:\nsome picture illustrations of this software are from Alibaba vector icons. If there is infringement, please contact the author to delete.\n</string>
     <string name="share_softwear_tips">Helpful? Give a support!</string>

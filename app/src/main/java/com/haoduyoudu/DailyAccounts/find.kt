@@ -3,11 +3,12 @@ package com.haoduyoudu.DailyAccounts
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_find.*
 import java.util.*
 
-class find : AppCompatActivity() {
+class find : AppCompatActivity(){
     var yt = 0
     var mt = 0
 

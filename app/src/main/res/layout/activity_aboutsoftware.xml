@@ -44,8 +44,9 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardElevation="5dp"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp">
+
                     <ImageView
                         android:id="@+id/im1"
                         android:layout_width="160dp"
@@ -59,10 +60,10 @@
                     android:id="@+id/zhixiemeigong"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/thank_for"
-                    android:textSize="13sp"
                     android:textColor="#FFFFFF"
-                    android:layout_marginBottom="5dp"/>
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -73,14 +74,23 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="259dp"
+                    android:layout_height="314dp"
                     android:scaleType="fitEnd"
                     android:src="@mipmap/qqimage" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="179dp"
+                    android:layout_height="161dp"
+                    android:scaleType="fitEnd"
+                    app:srcCompat="@mipmap/dailynote_tg" />
+
                 <LinearLayout
+                    android:id="@+id/versions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/versions">
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/Version"
                         android:layout_width="match_parent"
@@ -93,17 +103,33 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/version_with"
                         android:layout_marginBottom="5dp"
+                        android:text="@string/version_with"
                         android:textColor="#C5C3C3"
                         android:textSize="13sp" />
                 </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/authorinfo"
                     android:textColor="#C5C3C3"
                     android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/authorinfo_rex"
+                    android:textColor="#C5C3C3"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/github_info"
+                    android:textColor="#C5C3C3"
+                    android:textSize="13sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -117,19 +143,22 @@
                     android:text="@string/img_copyright"
                     android:textColor="#C5C3C3"
                     android:textSize="13sp" />
+
                 <LinearLayout
                     android:id="@+id/sharefriendf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/share_softwear_tips"
+                        android:layout_marginBottom="5dp"
                         android:gravity="center"
+                        android:text="@string/share_softwear_tips"
                         android:textColor="#C5C3C3"
-                        android:textSize="13sp"
-                        android:layout_marginBottom="5dp"/>
+                        android:textSize="13sp" />
+
                     <Button
                         android:id="@+id/share_to_friend"
                         android:layout_width="match_parent"
@@ -139,17 +168,18 @@
                         android:background="@drawable/shape_all"
                         android:gravity="center"
                         android:text="@string/share_softwear_button"
-                        android:textColor="#FFF"/>
+                        android:textColor="#FFF" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
+
     <View
         android:id="@+id/tempview"
-        android:visibility="gone"
-        android:background="#000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="#000"
+        android:visibility="gone" />
     <ImageView
         android:id="@+id/startview"
         android:layout_width="match_parent"
