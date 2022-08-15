@@ -15,24 +15,24 @@ android {
             dirs 'libs'
         }
     }
-    signingConfigs {
-        debug {
-            storeFile file('/Users/tigerzhan/haoduyoudu.jks')
-            storePassword '1234567'
-            keyAlias 'haoduyoudu'
-            keyPassword '1234567'
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
-        release {
-            storeFile file('/Users/tigerzhan/haoduyoudu.jks')
-            storePassword '1234567'
-            keyAlias 'haoduyoudu'
-            keyPassword '1234567'
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
-    }
+    //signingConfigs {
+        //debug {
+            //storeFile file('/Users/tigerzhan/haoduyoudu.jks')
+            //storePassword '1234567'
+            //keyAlias 'haoduyoudu'
+            //keyPassword '1234567'
+            //v1SigningEnabled true
+            //v2SigningEnabled true
+        //}
+        //release {
+            //storeFile file('/Users/tigerzhan/haoduyoudu.jks')
+            //storePassword '1234567'
+            //keyAlias 'haoduyoudu'
+            //keyPassword '1234567'
+            //v1SigningEnabled true
+            //v2SigningEnabled true
+        //}
+    //}
     compileSdkVersion 30
     buildToolsVersion '30.0.3'
     defaultConfig {
@@ -77,8 +77,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.material:material:1.0.0'
-    compile 'com.tencent.bugly:crashreport:3.4.4'
-    compile 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation 'com.tencent.bugly:crashreport:3.4.4'
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.squareup.okhttp3:okhttp:4.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.zcw:togglebutton-library:1.0.0'
