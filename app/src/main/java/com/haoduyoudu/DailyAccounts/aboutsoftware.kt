@@ -98,9 +98,9 @@ class aboutsoftware : AppCompatActivity(){
             cantouch=false
             thread {
                 runOnUiThread { fadein(startview) }
-                Thread.sleep(3500)
-                runOnUiThread { fadeout(startview, 2300) }
-                Thread.sleep(2300)
+                Thread.sleep(2500)
+                runOnUiThread { fadeout(startview, 1000) }
+                Thread.sleep(1000)
                 runOnUiThread { tempview.visibility = View.GONE }
                 cantouch = true
             }
