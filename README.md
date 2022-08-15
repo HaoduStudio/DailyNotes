@@ -4,7 +4,3 @@ It runs on the Xtc watch.
 
 # Screenshot
 In /images
-
-# Other
-
-Haoduyoudu, Fuckyou!
