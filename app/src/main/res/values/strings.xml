@@ -1,18 +1,21 @@
 <resources>
     <string name="language_tag">zh_cn</string>
     <string name="app_name">每日手帐</string>
-    <string name="version">版本V2.0.4</string>
-    <string name="version_with">此版本为正式版</string>
+    <string name="version">版本V2.0.5</string>
+    <string name="isee">我知道了</string>
+    <string name="version_with">此版本为公开测试版</string>
     <string name="authorinfo">软件作者:好读游独\n邮箱：michaelzhtiger@outlook.com\n</string>
-    <string name="aboutnewvewsion">新版特性:\n更新贴纸\n添加天气和标语\n接入小天才shareapi\n更新模板\n可以修改字体颜色\n添加自定义心情\n修复已知bug\n更新 \\彩蛋/</string>
+    <string name="authorinfo_rex">现维护团队为 ReX DailyNotes</string>
+    <string name="aboutnewvewsion">新版特性:\n优化动画体验\n支持“中文繁体”\n更新贴纸\n添加天气和标语\n接入小天才shareapi\n更新模板\n可以修改字体颜色\n添加自定义心情\n修复已知bug\n更新 \\彩蛋/</string>
     <string name="about_title">关于软件</string>
+    <string name="github_info">本软件现已在Github上进行开源，欢迎给个Star~\n仓库网址:\nhttps://github.com/HaoduyouduStudio/DailyNotes\n</string>
     <string name="about_mubiaodacheng">恭喜达成目标！</string>
     <string name="about_caidan_tips">彩蛋：写完%d篇手帐再来找我,我们不见不散!</string>
     <string name="about_caidan_tips2">Tips：您使用的彩蛋已过时,为什么不去版本号中多点几下呢AWA</string>
     <string name="share_software_text">好用的宝贝，分享给你～</string>
     <string name="share_software_tips">《每日手帐》感谢您的支持与鼓励！</string>
     <string name="thank_for">*致谢美工\n感谢  颖琳、卡比、许祁颂、DonG、倪冰、Wick、娴静自然、Oroxi、老瑜、苏柒、二贼猫为软件添砖加瓦    (点我看看！)\n</string>
-    <string name="qq_group">加入我们的反馈群吧！\n群号:721731698</string>
+    <string name="qq_group">加入我们的反馈群吧！\nQQ群号:721731698\nTG群组:t.me/+lJx7PjmqQS05Mjc1</string>
     <string name="softwear_inf">手帐？我们这儿，专业的！\n</string>
     <string name="img_copyright">\n图片版权声明：\n本软件部分图片插画来自阿里巴巴矢量图标，如有侵权，请联系作者删除\n</string>v
     <string name="share_softwear_tips">好用？支持一下？</string>
@@ -114,5 +117,4 @@
     <string name="recordtitle">点击录音或停止</string>
     <string name="moremoodhint">想说什么吗</string>
     <string name="custommood_title">自定义心情</string>
-    <string name="isee">我知道了</string>
 </resources>

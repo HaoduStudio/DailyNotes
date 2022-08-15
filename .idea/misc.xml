@@ -14,6 +14,8 @@
         <entry key="../../.gradle/caches/transforms-3/9e220914791fff4cc445317aed850c45/transformed/shareapi-2.2.2/res/drawable/bt_background_normal.xml" value="0.1" />
         <entry key="../../.gradle/caches/transforms-3/9e220914791fff4cc445317aed850c45/transformed/shareapi-2.2.2/res/drawable/bt_background_pressed.xml" value="0.1" />
         <entry key="../../.gradle/caches/transforms-3/9e220914791fff4cc445317aed850c45/transformed/shareapi-2.2.2/res/drawable/ll_icon_selector.xml" value="10.0" />
+        <entry key="..\:/DailyNotes-Beans/Ver-2.0.4/app/src/main/res/layout/activity_aboutsoftware.xml" value="0.9299163179916318" />
+        <entry key="..\:/DailyNotes-Beans/Ver-2.0.4/app/src/main/res/layout/activity_guide_interface.xml" value="0.762114537444934" />
         <entry key="app/src/main/res/drawable/backgroundfordialog.xml" value="1.415625" />
         <entry key="app/src/main/res/drawable/bottombuttonleft_style.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bottombuttonright_style.xml" value="1.3944444444444444" />
@@ -99,7 +101,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
