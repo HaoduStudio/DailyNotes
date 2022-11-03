@@ -97,7 +97,8 @@
                             android:layout_gravity="end|center_vertical"
                             android:layout_marginTop="1dp"
                             android:layout_marginEnd="22dp"
-                            android:src="@mipmap/ic_bianji2" />
+                            android:src="@mipmap/edit_emoji" />
+
                     </FrameLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -132,7 +133,9 @@
                             android:layout_height="22dp"
                             android:layout_gravity="end|center_vertical"
                             android:layout_marginTop="3dp"
-                            android:src="@mipmap/ic_bianji2" />
+
+                            android:src="@mipmap/edit_text" />
+
 
                     </LinearLayout>
 
@@ -185,7 +188,8 @@
                             android:layout_height="22dp"
                             android:layout_marginEnd="22dp"
                             android:layout_gravity="end|center_vertical"
-                            android:src="@mipmap/ic_bianji2" />
+                            android:src="@mipmap/edit_dmt" />
+
 
                     </LinearLayout>
 
