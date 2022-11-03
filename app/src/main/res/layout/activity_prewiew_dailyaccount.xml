@@ -37,12 +37,13 @@
                         android:visibility="visible" />
                 </FrameLayout>
             </com.haoduyoudu.DailyAccounts.MyScrollView>
+
             <ImageView
                 android:id="@+id/showright"
-                android:layout_gravity="end|center_vertical"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/pop_right"/>
+                android:layout_gravity="end|center_vertical"
+                android:src="@mipmap/pop_right" />
             <LinearLayout
                 android:id="@+id/sk_popview"
                 android:layout_width="match_parent"

@@ -14,6 +14,37 @@
         <entry key="../../.gradle/caches/transforms-3/9e220914791fff4cc445317aed850c45/transformed/shareapi-2.2.2/res/drawable/bt_background_normal.xml" value="0.1" />
         <entry key="../../.gradle/caches/transforms-3/9e220914791fff4cc445317aed850c45/transformed/shareapi-2.2.2/res/drawable/bt_background_pressed.xml" value="0.1" />
         <entry key="../../.gradle/caches/transforms-3/9e220914791fff4cc445317aed850c45/transformed/shareapi-2.2.2/res/drawable/ll_icon_selector.xml" value="10.0" />
+<<<<<<< HEAD
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_aboutsoftware.xml" value="0.8236714975845411" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_cel_background.xml" value="0.8236714975845411" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_cel_sticker.xml" value="0.8236714975845411" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_daily_accounts.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_edit_daily_text.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_find.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_guide_interface.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_main.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_moodcalendar.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_more_ac.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_more_ac2.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_more_moodsclect.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_needtodelete.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_prewiew_dailyaccount.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_say_hello.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_select_media_access.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_select_template.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_settingpage.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_showaudio.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_showdailyaccount.xml" value="0.1" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_showfind.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/activity_sound_recording_dialog.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/imageorvideolist_item.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/moodlist_item.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/moremoodlist_item.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/recordlist_item.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/templateimagelistitem.xml" value="1.2965116279069768" />
+        <entry key="..\:/DailyNotes-Beans/DailyNotes-master/app/src/main/res/layout/tewtviewbuttonlist_item.xml" value="1.2965116279069768" />
+=======
+>>>>>>> 5f4a7c674b00b9730ca17bd7ca48e43516ef2a0f
         <entry key="..\:/DailyNotes-Beans/Ver-2.0.4/app/src/main/res/layout/activity_aboutsoftware.xml" value="0.9299163179916318" />
         <entry key="..\:/DailyNotes-Beans/Ver-2.0.4/app/src/main/res/layout/activity_guide_interface.xml" value="0.762114537444934" />
         <entry key="..\:/DailyNotes-Beans/Ver-2.0.5-alpha/app/src/main/res/layout/activity_aboutsoftware.xml" value="0.762114537444934" />
