@@ -1,10 +1,12 @@
 package com.haoduyoudu.DailyAccounts
 
+import android.annotation.SuppressLint
 import android.os.Vibrator
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
+@SuppressLint("ClickableViewAccessibility")
 fun View.addClickScale(scale: Float = 0.9f, duration: Long = 150) {
     this.setOnTouchListener { _, event ->
         try{
@@ -26,7 +28,7 @@ fun View.addClickScale(scale: Float = 0.9f, duration: Long = 150) {
 
         // 点击事件处理，交给View自身
         this.onTouchEvent(event)
-        this.performClick()
+        //this.performClick()
     }
 }
 
