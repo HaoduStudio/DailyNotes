@@ -11,11 +11,12 @@
         android:layout_height="match_parent"
         android:background="@drawable/startingwindow_bg"
         android:id="@+id/main_background">
+
         <ImageView
             android:id="@+id/weather_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitCenter" />
 
         <FrameLayout
             android:layout_width="match_parent"

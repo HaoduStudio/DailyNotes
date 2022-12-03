@@ -26,6 +26,7 @@ fun View.addClickScale(scale: Float = 0.9f, duration: Long = 150) {
 
         // 点击事件处理，交给View自身
         this.onTouchEvent(event)
+        this.performClick()
     }
 }
 
