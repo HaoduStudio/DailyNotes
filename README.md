@@ -22,8 +22,8 @@ You can view the screenshot in `/images`
 - 😎New background graphics
 - 👀New editor and UI interface
 
-# Open source protocol
+# Open Source License
 
-This project uses the **apache2.0 open source protocol**. You **can close the source and use it for commercial use**, but please **leave the original developer's instructions**. Otherwise, we will **consider closing the source and investigate all responsibilities**.
+This project is licensed under the **Apache v2.0 Open Source License**. You **can close the source of your recreated project and use it for commercial use**, but please **leave the original developer's instructions**. Otherwise, we will **consider closing the source and investigate all responsibilities**.
 
-Thankyou 😘
+Thank you 😘
