@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Build
@@ -26,16 +27,13 @@ import androidx.core.view.GravityCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.Mapofweather
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.needupdata
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.weather
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
-import java.util.*
 import kotlin.concurrent.thread
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
-import android.content.pm.PackageManager
-import kotlin.collections.HashMap
 
 class MainActivity : AppCompatActivity() {
     lateinit var adapter: TextviewButtonListAdapter
@@ -104,19 +102,19 @@ class MainActivity : AppCompatActivity() {
             try {
                 val pathofdailyaccounts = "/sdcard/Android/data/com.haoduyoudu.DailyAccounts/"
                 var Filenamesofdailyaccounts = GFN(pathofdailyaccounts)
-                if(Filenamesofdailyaccounts.size != 0 && weather != null && needupdata == true){
-                    startActivityForResult(Intent(this,SayHello::class.java),3)
-                }else if(Filenamesofdailyaccounts.size != 0 && weather == null && needupdata == true){
+                if (Filenamesofdailyaccounts.size != 0 && weather != null && needupdata == true) {
+                    startActivityForResult(Intent(this, SayHello::class.java), 3)
+                } else if (Filenamesofdailyaccounts.size != 0 && weather == null && needupdata == true) {
                     thread {
                         var outtime = 0
-                        while (weather == null && outtime<=1000){
+                        while (weather == null && outtime <= 1000) {
                             Thread.sleep(100)
-                            outtime+=100
+                            outtime += 100
                         }
                         if (weather != null) {
                             startActivityForResult(Intent(this, SayHello::class.java), 3)
                             needupdata = false
-                        }else{
+                        } else {
                             runOnUiThread {
                                 if(needupdata == true)
                                     Toast.makeText(this,MyApplication.Mapoftime[MyApplication.gettime()],Toast.LENGTH_SHORT).show()
@@ -628,13 +626,16 @@ class MainActivity : AppCompatActivity() {
         return (y+(y/4)+(c/4)-2*c+(26*(m+1)/10)+d-1)%7
     }
     private fun showUseTip(){
-        if(GFN("/sdcard/Android/data/com.haoduyoudu.DailyAccounts/").size != 0
-            && (!File(filesDir.path,"NOTNEW.dt").exists())){
+        if (GFN("/sdcard/Android/data/com.haoduyoudu.DailyAccounts/").size == 0 && (!File(
+                filesDir.path,
+                "NOTNEW.dt"
+            ).exists())
+        ) {
             thread {
                 Thread.sleep(800)
-                startActivity(Intent(this,guideInterface::class.java))
+                startActivity(Intent(this, guideInterface::class.java))
             }
-            Log.d("MainActivity","showUseTip")
+            Log.d("MainActivity", "showUseTip")
         }
     }
 }
