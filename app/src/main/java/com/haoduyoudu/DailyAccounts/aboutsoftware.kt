@@ -47,7 +47,7 @@ class aboutsoftware : AppCompatActivity(){
         setContentView(R.layout.activity_aboutsoftware)
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O || SHIELD_SHARE_ACTON){
-            sharefriendf.visibility=View.GONE
+            share_to_friend.visibility=View.GONE
         }
 
         versions.setOnClickListener {

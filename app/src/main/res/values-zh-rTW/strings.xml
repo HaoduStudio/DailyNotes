@@ -3,10 +3,10 @@
     <string name="app_name">每日手帳</string>
     <string name="version">版本V2.0.5</string>
     <string name="isee">我知道了</string>
-    <string name="version_with">此版本為公開測試版</string>
+    <string name="version_with">此版本為正式版</string>
     <string name="authorinfo">軟體作者:好读游独\n電郵：michaelzhtiger@outlook.com\n</string>
-    <string name="authorinfo_rex">現維護團隊為ReX DailyNotes</string>
-    <string name="github_info">本軟件現已在Github上進行開源，歡迎給個Star~\n倉庫網址：\ nhttps://github.com/HaoduyouduStudio/DailyNotes \n</string>
+    <string name="authorinfo_rex">現維護團隊為DailyNotes Team by ReX</string>
+    <string name="github_info">本軟件現已在Github上進行開源，歡迎給個Star~\n倉庫網址：\ nhttps://github.com/HaoduyouduStudio/DailyNotes \n隱私政策(简中):https://nextsay.cn/Privacy.html\n</string>
     <string name="aboutnewvewsion">新版特性:\n優化動畫體驗\n支援“中文繁體(台灣)”\n更新貼紙\n添加貼紙和標語\n接入小天才ShareApi\n更新應用程式圖標\n更新模板\n可以修改字體顔色\n添加自定心情\n修復已知bug\n添加了心情日曆\n添加了頁面索引\n添加 \\彩蛋/</string>
     <string name="about_title">關於軟體</string>
     <string name="about_mubiaodacheng">恭喜達成目標！</string>
