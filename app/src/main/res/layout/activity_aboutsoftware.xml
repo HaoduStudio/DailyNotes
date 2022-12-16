@@ -80,8 +80,8 @@
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="179dp"
-                    android:layout_height="161dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
                     android:scaleType="fitEnd"
                     app:srcCompat="@mipmap/dailynote_tg" />
 
@@ -145,7 +145,7 @@
                     android:textSize="13sp" />
 
                 <LinearLayout
-                    android:id="@+id/sharefriendf"
+                    android:id="@+id/share_to_friend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
