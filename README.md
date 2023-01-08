@@ -6,20 +6,20 @@
 
 
 
-A diary software that can record your mood and thoughts at any time every day.
-It runs on the Xtc watch.
+A diary software that can help you write down your your feelings and thoughts at any time every day.
+It runs on the XTC devices.
 
-🌏English(This) | [中文简体](https://github.com/HaoduyouduStudio/DailyNotes/blob/master/ZH-CN%20README.md)
+🌏English(This) | [中文简体](https://github.com/HaoduyouduStudio/DailyNotes/blob/master/README.zh-CN.md)
 
 # Screenshot
-You can view the screenshot in `/images`
+You can view the screenshot in `/images/`
 
 # Characteristic
 
-- 💕Up to 52 expressions as mood, and customizable text
+- 💕Up to 52 expressions as feelings, and customizable text
 - 🙌New custom sticker features and menus
-- 🎉Colorful color text
-- 😎New background graphics
+- 🎉Colorful text
+- 😎New background
 - 👀New editor and UI interface
 
 # Open Source License
