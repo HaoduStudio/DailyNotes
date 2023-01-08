@@ -46,10 +46,10 @@ class aboutsoftware : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aboutsoftware)
 
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O || SHIELD_SHARE_ACTON){
-//            share_to_friend.visibility=View.GONE
-//        }
-//         边个****写佐呢个地方嘅code 扑街（粤语
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O || SHIELD_SHARE_ACTON){
+            share_to_friend.visibility=View.GONE
+        }
+
         versions.setOnClickListener {
             touchdata.add(System.currentTimeMillis())
             if(touchdata.size!=0){
