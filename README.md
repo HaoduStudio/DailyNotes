@@ -9,7 +9,7 @@
 A diary software that can help you write down your your feelings and thoughts at any time every day.
 It runs on the XTC devices.
 
-🌏English(This) | [中文简体](https://github.com/HaoduyouduStudio/DailyNotes/blob/master/20README.zh-CN.md)
+🌏English(This) | [中文简体](https://github.com/HaoduyouduStudio/DailyNotes/blob/master/README.zh-CN.md)
 
 # Screenshot
 You can view the screenshot in `/images/`
