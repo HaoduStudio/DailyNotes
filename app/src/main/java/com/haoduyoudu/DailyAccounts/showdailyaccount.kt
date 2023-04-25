@@ -5,40 +5,27 @@ import android.content.Intent
 import android.graphics.*
 import android.os.Build
 import android.os.Bundle
+import android.os.Vibrator
+import android.renderscript.Allocation
+import android.renderscript.Element
+import android.renderscript.RenderScript
+import android.renderscript.ScriptIntrinsicBlur
 import android.util.Log
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_showdailyaccount.*
-import kotlin.collections.ArrayList
-import kotlin.concurrent.thread
-import java.io.*
-import android.widget.SeekBar
-import android.widget.SeekBar.OnSeekBarChangeListener
-import android.os.Vibrator
-import android.view.*
+import com.xtc.shareapi.share.communication.BaseResponse
 import com.xtc.shareapi.share.communication.SendMessageToXTC
+import com.xtc.shareapi.share.communication.ShowMessageFromXTC
 import com.xtc.shareapi.share.interfaces.IResponseCallback
 import com.xtc.shareapi.share.manager.ShareMessageManager
+import com.xtc.shareapi.share.manager.XTCCallbackImpl
 import com.xtc.shareapi.share.shareobject.XTCImageObject
 import com.xtc.shareapi.share.shareobject.XTCShareMessage
-import com.xtc.shareapi.share.manager.XTCCallbackImpl
-import com.xtc.shareapi.share.communication.ShowMessageFromXTC
-
-import com.xtc.shareapi.share.communication.BaseResponse
-import android.view.ViewGroup
-import android.renderscript.ScriptIntrinsicBlur
-
-import android.renderscript.Allocation
-import android.renderscript.Element
-
-import android.renderscript.RenderScript
-import androidx.core.view.size
-import com.xtc.shareapi.share.sharescene.Chat
-import android.widget.ScrollView
-
-
-
+import kotlinx.android.synthetic.main.activity_showdailyaccount.*
+import java.io.*
+import kotlin.concurrent.thread
 
 
 class showdailyaccount : AppCompatActivity(), IResponseCallback {

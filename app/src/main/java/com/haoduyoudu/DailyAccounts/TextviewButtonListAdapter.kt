@@ -1,28 +1,16 @@
 package com.haoduyoudu.DailyAccounts
 
 import android.app.Activity
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Rect
-import android.net.Uri
-import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.activity_showdailyaccount.*
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileInputStream
 import kotlin.concurrent.thread
 
 class TextviewButtonListAdapter (activity: Activity,val resourceId:Int,data:List<TextviewButtonList>) :

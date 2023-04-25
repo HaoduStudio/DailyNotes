@@ -1,7 +1,5 @@
 package com.haoduyoudu.DailyAccounts;
 
-import static com.haoduyoudu.DailyAccounts.MyApplication.MAX_STICKER_COUNT;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,8 +11,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.haoduyoudu.DailyAccounts.MyApplication.MAX_STICKER_COUNT;
 
 /**
  * 贴纸布局（管理分发各种贴纸处理事件）

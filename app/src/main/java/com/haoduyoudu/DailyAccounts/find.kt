@@ -1,10 +1,9 @@
 package com.haoduyoudu.DailyAccounts
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_find.*
 import java.util.*
 

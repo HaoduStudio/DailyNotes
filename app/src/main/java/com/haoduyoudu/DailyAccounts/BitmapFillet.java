@@ -1,13 +1,6 @@
 package com.haoduyoudu.DailyAccounts;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
+import android.graphics.*;
 
 /**
  * Created by liujinhua on 15/9/7.

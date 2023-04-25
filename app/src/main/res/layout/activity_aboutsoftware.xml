@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/softwear_inf"
                     android:textColor="#FFFFFF"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
@@ -72,18 +72,6 @@
                     android:textColor="#FFFFFF"
                     android:textSize="13sp" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="314dp"
-                    android:scaleType="fitEnd"
-                    android:src="@mipmap/qqimage" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:scaleType="fitEnd"
-                    app:srcCompat="@mipmap/dailynote_tg" />
 
                 <LinearLayout
                     android:id="@+id/versions"

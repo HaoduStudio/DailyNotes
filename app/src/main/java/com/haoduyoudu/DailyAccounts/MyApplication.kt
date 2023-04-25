@@ -13,7 +13,6 @@ import okhttp3.Request
 import org.json.JSONObject
 import java.io.*
 import java.util.*
-import kotlin.collections.HashMap
 import kotlin.concurrent.thread
 
 
@@ -31,9 +30,9 @@ class MyApplication:Application() {
 
         var firstLoadaboutBg = true
 
-        const val SHIELD_SHARE_NOTES_ACTON = true
+        const val SHIELD_SHARE_NOTES_ACTON = false
         const val SHIELD_PASSWORD_ACTON = true
-        const val SHIELD_SHARE_ACTON = false
+        const val SHIELD_SHARE_ACTON = true
 
         const val SET_PASSWORD = 1
         const val RESET_PASSWORD = 2

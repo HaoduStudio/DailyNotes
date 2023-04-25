@@ -73,6 +73,7 @@
             android:name=".SayHello"
             android:theme="@style/DialogActivityTheme" />
         <activity
+
             android:name=".Moodcalendar"
             android:theme="@style/AppThemesharp" />
         <activity android:name=".select_template" />

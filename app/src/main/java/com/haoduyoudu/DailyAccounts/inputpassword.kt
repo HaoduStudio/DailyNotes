@@ -3,25 +3,24 @@ package com.haoduyoudu.DailyAccounts
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import com.bumptech.glide.Glide
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.CLOSE_PASSWORD
-import com.haoduyoudu.DailyAccounts.MyApplication.Companion.SET_PASSWORD
-import com.haoduyoudu.DailyAccounts.MyApplication.Companion.RESET_PASSWORD
-import com.haoduyoudu.DailyAccounts.MyApplication.Companion.INPUT_PASSWORD
-import com.haoduyoudu.DailyAccounts.MyApplication.Companion.MAX_PASSWORD_ERROR_TIMES
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.DIGIT_OF_PASSWORD
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.INPUT_PASSWORD
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.LOCK_TIME
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.MAX_PASSWORD_ERROR_TIMES
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.RESET_PASSWORD
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.SET_PASSWORD
 import kotlinx.android.synthetic.main.activity_inputpassword.*
 import java.io.File
-import java.lang.StringBuilder
 import kotlin.concurrent.thread
 
 class inputpassword : AppCompatActivity(), View.OnClickListener{
