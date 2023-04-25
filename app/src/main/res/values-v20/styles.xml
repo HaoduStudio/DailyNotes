@@ -26,7 +26,7 @@
     <style name="DialogActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFrame">@null</item> <!-- 无windowFrame -->
         <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:windowSwipeToDismiss">false</item>
+        <!--<item name="android:windowSwipeToDismiss">false</item>-->
         <item name="android:windowBackground">@color/selected</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
