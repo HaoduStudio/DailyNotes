@@ -1,8 +1,8 @@
 # DailyNotes
 
 ![Powered By DailyNotes Studio](https://img.shields.io/badge/Powered%20by-DailyNotes%20Studio-5ba585)
-![New Version](https://img.shields.io/badge/New%20Version-Ver2.0.3-blue)
-![Alpha Version](https://img.shields.io/badge/Alpha%20Version-Ver2.0.5__alpha.6-success)
+![New Version](https://img.shields.io/badge/New%20Version-Ver2.0.5-blue)
+![Alpha Version](https://img.shields.io/badge/Alpha%20Version-Ver2.0.6_alpha.1-success)
 
 
 
