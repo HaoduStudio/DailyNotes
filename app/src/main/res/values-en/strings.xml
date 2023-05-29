@@ -2,11 +2,11 @@
 <resources>
     <string name="language_tag">en</string>
     <string name="app_name">DailyNotes</string>
-    <string name="version">Version 2.0.5</string>
+    <string name="version">Version 2.0.6</string>
     <string name="isee">I see</string>
-    <string name="authorinfo_rex">Now the maintenance team is ReX DailyNotes by ReX</string>
-    <string name="version_with">This version is a Official edition</string>
-    <string name= "github_info" > this software is now open source on GitHub. Welcome to star~ \n warehouse website: \n https://github.com/HaoduyouduStudio/DailyNotes \nPrivacy Policy(Chinese):https://nextsay.cn/Privacy.html /n</string>
+    <string name="authorinfo_rex">Now the maintenance team is DailyNotes Team</string>
+    <string name="version_with">This version is a alpha version.</string>
+    <string name= "github_info" >This software is now open source on GitHub. Welcome to star~ \n warehouse website: \n https://github.com/HaoduyouduStudio/DailyNotes \nPrivacy Policy(Chinese):https://nextsay.cn/Privacy.html /n</string>
     <string name="authorinfo">Software author:\nHaoduyoudu_Dev\nE-mail:michaelzhtiger@outlook.com\n</string>
     <string name="aboutnewvewsion">New features: \nOptimize the animation experience\nSupport "traditional Chinese"\nupdate stickers\nadd weather and slogans\naccess to xtc shareapi\nupdate templates\nmodify font color\nadd custom mood\nfix known bugs\nupdate painted eggshell</string>
     <string name="about_title">About</string>
