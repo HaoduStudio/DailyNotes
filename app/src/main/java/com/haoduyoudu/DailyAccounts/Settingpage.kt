@@ -1,9 +1,9 @@
 package com.haoduyoudu.DailyAccounts
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settingpage.*
 import java.io.File
 

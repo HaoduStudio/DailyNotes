@@ -1,11 +1,9 @@
 package com.haoduyoudu.DailyAccounts
 
 import android.content.Context
-import android.util.Log
 import com.hw.videoprocessor.VideoProcessor
 import com.hw.videoprocessor.util.VideoProgressListener
 import java.io.File
-import java.lang.Exception
 
 object CompressVideo {
     /**

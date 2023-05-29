@@ -83,7 +83,7 @@ public class ViewHelper {
             if (bitmap != null && !bitmap.isRecycled()) {
                 bitmap.recycle();
             }
-            bitmap = Bitmap.createBitmap(viewWidth, viewHeight, Bitmap.Config.ARGB_8888);
+            bitmap = Bitmap.createBitmap(viewWidth, viewHeight, Bitmap.Config.ARGB_4444);
             view.setTag(R.id.cacheBitmapKey, bitmap);
             dirty = true;
         }

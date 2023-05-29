@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_daily_accounts.*
 import java.io.File
 import java.util.*
-import kotlin.Exception
 
 
 class DailyAccounts : AppCompatActivity(), View.OnClickListener {

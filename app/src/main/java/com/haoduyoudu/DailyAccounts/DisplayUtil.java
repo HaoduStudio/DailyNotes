@@ -1,7 +1,5 @@
 package com.haoduyoudu.DailyAccounts;
 
-import android.content.Context;
-
 /**
  * dp、sp 转换为 px 的工具类
  *

@@ -35,7 +35,7 @@ public class BitmapFillet {
             final int width = bitmap.getWidth();
             final int height = bitmap.getHeight();
 
-            Bitmap paintingBoard = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Bitmap paintingBoard = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
             Canvas canvas = new Canvas(paintingBoard);
             canvas.drawARGB(Color.TRANSPARENT, Color.TRANSPARENT, Color.TRANSPARENT, Color.TRANSPARENT);
 

@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.PointF
 import android.graphics.drawable.BitmapDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
 import android.renderscript.Allocation
@@ -23,13 +22,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.*
-import kotlin.concurrent.thread
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.*
 import java.io.*
+import kotlin.concurrent.thread
 
 
 class prewiew_dailyaccount : AppCompatActivity() {

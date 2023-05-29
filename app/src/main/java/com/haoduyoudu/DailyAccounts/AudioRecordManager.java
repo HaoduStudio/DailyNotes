@@ -25,11 +25,7 @@ public class AudioRecordManager {
         mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC, 8000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize * 2);
     }
 
-    /**
-     * 获取单例引用
-     *
-     * @return
-     */
+
     public static AudioRecordManager getInstance() {
         if (mInstance == null) {
             synchronized (AudioRecordManager.class) {

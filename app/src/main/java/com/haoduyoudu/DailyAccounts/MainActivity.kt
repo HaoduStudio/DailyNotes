@@ -31,7 +31,20 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.Mapofweather
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.needupdata
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.weather
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.Title
+import kotlinx.android.synthetic.main.activity_main.about
+import kotlinx.android.synthetic.main.activity_main.findda
+import kotlinx.android.synthetic.main.activity_main.listView
+import kotlinx.android.synthetic.main.activity_main.mDrawerLayout
+import kotlinx.android.synthetic.main.activity_main.main_background
+import kotlinx.android.synthetic.main.activity_main.menu
+import kotlinx.android.synthetic.main.activity_main.menuyinying
+import kotlinx.android.synthetic.main.activity_main.moodcalendar
+import kotlinx.android.synthetic.main.activity_main.pifu
+import kotlinx.android.synthetic.main.activity_main.setsafety
+import kotlinx.android.synthetic.main.activity_main.swipeRefresh
+import kotlinx.android.synthetic.main.activity_main.weather_img
+import kotlinx.android.synthetic.main.activity_main.write
 import java.io.File
 import kotlin.concurrent.thread
 
@@ -545,7 +558,7 @@ class MainActivity : AppCompatActivity() {
         renderScript.destroy()
         return source
     }
-    fun viewConversionBitmap(v: View,config:Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap? {
+    fun viewConversionBitmap(v: View,config:Bitmap.Config = Bitmap.Config.ARGB_4444): Bitmap? {
         val w = v.width
         val h = v.height
         val bmp = Bitmap.createBitmap(w, h, config)

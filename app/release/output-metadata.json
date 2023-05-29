@@ -11,13 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-<<<<<<< HEAD
-      "versionCode": 7,
+      "versionCode": 8,
       "versionName": "2.0.5",
-=======
-      "versionCode": 6,
-      "versionName": "2.0.4",
->>>>>>> 5f4a7c674b00b9730ca17bd7ca48e43516ef2a0f
       "outputFile": "app-release.apk"
     }
   ],

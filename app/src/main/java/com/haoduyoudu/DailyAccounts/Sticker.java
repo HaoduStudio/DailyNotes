@@ -1,12 +1,8 @@
 package com.haoduyoudu.DailyAccounts;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.view.MotionEvent;
-
-import java.io.Serializable;
 
 /**
  * 贴纸类（手势与贴纸的关系）

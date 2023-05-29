@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_moodcalendar.*
 import java.io.File
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Moodcalendar : AppCompatActivity() {
 

@@ -2,9 +2,6 @@ package com.haoduyoudu.DailyAccounts
 
 import android.app.Activity
 import android.media.MediaPlayer
-import android.media.VolumeShaper
-import android.os.Build
-import java.lang.Exception
 import kotlin.concurrent.thread
 
 class PlaymediafromresUtils(musicid:Int,connect:Activity) {

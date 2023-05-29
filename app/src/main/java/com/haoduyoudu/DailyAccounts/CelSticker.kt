@@ -1,24 +1,18 @@
 package com.haoduyoudu.DailyAccounts
 
-import android.animation.Animator
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.activity_cel_sticker.*
-import java.util.ArrayList
-import android.view.animation.*
-import kotlinx.android.synthetic.main.activity_cel_sticker.recyclerView
-import kotlin.concurrent.thread
-import android.view.animation.AlphaAnimation
-import android.view.animation.ScaleAnimation
-import android.view.animation.AnimationSet
 import java.io.File
+import kotlin.concurrent.thread
 
 
 class CelSticker : AppCompatActivity() {

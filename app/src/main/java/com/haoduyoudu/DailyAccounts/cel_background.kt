@@ -3,11 +3,11 @@ package com.haoduyoudu.DailyAccounts
 import android.content.Context
 import android.graphics.Rect
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.JsonWriter
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_cel_background.*
 import okhttp3.OkHttpClient
 import okhttp3.Request

@@ -1,40 +1,39 @@
 package com.haoduyoudu.DailyAccounts
 
 import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.xtc.shareapi.share.interfaces.IResponseCallback
-import kotlinx.android.synthetic.main.activity_aboutsoftware.*
-import com.xtc.shareapi.share.manager.ShareMessageManager
-
-import com.xtc.shareapi.share.communication.SendMessageToXTC
-
-import android.graphics.BitmapFactory
-import android.view.View
-import com.xtc.shareapi.share.communication.BaseResponse
-import com.xtc.shareapi.share.communication.ShowMessageFromXTC
-import com.xtc.shareapi.share.manager.XTCCallbackImpl
-
-import com.xtc.shareapi.share.shareobject.XTCShareMessage
-
-import com.xtc.shareapi.share.shareobject.XTCAppExtendObject
-import kotlin.Exception
-import kotlin.concurrent.thread
-import android.animation.AnimatorListenerAdapter
-import android.content.Context
-import android.content.res.Resources
-import android.os.Build
-import android.util.Log
-import android.view.MotionEvent
-import com.haoduyoudu.DailyAccounts.MyApplication.Companion.SHIELD_SHARE_ACTON
-import java.io.*
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.COUNT_OF_DAYS_OF_COLOREGG_TO_APPEAR
-import com.xtc.shareapi.share.sharescene.Chat
+import com.haoduyoudu.DailyAccounts.MyApplication.Companion.SHIELD_SHARE_ACTON
+import com.xtc.shareapi.share.communication.SendMessageToXTC
+import com.xtc.shareapi.share.manager.ShareMessageManager
+import com.xtc.shareapi.share.shareobject.XTCAppExtendObject
+import com.xtc.shareapi.share.shareobject.XTCShareMessage
+import kotlinx.android.synthetic.main.activity_aboutsoftware.Tv1
+import kotlinx.android.synthetic.main.activity_aboutsoftware.im1
+import kotlinx.android.synthetic.main.activity_aboutsoftware.share_to_friend
+import kotlinx.android.synthetic.main.activity_aboutsoftware.startview
+import kotlinx.android.synthetic.main.activity_aboutsoftware.tempview
+import kotlinx.android.synthetic.main.activity_aboutsoftware.versions
+import kotlinx.android.synthetic.main.activity_aboutsoftware.zhixiemeigong
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
+import kotlin.concurrent.thread
 
 class aboutsoftware : AppCompatActivity(){
 
@@ -49,7 +48,7 @@ class aboutsoftware : AppCompatActivity(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O || SHIELD_SHARE_ACTON){
             share_to_friend.visibility=View.GONE
         }
-
+//      删个**code by MengXi 23.01.08
         versions.setOnClickListener {
             touchdata.add(System.currentTimeMillis())
             if(touchdata.size!=0){
@@ -247,7 +246,7 @@ class aboutsoftware : AppCompatActivity(){
             val vectorDrawable = context.getDrawable(vectorDrawableId)
             bitmap = Bitmap.createBitmap(
                 vectorDrawable!!.intrinsicWidth,
-                vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+                vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_4444
             )
             val canvas = Canvas(bitmap)
             vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
