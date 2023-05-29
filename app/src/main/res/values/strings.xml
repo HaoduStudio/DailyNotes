@@ -1,11 +1,11 @@
 <resources>
     <string name="language_tag">zh_cn</string>
     <string name="app_name">每日手帐</string>
-    <string name="version">版本V2.0.5</string>
+    <string name="version">版本V2.0.6</string>
     <string name="isee">我知道了</string>
-    <string name="version_with">此版本为正式版</string>
+    <string name="version_with">此版本为测试版</string>
     <string name="authorinfo">原软件作者:好读游独\n</string>
-    <string name="authorinfo_rex">现维护团队为 DailyNotes Team by ReX</string>
+    <string name="authorinfo_rex">现维护团队为 DailyNotes Team</string>
     <string name="aboutnewvewsion">新版特性:\n优化动画体验\n支持“中文繁体”\n更新贴纸\n添加天气和标语\n接入小天才shareapi\n更新模板\n可以修改字体颜色\n添加自定义心情\n修复已知bug\n更新 \\彩蛋/</string>
     <string name="about_title">关于软件</string>
     <string name="github_info">本软件现已在Github上进行开源，欢迎给个Star~\n仓库网址:\nhttps://github.com/HaoduyouduStudio/DailyNotes\n隐私政策:https://nextsay.cn/Privacy.html\n</string>
