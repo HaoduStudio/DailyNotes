@@ -20,7 +20,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.MAX_IMAGE_OR_VIDEO_COUNT
 import com.haoduyoudu.DailyAccounts.MyApplication.Companion.MAX_RECORD_COUNT
-import kotlinx.android.synthetic.main.activity_select_media_access.*
+import kotlinx.android.synthetic.main.activity_select_media_access.Loading
+import kotlinx.android.synthetic.main.activity_select_media_access.background_img
+import kotlinx.android.synthetic.main.activity_select_media_access.celmedia
+import kotlinx.android.synthetic.main.activity_select_media_access.fromalbum
+import kotlinx.android.synthetic.main.activity_select_media_access.lodings
+import kotlinx.android.synthetic.main.activity_select_media_access.progressBar
+import kotlinx.android.synthetic.main.activity_select_media_access.recordthis
+import kotlinx.android.synthetic.main.activity_select_media_access.takephoto
+import kotlinx.android.synthetic.main.activity_select_media_access.takevideo
 import java.io.File
 import kotlin.concurrent.thread
 
@@ -187,7 +195,7 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                                             val vectorDrawable: Drawable = this.getDrawable(R.mipmap.novideo)!!
                                             bitmapofvideobuffe = Bitmap.createBitmap(
                                                 vectorDrawable.intrinsicWidth,
-                                                vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+                                                vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_4444
                                             )
                                             val canvas = Canvas(bitmapofvideobuffe)
                                             vectorDrawable.setBounds(
@@ -306,7 +314,7 @@ class Select_media_access : AppCompatActivity(),View.OnClickListener {
                                         val vectorDrawable: Drawable = this.getDrawable(R.mipmap.novideo)!!
                                         bitmapofvideobuffe = Bitmap.createBitmap(
                                             vectorDrawable.intrinsicWidth,
-                                            vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+                                            vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_4444
                                         )
                                         val canvas = Canvas(bitmapofvideobuffe!!)
                                         vectorDrawable.setBounds(

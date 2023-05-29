@@ -4,7 +4,11 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class AudioRecordManager {
     public static final String TAG = "AudioRecordManager";
@@ -21,11 +25,7 @@ public class AudioRecordManager {
         mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC, 8000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize * 2);
     }
 
-    /**
-     * 获取单例引用
-     *
-     * @return
-     */
+
     public static AudioRecordManager getInstance() {
         if (mInstance == null) {
             synchronized (AudioRecordManager.class) {

@@ -18,7 +18,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_showfind.*
+import kotlinx.android.synthetic.main.activity_showfind.f_background
+import kotlinx.android.synthetic.main.activity_showfind.f_title
+import kotlinx.android.synthetic.main.activity_showfind.img_background
+import kotlinx.android.synthetic.main.activity_showfind.listView
 import java.io.File
 
 class showfind : AppCompatActivity() {
@@ -228,7 +231,7 @@ class showfind : AppCompatActivity() {
         renderScript.destroy()
         return source
     }
-    fun viewConversionBitmap(v: View,config: Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap? {
+    fun viewConversionBitmap(v: View,config: Bitmap.Config = Bitmap.Config.ARGB_4444): Bitmap? {
         val w = v.width
         val h = v.height
         val bmp = Bitmap.createBitmap(w, h, config)

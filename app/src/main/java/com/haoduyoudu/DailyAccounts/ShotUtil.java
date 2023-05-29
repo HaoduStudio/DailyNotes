@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -110,7 +111,7 @@ public class ShotUtil {
         }
 
         Bitmap bigbitmap =
-                Bitmap.createBitmap(listview.getMeasuredWidth(), allitemsheight, Bitmap.Config.ARGB_8888);
+                Bitmap.createBitmap(listview.getMeasuredWidth(), allitemsheight, Bitmap.Config.ARGB_4444);
         Canvas bigcanvas = new Canvas(bigbitmap);
 
         Paint paint = new Paint();
@@ -164,7 +165,7 @@ public class ShotUtil {
                 height += holder.itemView.getMeasuredHeight();
             }
 
-            bigBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), height, Bitmap.Config.ARGB_8888);
+            bigBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), height, Bitmap.Config.ARGB_4444);
             Canvas bigCanvas = new Canvas(bigBitmap);
             Drawable lBackground = view.getBackground();
             if (lBackground instanceof ColorDrawable) {

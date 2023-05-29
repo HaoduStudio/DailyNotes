@@ -1,6 +1,13 @@
 package com.haoduyoudu.DailyAccounts;
 
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 
 /**
  * Created by liujinhua on 15/9/7.
@@ -28,7 +35,7 @@ public class BitmapFillet {
             final int width = bitmap.getWidth();
             final int height = bitmap.getHeight();
 
-            Bitmap paintingBoard = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Bitmap paintingBoard = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
             Canvas canvas = new Canvas(paintingBoard);
             canvas.drawARGB(Color.TRANSPARENT, Color.TRANSPARENT, Color.TRANSPARENT, Color.TRANSPARENT);
 

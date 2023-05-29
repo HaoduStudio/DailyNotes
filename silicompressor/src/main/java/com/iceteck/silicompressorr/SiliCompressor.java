@@ -327,7 +327,7 @@ public class SiliCompressor {
 
             // load the bitmap from its path
             bmp = BitmapFactory.decodeStream(mContext.getContentResolver().openInputStream(imageUri), null, options);
-            scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_8888);
+            scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_4444);
 
 
             float ratioX = actualWidth / (float) options.outWidth;

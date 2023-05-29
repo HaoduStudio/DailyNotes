@@ -21,8 +21,18 @@ import com.xtc.shareapi.share.communication.SendMessageToXTC
 import com.xtc.shareapi.share.manager.ShareMessageManager
 import com.xtc.shareapi.share.shareobject.XTCAppExtendObject
 import com.xtc.shareapi.share.shareobject.XTCShareMessage
-import kotlinx.android.synthetic.main.activity_aboutsoftware.*
-import java.io.*
+import kotlinx.android.synthetic.main.activity_aboutsoftware.Tv1
+import kotlinx.android.synthetic.main.activity_aboutsoftware.im1
+import kotlinx.android.synthetic.main.activity_aboutsoftware.share_to_friend
+import kotlinx.android.synthetic.main.activity_aboutsoftware.startview
+import kotlinx.android.synthetic.main.activity_aboutsoftware.tempview
+import kotlinx.android.synthetic.main.activity_aboutsoftware.versions
+import kotlinx.android.synthetic.main.activity_aboutsoftware.zhixiemeigong
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import kotlin.concurrent.thread
 
 class aboutsoftware : AppCompatActivity(){
@@ -236,7 +246,7 @@ class aboutsoftware : AppCompatActivity(){
             val vectorDrawable = context.getDrawable(vectorDrawableId)
             bitmap = Bitmap.createBitmap(
                 vectorDrawable!!.intrinsicWidth,
-                vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+                vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_4444
             )
             val canvas = Canvas(bitmap)
             vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())

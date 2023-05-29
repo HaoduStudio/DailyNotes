@@ -780,7 +780,7 @@ class showdailyaccount : AppCompatActivity(), IResponseCallback {
     /**
      * @param linearLayout 要转化为图片的布局
      */
-    fun viewConversionBitmap(v: View,config:Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap? {
+    fun viewConversionBitmap(v: View,config:Bitmap.Config = Bitmap.Config.ARGB_4444): Bitmap? {
         val w = v.width
         val h = v.height
         val bmp = Bitmap.createBitmap(w, h, config)
