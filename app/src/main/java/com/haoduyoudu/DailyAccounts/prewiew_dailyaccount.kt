@@ -25,8 +25,26 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
-import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.*
-import java.io.*
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.backtoedit
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.delsk
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.editsk
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.images
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.mDrawerLayout
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.mScrollView
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.mStickerLayout
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.ok
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.popbk
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.showright
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.sk_angle_left
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.sk_angle_right
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.sk_popview
+import kotlinx.android.synthetic.main.activity_prewiew_dailyaccount.sk_size
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 import kotlin.concurrent.thread
 
 
@@ -405,7 +423,7 @@ class prewiew_dailyaccount : AppCompatActivity() {
         renderScript.destroy()
         return source
     }
-    private fun viewConversionBitmap(v: View,config:Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap? {
+    private fun viewConversionBitmap(v: View,config:Bitmap.Config = Bitmap.Config.ARGB_4444): Bitmap? {
         val w = v.width
         val h = v.height
         val bmp = Bitmap.createBitmap(w, h, config)
