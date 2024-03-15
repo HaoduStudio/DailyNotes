@@ -1,8 +1,11 @@
 # DailyNotes
 
-![Powered By DailyNotes Studio](https://img.shields.io/badge/Powered%20by-DailyNotes%20Studio-5ba585)
-![New Version](https://img.shields.io/badge/New%20Version-Ver2.0.5-blue)
-![Alpha Version](https://img.shields.io/badge/Alpha%20Version-Ver2.0.6_alpha.3-success)
+![Powered By HaoduStudio](https://img.shields.io/badge/Powered%20by-HaoduStudio-5ba585)
+![New Version](https://img.shields.io/badge/New%20Version-Ver3.0.0-blue)
+![Alpha Version](https://img.shields.io/badge/Alpha%20Version-Ver3.0.0_alpha-success)
+
+
+🚀 **Sir, times have changed**
 
 
 
@@ -11,8 +14,11 @@ It runs on the XTC devices.
 
 🌏English(This) | [中文简体](https://github.com/HaoduyouduStudio/DailyNotes/blob/master/README.zh-CN.md)
 
-# Screenshot
-You can view the screenshot in `/images/`
+# Tips
+
+⚠ **This project belongs to Little Genius, but you can still access our open source repository for creating versions**
+
+------
 
 # Characteristic
 
