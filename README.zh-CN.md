@@ -1,16 +1,24 @@
 # 每日手账
 
-![Powered By DailyNotes Studio](https://img.shields.io/badge/Powered%20by-DailyNotes%20Studio-5ba585)
-![New Version](https://img.shields.io/badge/New%20Version-Ver2.0.5-blue)
-![Alpha Version](https://img.shields.io/badge/Alpha%20Version-Ver2.0.6_alpha.3-success)
+![Powered By HaoduStudio](https://img.shields.io/badge/Powered%20by-HaoduStudio-5ba585)
+![New Version](https://img.shields.io/badge/New%20Version-Ver3.0.0-blue)
+![Alpha Version](https://img.shields.io/badge/Alpha%20Version-Ver3.0.0_alpha-success)
+
+🚀 **大人，时代变了**
 
 一个手账软件，可以在每天的任何时间记录你的心情和想法。它在 小天才 手表上运行。
 
 🌏[English](https://github.com/HaoduyouduStudio/DailyNotes) | 中文简体 (当前访问)
 
-# 截图
+# 注意
 
-您可以在 `/images` 中查看截图
+**此项目已归属于小天才，但您仍可以访问我们制作版本的开放源代码仓库**
+
+此仓库用于存储 `3.0` 版本以前的源代码，`3.0` 版本的源代码存储在另一个仓库。
+
+保留 `2.0` 版本的目的是让用户能够体验原汁原味的每日手帐。
+
+⚠ **此版本使用旧存储机制，不支持小天才设备迁移。我们不承担一切因未对数据进行备份在重置后导致数据丢失的后果**
 
 # 更新特点
 
