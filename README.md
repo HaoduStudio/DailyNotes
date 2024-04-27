@@ -12,7 +12,7 @@
 A diary software that can help you write down your your feelings and thoughts at any time every day.
 It runs on the XTC devices.
 
-🌏English(This) | [中文简体](https://github.com/HaoduyouduStudio/DailyNotes/blob/master/README.zh-CN.md)
+🌏English(Here) | [中文简体](https://github.com/HaoduyouduStudio/DailyNotes/blob/master/README.zh-CN.md)
 
 # Tips
 
@@ -33,3 +33,9 @@ It runs on the XTC devices.
 This project is licensed under the **Apache v2.0 Open Source License**. You **can close the source of your recreated project and use it for commercial use**, but please **leave the original developer's instructions**. Otherwise, we will **consider closing the source and investigate all responsibilities**.
 
 Thank you 😘
+
+# Thanks
+
+<a href="https://github.com/HaoduyouduStudio/DailyNotes/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=HaoduyouduStudio/DailyNotes" />
+</a>
